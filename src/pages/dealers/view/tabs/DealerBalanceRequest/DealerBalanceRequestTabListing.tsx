@@ -20,7 +20,7 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import { useGetDealerCreditAmountRequestQuery, useSyncedDealerCreditAmountRequestMutation } from 'src/services/DealerBalanceRequestService'
+import { useGetDealerBalanceAmountRequestQuery, useSyncedDealerCreditAmountRequestMutation } from 'src/services/DealerBalanceRequestService'
 import { showToast } from 'src/utils'
 import { showConfirmationDialog } from 'src/utils/showConfirmationDialog'
 
@@ -41,7 +41,7 @@ const DealerBalanceRequestTabListing = ({ columns, rows }: Props) => {
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } = state
 
     const { items, isLoading } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetDealerCreditAmountRequestQuery(dealerId, {
+        useEndPointHook: useGetDealerBalanceAmountRequestQuery(dealerId, {
             skip: !dealerId
         }),
     })

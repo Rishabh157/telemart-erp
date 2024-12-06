@@ -8,11 +8,16 @@ import { RootState } from 'src/redux/store'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { useGetDealerBalanceRequestQuery } from 'src/services/DealerBalanceRequestService'
+import { useGetDealerBalanceRequestQuery, useApprovalDealerBalanceRequestMutation, } from 'src/services/DealerBalanceRequestService'
 import DealerBalanceRequestTabListing from './DealerBalanceRequestTabListing'
 import { ATMDateTimeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { useParams } from 'react-router-dom'
 import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
+import { Chip } from '@mui/material'
+import { showToast } from 'src/utils'
+import { isAuthorized } from 'src/utils/authorization'
+
 
 interface DealerBalanceRequestListResponse {
     _id: string;
@@ -46,6 +51,7 @@ const DealerBalanceRequestTabListingWrapper = () => {
 
     const dealerToDealerState: any = useSelector((state: RootState) => state.listingPagination)
     const { page, rowsPerPage, searchValue } = dealerToDealerState
+    const [updateRequest] = useApprovalDealerBalanceRequestMutation();
 
     const { items } = useGetCustomListingData<DealerBalanceRequestListResponse>({
         useEndPointHook: useGetDealerBalanceRequestQuery({
@@ -66,12 +72,36 @@ const DealerBalanceRequestTabListingWrapper = () => {
         }),
     });
 
+    const handleApproval = (_id: string, value: boolean, message: string) => {
+        updateRequest({
+            id: _id,
+            body: {
+                accountApproved: value,
+                accountRemark: message
+            },
+        }).then((res: any) => {
+            if ('data' in res) {
+                if (res?.data?.status) {
+                    showToast(
+                        'success',
+                        `Account ${message} is successfully!`
+                    )
+                } else {
+                    showToast('error', res?.data?.message)
+                }
+            } else {
+                showToast('error', 'Something went wrong')
+            }
+        })
+    }
+
     const columns: columnTypes[] = [
         {
             field: 'isSynced',
             headerName: 'Synced',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_SYNCED,
             renderCell: (row: DealerBalanceRequestListResponse) => (
                 <span className={`px-2 py-1 text-xs font-medium rounded-lg ${row?.isSynced ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
                     {row?.isSynced ? 'SYNCED' : 'NOT SYNCED'}
@@ -83,6 +113,7 @@ const DealerBalanceRequestTabListingWrapper = () => {
             headerName: 'Amount',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_AMOUNT,
             renderCell: (row: DealerBalanceRequestListResponse) => <span> {row?.amount} </span>,
         },
         {
@@ -90,17 +121,17 @@ const DealerBalanceRequestTabListingWrapper = () => {
             headerName: 'Acc Second Approval',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1.0_1.0_0%]',
-            // name: UserModuleNameTypes.SALE_ORDER_LIST_ACC_APPROVAL,
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_APPROVAL,
             align: 'center',
-            renderCell: (row: DealerBalanceRequestListResponse) => {
-                return (
-                    <div className="z-0">
+            renderCell: (row: DealerBalanceRequestListResponse) =>
+                isAuthorized(UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST_TAB_APPROVAL)
+                    ? <div className="z-0">
                         <SwtAlertChipConfirm
                             title="Approval"
                             text="Do you want to Account Approve ?"
                             color={row?.accountApproved === false ? 'warning' : 'success'}
                             chipLabel={row?.accountApproved === false ? 'Acc Pending' : 'Acc Approved'}
-                            disabled={row?.accountApproved === true}
+                            // disabled={row?.accountApproved === true}
                             input={'text'}
                             inputPlaceholder="remark"
                             showCancelButton
@@ -110,52 +141,40 @@ const DealerBalanceRequestTabListingWrapper = () => {
                             cancelButtonColor="#dc3741"
                             confirmButtonText="Yes"
                             next={(res) => {
-                                // if (isAuthorized(UserModuleNameTypes.ACTION_DEALER_CREDIT_AMOUNT_REQUEST_ACCOUNT_APPROVAL)) {
-                                //     if (res.isConfirmed || res?.isDenied) {
-                                //         return handleApproval(
-                                //             row?._id,
-                                //             res?.isConfirmed,
-                                //             res?.value,
-                                //         )
-                                //     }
-                                // } else {
-                                //     showToast('error', "You don't have permission to approve the request")
-                                // }
+                                if (res.isConfirmed || res?.isDenied) {
+                                    return handleApproval(
+                                        row?._id,
+                                        res?.isConfirmed,
+                                        res?.value,
+                                    )
+                                }
                             }}
                         />
-                    </div>
-                )
-            },
+                    </div> :
+                    <Chip
+                        label={row?.accountApproved === true ? "Acc Approved" : "Acc Pending"}
+                        color={row?.accountApproved === true ? "success" : "warning"}
+                        variant="outlined"
+                        size="small"
+                        clickable={true}
+                        onClick={() => showToast('error', "You don't have permission to approve the request")}
+                    />
         },
-        // {
-        //     field: 'accApprovedActionBy',
-        //     headerName: 'Acc Approved By',
-        //     extraClasses: 'min-w-[150px]',
-        //     flex: 'flex-[0.5_0.5_0%]',
-        //     align: 'center',
-        //     renderCell: (row: DealerBalanceRequestListResponse) => {
-        //         return <div>
-        //             <div className="font-medium">
-        //                 {row?.accApprovedActionBy}
-        //             </div>
-        //             <div className="text-[12px] text-slate-500 font-medium">
-        //                 {row?.accApprovedAt}
-        //             </div>
-        //         </div>
-        //     },
-        // },
         {
             field: 'referenceNumber',
             headerName: 'Reference Number',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
             align: 'center',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_REFERENCE_NUMBER,
+            renderCell: (row: DealerBalanceRequestListResponse) => <span>{row?.referenceNumber || 'N/A'}</span>,
         },
         {
             field: 'transferType',
             headerName: 'Transfer Type',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[0.8_0.8_0%]',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_TRANSFER_TYPE,
             align: 'center',
         },
         {
@@ -163,6 +182,7 @@ const DealerBalanceRequestTabListingWrapper = () => {
             headerName: 'Reference Date',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_REFERENCE_DATE,
             renderCell: (row: DealerBalanceRequestListResponse) => <ATMDateTimeDisplay disableTime createdAt={row?.referenceDate} />,
         },
         {
@@ -170,18 +190,21 @@ const DealerBalanceRequestTabListingWrapper = () => {
             headerName: 'Bank Account',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_BANK_ACCOUNT,
         },
         {
             field: 'remark',
             headerName: 'Remark',
             extraClasses: 'min-w-[150px]',
             flex: 'flex-[1_1_0%]',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_REMARK,
         },
         {
             field: 'createdAt',
             headerName: 'Create Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
+            name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_TAB_LIST_CREATE_DATE,
             renderCell: (row: DealerBalanceRequestListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />,
         },
     ]

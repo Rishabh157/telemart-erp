@@ -70,7 +70,6 @@ export const schemeApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
-      
 
         // **** GET BY ID
         getSchemeByIdAuth: builder.query({

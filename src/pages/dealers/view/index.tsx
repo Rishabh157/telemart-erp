@@ -65,7 +65,7 @@ const tabsData = [
         label: 'Dealer Balance',
         icon: RiBillLine,
         path: `dealer-balance`,
-        name: UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST,
+        name: UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST_TAB,
     },
     {
         label: 'Activity',

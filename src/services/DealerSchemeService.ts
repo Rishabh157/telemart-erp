@@ -24,13 +24,22 @@ export const dealerSchemeApi = apiSlice.injectEndpoints({
                 // body,
             }),
         }),
+
         //***** GET ALL DEALER SCHEME BY DEALERID *****/
         getAllDealerSchemeByDealerId: builder.query({
             providesTags: ['dealerScheme'],
-            query: ({ companyId, dealerId }) => ({
-                url: `/dealer-scheme/company/${companyId}/dealer/${dealerId}`,
+            query: (dealerId) => ({
+                url: `/dealer-scheme/dealer/${dealerId}`,
                 method: 'GET',
-                // body,
+            }),
+        }),
+        
+        //***** GET ALL DEALER SCHEME BY DEALERID *****/
+        getAllAssignsDealerSchemeByDealerId: builder.query({
+            providesTags: ['dealerScheme'],
+            query: (dealerId) => ({
+                url: `/dealer-scheme/get-dealer-scheme/${dealerId}`,
+                method: 'GET',
             }),
         }),
 
@@ -101,4 +110,5 @@ export const {
     useGetDealerSchemeByIdQuery,
     useGetCheckServiceabilityQuery,
     useGetAllDealerSchemeByDealerIdQuery,
+    useGetAllAssignsDealerSchemeByDealerIdQuery,
 } = dealerSchemeApi

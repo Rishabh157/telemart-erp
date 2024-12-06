@@ -34,10 +34,7 @@ const DealerPinCodeTabWrapper = (props: Props) => {
     const [addDealerScheme] = useAddDealerSchemeMutation()
 
     const { options: schemeOptions } = useCustomOptions({
-        useEndPointHook: useGetAllDealerSchemeByDealerIdQuery({
-            companyId: userData?.companyId,
-            dealerId,
-        }),
+        useEndPointHook: useGetAllDealerSchemeByDealerIdQuery(dealerId,),
         keyName: 'schemeName',
         value: '_id',
     })

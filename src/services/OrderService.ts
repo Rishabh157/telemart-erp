@@ -63,6 +63,15 @@ export const OrderApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** Get order of the dealer *****/
+        getDealerOrderByOrderNumber: builder.query({
+            providesTags: ['order'],
+            query: (orderNumber) => ({
+                url: `/order-inquiry/get-dealer-order/${orderNumber}`,
+                method: 'GET',
+            }),
+        }),
+
         //***** Get order details by phone number using courier ndr page *****/
         updateCourierOrderData: builder.mutation({
             query: ({ id, body }) => ({
@@ -128,6 +137,16 @@ export const OrderApi = apiSlice.injectEndpoints({
             invalidatesTags: ['order'],
             query: (body: any) => ({
                 url: 'bar-code/order-dispatch',
+                method: 'PUT',
+                body,
+            }),
+        }),
+       
+        //***** Dispached Order Barcode *****/
+        updateOrderSchemeAndQuantity: builder.mutation({
+            invalidatesTags: ['order'],
+            query: (body: any) => ({
+                url: '/order-inquiry/update-scheme',
                 method: 'PUT',
                 body,
             }),
@@ -356,12 +375,14 @@ export const {
     useGetOrderByIdQuery,
     useGetWarehouseNdrOrderByPhoneNumberQuery,
     useGetOrderByOrderNumberManualMappingQuery,
+    useGetDealerOrderByOrderNumberQuery,
     useUpdateCourierOrderDataMutation,
     useGetOrderDashboardDataQuery,
     useGetAllOrderGlobalSearchQuery,
     useExportOrderDataMutation,
     useGetOrderHistoryQuery,
     useDispatchedOrderBarcodeMutation,
+    useUpdateOrderSchemeAndQuantityMutation,
     useGetDealerOfOrderQuery,
     useAssignOrderToDealerOrWarehouseMutation,
     useApprovedOrderStatusMutation,
@@ -384,5 +405,5 @@ export const {
     useGetShipayaariOrderStatusQuery,
     useGetStatusMarkAsDeleiverdMutation,
     useOrderStatusFreezedMutation,
-    useOrderStatusUpdateFromWarehouseMutation
+    useOrderStatusUpdateFromWarehouseMutation,
 } = OrderApi

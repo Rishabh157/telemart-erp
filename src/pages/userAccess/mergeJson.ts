@@ -113,6 +113,7 @@ import { default as stockReportsReports } from '../../utils/mediaJson/stockRepor
 import { default as systemReports } from '../../utils/mediaJson/systemReports.json'
 import { default as warehousePutAwayReports } from '../../utils/mediaJson/warehousePutAwayReports.json'
 import { default as dealerBalanceRequest } from '../../utils/mediaJson/dealerBalanceRequest.json'
+import { default as orderSchemeChangeRequest } from '../../utils/mediaJson/orderSchemeChangeRequest.json'
 
 const orderTabsMerge = {
     ...ordersJson,
@@ -218,6 +219,8 @@ export const mergeUserModules = [
     { ...websitesTagsJson },
     { ...websiteLeadsJson },
     { ...multiMappingJson },
+    { ...dealerBalanceRequest },
+    { ...orderSchemeChangeRequest },
     { ...agentDetailsReports },
     { ...allOrdersReports },
     { ...carriersOrdersReports },
@@ -236,5 +239,4 @@ export const mergeUserModules = [
     { ...stockReportsReports },
     { ...systemReports },
     { ...warehousePutAwayReports },
-    { ...dealerBalanceRequest },
 ]

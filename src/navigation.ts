@@ -182,6 +182,12 @@ export const navigation: NavItemType[] = [
         name: UserModuleNameTypes.NAV_MUILTI_ORDER_SEARCH,
     },
     {
+        label: 'Scheme Change Request',
+        icon: MdOutlineLocalOffer,
+        path: '/scheme-change-request',
+        name: UserModuleNameTypes.NAV_ORDER_SCHEME_CHANGE_REQUEST,
+    },
+    {
         label: 'Order Cancel Request',
         icon: FiPhoneCall,
         path: '/order-cancel-request',
