@@ -1,0 +1,14 @@
+{
+    "moduleId": "NAV_ORDER_SCHEME_CHANGE_REQUEST",
+    "moduleName": "NAV_ORDER_SCHEME_CHANGE_REQUEST",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_ORDER_SCHEME_CHANGE_REQUEST",
+            "actionUrl": "",
+            "actionName": "ORDER SCHEME CHANGE",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

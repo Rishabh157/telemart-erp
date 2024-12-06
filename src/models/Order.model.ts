@@ -1,4 +1,4 @@
-import { OrderStatusEnum } from "src/utils/constants/enums"
+import { OrderStatusEnum } from 'src/utils/constants/enums'
 
 // |-- Types --|
 interface MaerksResponseType {
@@ -77,7 +77,7 @@ export type OrderListResponse = {
     paymentMode: string
     productGroupId: string
     remark: string
-    orderType : string
+    orderType: string
     shcemeQuantity: number
     firstCallApproval: null | boolean
     firstCallRemark: string
@@ -132,6 +132,8 @@ export type OrderListResponse = {
     dealerStatus: string
     callCenterId: string
     callCenterLabel: string
+    delivery_boy_id: string
+    deliveredBy: string
     orderReferenceNumber: string
     orderMBKNumber: string | null
     barcodeData: {
@@ -145,7 +147,7 @@ export type OrderListResponse = {
 // Invoice and Labels List Response
 export type OrderInvoiceAndLabelListResponse = {
     _id: string
-    isUnion:boolean
+    isUnion: boolean
     orderNumber: number
     orderReferenceNumber: string | null
     orderMBKNumber: string | null

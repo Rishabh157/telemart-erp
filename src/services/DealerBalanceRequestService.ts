@@ -14,7 +14,7 @@ export const dealerBalanceRequestApi = apiSlice.injectEndpoints({
         }),
 
         //***** Get Dealer Amount *****/
-        getDealerCreditAmountRequest: builder.query({
+        getDealerBalanceAmountRequest: builder.query({
             providesTags: ['dealer-credit'],
             query: (dealerId: string) => ({
                 url: `/dealer-receipt/get-amount/${dealerId}`,
@@ -45,7 +45,8 @@ export const dealerBalanceRequestApi = apiSlice.injectEndpoints({
 
 export const {
     useGetDealerBalanceRequestQuery,
-    useGetDealerCreditAmountRequestQuery,
+    // useGetDealerCreditAmountRequestQuery,
+    useGetDealerBalanceAmountRequestQuery,
     useApprovalDealerBalanceRequestMutation,
     useSyncedDealerCreditAmountRequestMutation,
 } = dealerBalanceRequestApi

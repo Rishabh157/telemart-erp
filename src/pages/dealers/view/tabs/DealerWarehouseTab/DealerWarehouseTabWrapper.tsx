@@ -56,16 +56,13 @@ const DealerWarehouseTabWrapper = (props: Props) => {
                     isEdit={isAuthorized(
                         UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_EDIT
                     )}
-                    isDelete={isAuthorized(
-                        UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_DELETE
-                    )}
+                    // isDelete={isAuthorized(
+                    //     UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_DELETE
+                    // )}
                     handleEditActionButton={() => {
-                        navigate(
-                            `/dealers/${dealerId}/warehouse/${currentId}`,
-                            {
-                                state: { params },
-                            }
-                        )
+                        navigate(`/dealers/${dealerId}/warehouse/${currentId}`, {
+                            state: { params },
+                        })
                     }}
                     handleDeleteActionButton={() => {
                         showConfirmationDialog({

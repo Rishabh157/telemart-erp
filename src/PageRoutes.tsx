@@ -54,7 +54,7 @@ import {
     AddCompetitorWrapper,
     AddDealerPinCodeTabWrapper,
     AddDealerSchemeTabWrapper,
-    AddDealerWarehouseWarpper,
+    // AddDealerWarehouseWarpper,
     AddDealerWrapper,
     AddDealersCategoryWrapper,
     AddDidManagementWrapper,
@@ -344,6 +344,7 @@ import SaleOrderViewWrapper from './pages/saleOrder/view/SaleOrderViewWrapper'
 import AgentWiseSchemeWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseSchemeWrapper'
 import DealerBalanceRequestListingWrapper from './pages/DealerCreditAmountRequest/list/DealerBalanceRequestListingWrapper'
 import DealerBalanceRequestTabListingWrapper from './pages/dealers/view/tabs/DealerBalanceRequest/DealerBalanceRequestTabListingWrapper'
+import OrderSchemChangeRequestWrapper from './pages/OrderSchemChangeRequest/OrderSchemChangeRequestWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -594,7 +595,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    <Route
+                    {/* <Route
                         path="warehouse/add-warehouse"
                         element={
                             <Authorization
@@ -604,7 +605,7 @@ const PageRoutes = () => {
                                 }
                             />
                         }
-                    />
+                    /> */}
                     <Route
                         path="warehouse/:id"
                         element={
@@ -658,7 +659,7 @@ const PageRoutes = () => {
                             <Authorization
                                 children={<DealerBalanceRequestTabListingWrapper />}
                                 permission={
-                                    UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST
+                                    UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST_TAB
                                 }
                             />
                         }
@@ -1321,6 +1322,18 @@ const PageRoutes = () => {
                             children={<DealerBalanceRequestListingWrapper />}
                             permission={
                                 UserModuleNameTypes.NAV_DEALER_BALANCE_REQUEST
+                            }
+                        />
+                    }
+                />
+
+                {/* Scheme Change Request */}
+                <Route path="/scheme-change-request"
+                    element={
+                        <Authorization
+                            children={<OrderSchemChangeRequestWrapper />}
+                            permission={
+                                UserModuleNameTypes.NAV_ORDER_SCHEME_CHANGE_REQUEST
                             }
                         />
                     }

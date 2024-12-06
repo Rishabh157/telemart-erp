@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
 import { DealerToDealerListResponseTypes } from '../../../models/DealerToDealer.model'
-// import Swal from 'sweetalert2'
-// { SweetAlertIcon, SweetAlertResult }
 
 // |-- Redux --|
 import { RootState } from '../../../redux/store'
@@ -15,7 +13,7 @@ import useUnmountCleanup from '../../../hooks/useUnmountCleanup'
 import { columnTypes } from '../../../components/UI/atoms/ATMTable/ATMTable'
 import { ATMDateTimeDisplay } from '../../../components/UI/atoms/ATMDisplay/ATMDisplay'
 import { useGetDealerBalanceRequestQuery, useApprovalDealerBalanceRequestMutation } from '../../../services/DealerBalanceRequestService'
-import DealerCreditAmountRequestListing from './DealerCreditAmountRequestListing'
+import DealerBalanceRequestListing from './DealerBalanceRequestListing'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { isAuthorized } from 'src/utils/authorization'
@@ -123,7 +121,7 @@ const DealerBalanceRequestListingWrapper = () => {
             name: UserModuleNameTypes.DEALER_BALANCE_REQUEST_LIST_APPROVAL,
             align: 'center',
             renderCell: (row: DealerBalanceRequestListResponse) =>
-                isAuthorized(UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST_ACCOUNT_APPROVAL)
+                isAuthorized(UserModuleNameTypes.ACTION_DEALER_BALANCE_REQUEST_TAB_APPROVAL)
                     ? <div className="z-0">
                         <SwtAlertChipConfirm
                             title="Approval"
@@ -210,7 +208,7 @@ const DealerBalanceRequestListingWrapper = () => {
 
     return (
         <SideNavLayout>
-            <DealerCreditAmountRequestListing
+            <DealerBalanceRequestListing
                 columns={columns}
                 rows={items || []}
             />

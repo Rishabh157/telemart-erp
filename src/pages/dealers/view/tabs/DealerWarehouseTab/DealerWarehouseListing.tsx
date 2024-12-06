@@ -3,15 +3,15 @@ import React, { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router'
+// import { useNavigate, useParams } from 'react-router'
 
 // |-- Internal Dependencies --|
 import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
-import { isAuthorized } from 'src/utils/authorization'
-import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+// import { isAuthorized } from 'src/utils/authorization'
+// import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 
 // |-- Redux --|
 import {
@@ -37,7 +37,7 @@ const DealerWarehouseListing = ({
     AddpathName,
     isShowAddWarehouseButton,
 }: Props) => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const dispatch = useDispatch<AppDispatch>()
     const dealerWarehouseState: any = useSelector(
         (state: RootState) => state.listingPagination
@@ -47,7 +47,7 @@ const DealerWarehouseListing = ({
     const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
         dealerWarehouseState
 
-    const params: any = useParams()
+    // const params: any = useParams()
 
     return (
         <div className="h-full">
@@ -55,7 +55,7 @@ const DealerWarehouseListing = ({
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Warehouse </ATMPageHeading>
                 {/* {isShowAddWarehouseButton && ( */}
-                {isAuthorized(
+                {/* {isAuthorized(
                     UserModuleNameTypes.ACTION_DEALER_DEALER_WAREHOUSE_ADD
                 ) && (
                         <button
@@ -69,7 +69,7 @@ const DealerWarehouseListing = ({
                         >
                             + Add
                         </button>
-                    )}
+                    )} */}
                 {/* )} */}
             </div>
 

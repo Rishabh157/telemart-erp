@@ -24,7 +24,7 @@ type Props = {
     rows: any[]
 }
 
-const DealerCreditAmountRequestListing = ({ columns, rows }: Props) => {
+const DealerBalanceRequestListing = ({ columns, rows }: Props) => {
 
     const dispatch = useDispatch<AppDispatch>()
     const state: any = useSelector((state: RootState) => state.listingPagination)
@@ -74,4 +74,4 @@ const DealerCreditAmountRequestListing = ({ columns, rows }: Props) => {
     )
 }
 
-export default DealerCreditAmountRequestListing
+export default DealerBalanceRequestListing
