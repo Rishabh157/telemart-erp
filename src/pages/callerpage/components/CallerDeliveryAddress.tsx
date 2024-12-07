@@ -8,8 +8,6 @@ import ATMTextArea from 'src/components/UI/atoms/formFields/ATMTextArea/ATMTextA
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { endTimesOptions, startTimesOptions } from './constants'
 import { SelectOption } from 'src/models/FormField/FormField.model'
-// import ATMSwitchButton from 'src/components/UI/atoms/formFields/ATMSwitchButton/ATMSwitchButton'
-// import AddressDialog from './AddressDialog'
 import { useDispatch, useSelector } from 'react-redux'
 import { DisabledFieldsPropsTypes } from '../courierNdrDialer/CourierNdrDialerPage'
 
@@ -38,7 +36,6 @@ import {
     // useGetAllAreaUnauthQuery,
     useGetAllAreaByTehsilUnauthQuery
 } from 'src/services/AreaService'
-import { AreaListResponse } from 'src/models/Area.model'
 import { setItems as setAreaItems } from 'src/redux/slices/areaSlice'
 
 // Get All Info By Pincode
@@ -92,6 +89,7 @@ const CallerDeliveryAddress = ({
         (state: RootState) => state.areas
     )
 
+    console.log('allArea: ', allArea);
     // set State
     const {
         data: stateData,
@@ -322,8 +320,8 @@ const CallerDeliveryAddress = ({
         pincodeOptions: allPincodes?.map((ele: PincodeListResponse) => {
             return { label: ele?.pincode, value: ele?._id }
         }),
-        areaOptions: allArea?.map((ele: AreaListResponse) => {
-            return { label: ele?.area, value: ele?._id, pincodeId: ele?.pincodeId }
+        areaOptions: allArea?.map((ele: any) => {
+            return { label: ele?.area, value: ele?._id, pincodeId: ele?.pincodeId, pincodeLabel: ele?.pincodeLabel }
         }),
     }
 
@@ -351,8 +349,6 @@ const CallerDeliveryAddress = ({
     useEffect(() => {
         handleEndTime(values?.preffered_delivery_start_time)
     }, [values?.preffered_delivery_start_time])
-
-
 
     useEffect(() => {
         setFieldValue('autoFillingShippingAddress', values?.autoFillingShippingAddress)
@@ -481,14 +477,6 @@ const CallerDeliveryAddress = ({
                         }}
                     />
 
-                    {/* {
-                        errors?.stateId && <p className="grid grid-cols-3 font-poppins text-xs mt-0 text-red-500">
-                            <div></div>
-                            <span>state is required</span>
-                        </p>
-                    } */}
-
-
                     <ATMSelectSearchable
                         required
                         isDisabled={isDisabled?.isDistrict}
@@ -568,8 +556,9 @@ const CallerDeliveryAddress = ({
                             setFieldValue('areaId', e?.value || '')
                             setFieldValue('areaLabel', e?.label || '')
 
-                            // Case : When Customer didn't know the pincode then we auto select the pincode accroding to the Area selection
+                            // // Case : When Customer didn't know the pincode then we auto select the pincode accroding to the Area selection
                             setFieldValue('pincodeId', e?.pincodeId || '')
+                            setFieldValue('pincodeLabel', e?.pincodeLabel || '')
                         }}
                     />
                 </div>
