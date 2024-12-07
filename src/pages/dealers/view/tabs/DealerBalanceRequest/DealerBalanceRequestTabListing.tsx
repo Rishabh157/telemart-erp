@@ -46,7 +46,7 @@ const DealerBalanceRequestTabListing = ({ columns, rows }: Props) => {
         }),
     })
 
-    console.log('dealerCreditAmount: ', items);
+    // console.log('dealerCreditAmount: ', items);
 
     const handleSynced = () => {
         updateSynced(dealerId)

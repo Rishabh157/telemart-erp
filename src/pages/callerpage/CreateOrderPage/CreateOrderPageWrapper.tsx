@@ -699,7 +699,7 @@ const CreateOrderPageWrapper = () => {
                         }
                     } else {
                         setApiStatus(false)
-                        showToast('error', 'Something went wrong')
+                        showToast('error', res?.error?.data?.message)
                     }
                     // setApiStatus(false)
                 })

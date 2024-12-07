@@ -658,6 +658,17 @@ const SalesPageWrapper = () => {
 
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
+
+        const addressLabels = `${values.stateLabel ? values.stateLabel + '\n' : ''
+            }${values.districtLabel ? values.districtLabel + '\n' : ''}${values.tehsilLabel ? values.tehsilLabel + '\n' : ''
+            }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${values.areaLabel ? values.areaLabel + '\n' : ''
+            }${values.houseNumber ? values.houseNumber + '\n' : ''}${values.streetNumber ? values.streetNumber + '\n' : ''
+            }${values.landmark ? values.landmark + '\n' : ''}`
+
+        if (!values?.autoFillingShippingAddress) {
+            values.autoFillingShippingAddress = addressLabels
+        }
+
         setApiStatus(true)
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
