@@ -1,8 +1,6 @@
-import { CircularProgress } from '@mui/material'
-import moment from 'moment'
 import { useState } from 'react'
+import moment from 'moment'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
-import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
@@ -10,36 +8,48 @@ import { useGetAgentOrderStatusReportsQuery } from 'src/services/ReportsService'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { useGetAllAgentsByCallCenterQuery } from 'src/services/UserServices'
 import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMPDFExportButton from 'src/components/UI/atoms/ATMPDFExport'
+import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader'
+import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
 
 const AgentOrderStatusWrapper = () => {
-
     const [filters, setFilters] = useState<any>({
         start_date: `${moment().format('YYYY-MM-DD')}`,
         end_date: `${moment().format('YYYY-MM-DD')}`,
         callCenterId: '',
-        agentId: null
+        agentId: null,
     })
+
+    // State to track selected headers
+    const [selectedHeaders, setSelectedHeaders] = useState<string[]>([]);
 
     const { userData } = useGetLocalStorage()
 
     const { items, isFetching } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetAgentOrderStatusReportsQuery({
-            callCenterId: filters?.callCenterId,
-            agentId: filters?.agentId,
-            dateFilter: {
-                startDate: filters.start_date
-                    ? moment(filters?.start_date).format('YYYY-MM-DD')
-                    : '',
-                endDate: filters.end_date
-                    ? moment(filters?.end_date).format('YYYY-MM-DD')
-                    : filters.end_date
-                        ? moment().format('YYYY-MM-DD')
+        useEndPointHook: useGetAgentOrderStatusReportsQuery(
+            {
+                callCenterId: filters?.callCenterId,
+                agentId: filters?.agentId,
+                dateFilter: {
+                    startDate: filters.start_date
+                        ? moment(filters?.start_date).format('YYYY-MM-DD')
                         : '',
+                    endDate: filters.end_date
+                        ? moment(filters?.end_date).format('YYYY-MM-DD')
+                        : filters.end_date
+                            ? moment().format('YYYY-MM-DD')
+                            : '',
+                },
             },
-        }, { skip: !(filters.callCenterId && filters.start_date && filters.end_date), }),
-        // }, { skip: !(filters.callCenterId && filters.agentId && filters.start_date && filters.end_date), }),
+            {
+                skip: !(
+                    filters.callCenterId &&
+                    filters.start_date &&
+                    filters.end_date
+                ),
+            }
+        ),
     })
-
 
     // get call centers
     const { options: callCenterOptions } = useCustomOptions({
@@ -52,12 +62,24 @@ const AgentOrderStatusWrapper = () => {
 
     // get agents by call center id
     const { options: agentsOptions } = useCustomOptions({
-        useEndPointHook: useGetAllAgentsByCallCenterQuery(filters?.callCenterId, {
-            skip: !filters?.callCenterId,
-        }),
+        useEndPointHook: useGetAllAgentsByCallCenterQuery(
+            filters?.callCenterId,
+            {
+                skip: !filters?.callCenterId,
+            }
+        ),
         keyName: 'userName',
         value: '_id',
     })
+
+
+    // Handle header selection
+    const handleHeaderSelection = (checked: boolean, header: string) => {
+        console.log('checked: ', checked);
+        setSelectedHeaders((prev) => checked ? [...prev, header] : prev.filter((h) => h !== header));
+    };
+
+    console.log(' ****  ', selectedHeaders);
 
     // order column
     const columns: columnTypes[] = [
@@ -65,82 +87,83 @@ const AgentOrderStatusWrapper = () => {
             field: 'schemeName',
             headerName: 'Scheme Name',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
-            align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            // renderCell: (row: OrderListResponse) => <span></span>,
+            checkBox: selectedHeaders?.includes('schemeName'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'schemeName'),
         },
         {
             field: 'userName',
             headerName: 'User',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
-            align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
-            renderCell: (row) => <span>{row?.userName}</span>,
+            checkBox: selectedHeaders?.includes('userName'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'userName'),
         },
         {
             field: 'FRESH',
             headerName: 'Fresh',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: selectedHeaders?.includes('FRESH'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'FRESH'),
         },
         {
             field: 'PREPAID',
             headerName: 'Prepaid',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: selectedHeaders?.includes('PREPAID'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'PREPAID'),
         },
         {
             field: 'DELIVERED',
             headerName: 'Delivered',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: selectedHeaders?.includes('DELIVERED'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'DELIVERED'),
         },
         {
             field: 'HOLD',
             headerName: 'Hold',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: selectedHeaders?.includes('HOLD'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'HOLD'),
         },
         {
             field: 'URGENT',
             headerName: 'Urgent',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
-        },
-        {
-            field: 'INQUIRY',
-            headerName: 'Inquiry',
-            flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
-            extraClasses: 'text-xs min-w-[150px]',
+            checkBox: selectedHeaders?.includes('URGENT'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'URGENT'),
         },
         {
             field: 'INTRANSIT',
-            headerName: 'IN-Transit',
+            headerName: 'In Transit',
             flex: 'flex-[1_1_0%]',
-            // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: selectedHeaders?.includes('INTRANSIT'),
+            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'INTRANSIT'),
         },
-    ]
+    ];
 
     return (
         <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
+            {isFetching && <ATMFullScreenLoader />}
+
             <div className="flex gap-2 items-center justify-end z-50">
                 <ATMSelectSearchable
                     name=""
                     componentClass="m-0"
                     value={filters?.callCenterId}
-                    onChange={(newValue) => setFilters({
-                        ...filters,
-                        callCenterId: newValue
-                    })}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            callCenterId: newValue,
+                        })
+                    }
                     options={callCenterOptions}
                     selectLabel="Select Call Center"
                     label=""
@@ -151,10 +174,12 @@ const AgentOrderStatusWrapper = () => {
                     name=""
                     componentClass="m-0"
                     value={filters?.agentId}
-                    onChange={(newValue) => setFilters({
-                        ...filters,
-                        agentId: newValue ? newValue : null
-                    })}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            agentId: newValue ? newValue : null,
+                        })
+                    }
                     options={agentsOptions}
                     selectLabel="Select Agent"
                     label=""
@@ -228,18 +253,21 @@ const AgentOrderStatusWrapper = () => {
                         Clear
                     </button>
                 )}
+
+                {selectedHeaders.length ? <ATMPDFExportButton
+                    headers={selectedHeaders}
+                    data={items || []}
+                    onClick={() => {
+                        setSelectedHeaders([])
+                    }}
+                /> : null}
             </div>
 
             <div className="relative flex-1 h-0 z-10">
-                {isFetching && (
-                    <div className="absolute inset-0 flex justify-center items-center z-10 bg-slate-100 opacity-50">
-                        <CircularProgress />
-                    </div>
-                )}
                 <div className="h-full mt-4">
-                    {/* Table */}
                     <div className="overflow-auto grow">
                         <ATMTable
+                            isColumnCheckbox
                             extraClasses=""
                             columns={columns}
                             rows={items || []}

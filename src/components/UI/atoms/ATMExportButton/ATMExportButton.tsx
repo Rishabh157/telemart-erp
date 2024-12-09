@@ -10,12 +10,13 @@ import React, { useRef } from 'react'
 
 // |-- External Dependencies --|
 import { CSVLink } from 'react-csv'
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge'
 
 // |-- Internal Dependencies --|
 // import { TbFileExport } from 'react-icons/tb'
-import { FaCloudDownloadAlt } from "react-icons/fa";
-import { FaCloudUploadAlt } from "react-icons/fa";
+import { FaCloudDownloadAlt } from 'react-icons/fa'
+import { FaCloudUploadAlt } from 'react-icons/fa'
+// import { ATMPDFExport } from '../ATMPDFExport'
 
 // |-- Types --|
 type Props = {
@@ -38,14 +39,23 @@ const ATMExportButton = ({
     fileName,
     disabled,
     isLoading,
-    onClick = () => { },
-    onImport = () => { },
+    onClick = () => {},
+    onImport = () => {},
     btnName = 'Export',
     btnType = 'UPLOAD',
     loadingText = 'Exporting...',
-    className
+    className,
 }: Props) => {
     const exportRef = useRef<any>(null)
+    // const pdfGenerator = () => {
+    //     const tableData = data.map((item: any) =>
+    //       headers.map((header: any) => item[header.key]) // Map keys to values
+    //     );
+      
+    //     const tableHeaders = headers.map((header: any) => header.label); // Extract header labels
+    //     ATMPDFExport(tableHeaders, tableData); // Pass headers and data
+    //   };
+      
     return (
         <div>
             <CSVLink
@@ -59,11 +69,18 @@ const ATMExportButton = ({
                 onClick={() => {
                     if (btnType === 'DOWNLOAD') {
                         onClick(() => exportRef?.current?.link?.click())
+                    // } else if (btnType === 'PDF') {
+                    //     pdfGenerator()
                     } else {
                         onImport()
                     }
                 }}
-                className={twMerge(`border border-primary-main h-[34px] px-3 items-center rounded bg-white  text-primary-main flex gap-2 ${disabled && 'opacity-70'}`, className)}
+                className={twMerge(
+                    `border border-primary-main h-[34px] px-3 items-center rounded bg-white  text-primary-main flex gap-2 ${
+                        disabled && 'opacity-70'
+                    }`,
+                    className
+                )}
                 disabled={disabled}
             >
                 {isLoading ? (
@@ -88,7 +105,11 @@ const ATMExportButton = ({
                     </>
                 ) : (
                     <>
-                        {btnType === 'DOWNLOAD' ? <FaCloudDownloadAlt className="text-lg" /> : <FaCloudUploadAlt className="text-lg" />}{' '}
+                        {btnType === 'DOWNLOAD' ? (
+                            <FaCloudDownloadAlt className="text-lg" />
+                        ) : (
+                            <FaCloudUploadAlt className="text-lg" />
+                        )}{' '}
                         <span className="text-sm"> {btnName} </span>
                     </>
                 )}
