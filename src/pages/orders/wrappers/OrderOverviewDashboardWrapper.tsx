@@ -1,7 +1,7 @@
-import { CircularProgress } from '@mui/material'
-import moment from 'moment'
 import { useState } from 'react'
+import moment from 'moment'
 import BarGraph from 'src/components/UI/atoms/ATMBarGraph/ATMBarGraph'
+import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader'
 import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetOrderDashboardDataQuery } from 'src/services/OrderService'
@@ -43,23 +43,16 @@ const OrderOverviewDashboardWrapper = () => {
             { y: items?.intransitOrders || 0, label: 'Intransit' },
             { y: items?.ndrOrders || 0, label: 'NDR' },
             { y: items?.pndOrders || 0, label: 'PND' },
-            {
-                y: items?.nonActionOrders || 0,
-                label: 'Non-Action',
-            },
-            {
-                y: items?.doorCancelledOrders || 0,
-                label: 'Door Cancelled',
-            },
-            {
-                y: items?.deliveryOutOfNetworkOrders,
-                label: 'Delivery Out Of Network',
-            },
+            { y: items?.nonActionOrders || 0, label: 'Non-Action' },
+            { y: items?.doorCancelledOrders || 0, label: 'Door Cancelled' },
+            { y: items?.deliveryOutOfNetworkOrders, label: 'Delivery Out Of Network' },
         ]
     }
 
     return (
         <div className="flex flex-col border border-slate-400 rounded p-2 h-auto">
+            {isFetching && <ATMFullScreenLoader />}
+
             <div className="flex gap-2 items-center justify-end">
                 <ATMDatePicker
                     name=""
@@ -130,12 +123,8 @@ const OrderOverviewDashboardWrapper = () => {
                     </button>
                 )}
             </div>
+
             <div className="relative flex-1 h-0">
-                {isFetching && (
-                    <div className="absolute inset-0 flex justify-center items-center z-10 bg-slate-100 opacity-50">
-                        <CircularProgress />
-                    </div>
-                )}
                 <div className="h-full ">
                     <BarGraph
                         dataPoints={getData(items)}

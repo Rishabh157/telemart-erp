@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
-import CircularProgress from '@mui/material/CircularProgress'
 import Timeline from 'rsuite/Timeline'
 import 'rsuite/dist/rsuite-no-reset.min.css'
 
@@ -21,12 +20,10 @@ import {
     setPage,
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
-import { HiDotsVertical } from 'react-icons/hi'
-import {
-    BarcodeFlowListResponse,
-    BarcodeFlowDataListResponsee,
-} from 'src/models'
-import moment from 'moment'
+import { BarcodeFlowListResponse, BarcodeFlowDataListResponsee } from 'src/models'
+import { ATMDateTimeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { FaRegEye } from "react-icons/fa";
+import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader'
 
 // |-- Types --|
 type Props = {
@@ -35,150 +32,94 @@ type Props = {
 }
 
 const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
+
     // state
     const [isFlowDialogShow, setIsFlowDialogShow] = useState<boolean>(false)
-    const [selectedFlowItem, setSelectedFlowItem] = useState<
-        BarcodeFlowDataListResponsee[]
-    >([])
-    const listingPaginationState: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
-
-    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } =
-        listingPaginationState
-
+    const [selectedFlowItem, setSelectedFlowItem] = useState<BarcodeFlowDataListResponsee[]>([])
     const dispatch = useDispatch<AppDispatch>()
 
-    // const showBarcodeStatusText = (
-    //     status: string,
-    //     wareHouseLabel: string,
-    //     companyLabel: string
-    // ) => {
-    //     switch (status) {
-    //         case barcodeStatusEnum.atWarehouse:
-    //             return `Barcode is Inwarding in ${capitalizeFirstLetter(
-    //                 wareHouseLabel
-    //             )} warehouse of ${capitalizeFirstLetter(companyLabel)} company`
-    //         case barcodeStatusEnum.atDealerWarehouse:
-    //             return `Barcode is in dealer ${capitalizeFirstLetter(
-    //                 wareHouseLabel
-    //             )} warehouse`
-    //         case barcodeStatusEnum.inTransit:
-    //             return 'Barcode is in In Transit'
-    //         case barcodeStatusEnum.delivered:
-    //             return 'Barcode is delivered'
-    //         case barcodeStatusEnum.rtv:
-    //             return 'Barcode is in return to vendor'
-    //         case barcodeStatusEnum.wtc:
-    //             return `Barcode is transfer to ${capitalizeFirstLetter(
-    //                 companyLabel
-    //             )} company`
-    //         case barcodeStatusEnum.wts:
-    //             return `Barcode is in warehouse and go to Sample`
-    //         case barcodeStatusEnum.wtw:
-    //             return 'Barcode is WTW outward'
-    //         default:
-    //             return `Barcode is created in ${capitalizeFirstLetter(
-    //                 companyLabel
-    //             )} company`
-    //     }
-    // }
+    const listingPaginationState: any = useSelector((state: RootState) => state.listingPagination)
+    const { page, rowsPerPage, totalItems, searchValue, isTableLoading } = listingPaginationState
+
+
 
     return (
-        <div className="px-4 h-[calc(100vh-45px)]  ">
+        <div className="px-4 h-[calc(100vh-55px)]">
+
+            {isTableLoading && <ATMFullScreenLoader />}
+
             {/* Page Header */}
             <div className="flex justify-between items-center h-[45px]">
-                <ATMPageHeading> Inventory Barcode Flow </ATMPageHeading>
+                <ATMPageHeading> Barcode Flow </ATMPageHeading>
             </div>
 
-            <div className="border flex flex-col h-[calc(100%-75px)] rounded bg-white">
+            <div className="border flex flex-col rounded bg-white h-[calc(100%-75px)]">
                 {/*Table Header */}
                 <ATMTableHeader
-                    // isDateFilter
                     page={page}
                     searchValue={searchValue}
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={items}
-                    onRowsPerPageChange={(newValue) =>
-                        dispatch(setRowsPerPage(newValue))
-                    }
+                    onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
                     onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                 />
 
                 {/* Table */}
-                <div className="h-[calc(100%-75px)]">
-                    {!isTableLoading ? (
-                        <div className="grid grid-cols-3 gap-4 overflow-auto p-4  ">
-                            {items?.map(
-                                (
-                                    barcode: BarcodeFlowListResponse,
-                                    ind: number
-                                ) => (
-                                    <div
-                                        key={ind}
-                                        className={`flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2`}
-                                        onClick={onBarcodeClick}
-                                    >
-                                        <div className="flex justify-between">
-                                            <div>
-                                                <div className="text-[12px] text-slate-500">
-                                                    Barcode No.
-                                                </div>
-                                                <div>
-                                                    {barcode?.barcodeNumber}
-                                                </div>
-                                            </div>
-                                            <div className='cursor-pointer hover:bg-slate-300 rounded-full px-2 py-1 flex items-center justify-center'>
-                                                <HiDotsVertical
-                                                    onClick={() => {
-                                                        setIsFlowDialogShow(
-                                                            true
-                                                        )
-                                                        setSelectedFlowItem(
-                                                            barcode?.data
-                                                        )
-                                                    }}
-                                                />
-                                            </div>
+                <div className="h-[calc(100%-75px)] overflow-y-auto">
+                    <div className="grid grid-cols-3 gap-4 p-4">
+                        {items?.map((barcode: BarcodeFlowListResponse) => (
+                            <div
+                                key={barcode?._id}
+                                className='group flex flex-col gap-2 shadow rounded-lg border-[1.5px] relative p-2'
+                                onClick={onBarcodeClick}
+                            >
+                                <div className="flex justify-between">
+                                    <div>
+                                        <div className="text-[12px] text-slate-500">
+                                            Barcode No.
                                         </div>
-
-                                        <div className="flex items-center gap-x-2 text-[13px] text-slate-500n font-medium">
-                                            <div className="bg-[#00dd56] text-[#ffffff] px-[2px] py-[1px] rounded">
-                                                Current Status
-                                            </div>
-                                            {' : '}
-                                            <div >
-                                                {barcode?.data[
-                                                    barcode?.data?.length - 1
-                                                ]?.status === ''
-                                                    ? 'Created'
-                                                    : barcode?.data[
-                                                        barcode?.data
-                                                            ?.length - 1
-                                                    ]?.status}
-                                            </div>
-                                        </div>
-
-                                        <div className="text-primary-main font-medium grow flex items-center">
-                                            {capitalizeFirstLetter(
-                                                barcode?.productGroupLabel || ''
-                                            )}
+                                        <div className='text-sm font-semibold'>
+                                            {barcode?.barcodeNumber}
                                         </div>
                                     </div>
-                                )
-                            )}
-                        </div>
-                    ) : (
-                        <div className="flex justify-center items-center h-[calc(100%-75px)]">
-                            <h1 className="text-[23px]">
-                                <CircularProgress size={30} />
-                            </h1>
-                        </div>
-                    )}
+
+                                    <div
+                                        className='absolute right-2 top-2 cursor-pointer group-hover:visible invisible p-1.5 rounded-full text-primary-30 bg-primary-90 border hover:border-primary-main'
+                                        onClick={() => {
+                                            setIsFlowDialogShow(true)
+                                            setSelectedFlowItem(barcode?.data)
+                                        }}
+                                    >
+                                        <FaRegEye className="size-[0.75rem]" />
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center gap-x-2 text-slate-500n font-medium">
+                                    <div className="bg-green-600 text-[#ffffff] text-xs px-2 py-1 rounded">
+                                        Current Status
+                                    </div>
+                                    {' : '}
+                                    <div className='text-xs'>
+                                        {barcode?.data[barcode?.data?.length - 1]?.status === ''
+                                            ? 'Created'
+                                            : barcode?.data[
+                                                barcode?.data
+                                                    ?.length - 1
+                                            ]?.status}
+                                    </div>
+                                </div>
+
+                                <div className="text-primary-main text-sm font-medium grow flex items-center">
+                                    {capitalizeFirstLetter(barcode?.productGroupLabel || '')}
+                                </div>
+                            </div>
+                        )
+                        )}
+                    </div>
                 </div>
 
-                {/* Flow Of Barcode */}
+                {/* Dialog Barcode Flow */}
                 <DialogLogBox
                     maxWidth="sm"
                     isOpen={isFlowDialogShow}
@@ -187,22 +128,19 @@ const InventoryFlowListing = ({ items, onBarcodeClick }: Props) => {
                         setSelectedFlowItem([])
                     }}
                     component={
-                        <div className="py-4  px-4">
-                            <div className="flex justify-center">
-                                <Timeline>
-                                    {selectedFlowItem.map((barcode: BarcodeFlowDataListResponsee) => (
-                                        <Timeline.Item key={barcode?._id}>
-                                            <div className="text-[14px] text-gray-600">
-                                                {moment(barcode?.createdAt).format('DD MMM YYYY hh:mm A')}
-                                            </div>
-                                            <div className="text-xs font-semibold">
-                                                {barcode?.barcodeLog}
-                                            </div>
-                                        </Timeline.Item>
-                                    )
-                                    )}
-                                </Timeline>
-                            </div>
+                        <div className="py-4 px-4 flex justify-center">
+                            <Timeline>
+                                {selectedFlowItem?.map((barcode: BarcodeFlowDataListResponsee) => (
+                                    <Timeline.Item key={barcode?._id}>
+                                        <div className="text-gray-600">
+                                            <ATMDateTimeDisplay createdAt={barcode?.createdAt} />
+                                        </div>
+                                        <div className="text-xs font-semibold">
+                                            {barcode?.barcodeLog}
+                                        </div>
+                                    </Timeline.Item>
+                                ))}
+                            </Timeline>
                         </div>
                     }
                 />

@@ -12,6 +12,16 @@ export const reportsApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+       
+        //***** Get Agent Inquiries Status *****/
+        getAgentInquiriesStatusReports: builder.query({
+            // providesTags: ['agent-report'],
+            query: (body) => ({
+                url: `/report/agent-inquiry-status`,
+                method: 'POST',
+                body,
+            }),
+        }),
 
         //***** Get Agent Order Status *****/
         getAgentWiseComplaint: builder.query({
@@ -47,6 +57,7 @@ export const reportsApi = apiSlice.injectEndpoints({
 
 export const {
     useGetAgentOrderStatusReportsQuery,
+    useGetAgentInquiriesStatusReportsQuery,
     useGetAgentWiseComplaintQuery,
     useGetAgentWiseEnquiryQuery,
     useGetAgentWiseProductReportsQuery,
