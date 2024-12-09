@@ -459,17 +459,6 @@ const OutwardDealerTabsListingWrapper = () => {
 
                     }
                 }
-
-                // error messages
-                // if (!res?.data?.status) {
-                //     console.log("12121")
-                //     showToast('error', res?.data?.message)
-                // }
-
-                // if (res?.error) {
-                //     console.log("22222")
-                //     showToast('error', res?.error?.data?.message)
-                // }
             })
             .catch((err) => console.error(err))
     }
