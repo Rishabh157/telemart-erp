@@ -38,8 +38,6 @@ const AgentInquiriesStatusWrapper = () => {
         }, { skip: !(filters.callCenterId && filters.start_date && filters.end_date), }),
     })
 
-    console.log('items: ', items)
-
     // get call centers
     const { options: callCenterOptions } = useCustomOptions({
         useEndPointHook: useGetAllCallCenterMasterQuery(userData?.companyId, {
@@ -74,7 +72,6 @@ const AgentInquiriesStatusWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row) => {
-                console.log('row', row)
                 return <span>{row?.userName}</span>
             },
         },

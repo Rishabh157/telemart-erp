@@ -77,7 +77,7 @@ const ATMTable = <T extends {}>({
     onEdit,
     onDelete,
 }: ATMTablePropTypes<T>) => {
-    // console.log('onEdit: ', onEdit);
+      
     const tabsRender = columns?.some((nav) => {
         if (nav.field === 'action') {
             return false
@@ -133,32 +133,7 @@ const ATMTable = <T extends {}>({
                             return null
                         } else {
                             return (
-                                <>
-                                    {/* {isColumnCheckbox ? (
-                                        <div
-                                            key={
-                                                'checkbox' + column?.headerName
-                                            }
-                                            className={`w-[20px]`}
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                // name=''
-                                                checked={column?.checkBox}
-                                                onChange={(e: any) => {
-                                                    e?.stopPropagation()
-                                                    column?.onCheckBox &&
-                                                        column?.onCheckBox(e)
-                                                }}
-                                                className=" w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300"
-                                                onClick={(e) =>
-                                                    e.stopPropagation()
-                                                }
-                                            />
-                                        </div>
-                                    ) : null} */}
-
+                                 <>
                                     {isColumnCheckbox ? (
                                         <div
                                             key={'checkbox' + column?.headerName}
