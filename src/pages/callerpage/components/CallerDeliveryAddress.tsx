@@ -89,7 +89,6 @@ const CallerDeliveryAddress = ({
         (state: RootState) => state.areas
     )
 
-    console.log('allArea: ', allArea);
     // set State
     const {
         data: stateData,

@@ -129,8 +129,6 @@ const WarehouseOrderStatusMark = ({ formikProps, apiStatus }: Props) => {
                                     const value = e;
                                     if (/^[\d\n]*$/.test(value)) {  // Regular expression to allow only numbers
                                         handleSetFieldValue('orderNumber', value);
-                                    } else {
-                                        console.log("Invalid input, only numbers are allowed");
                                     }
                                 }}
                             />

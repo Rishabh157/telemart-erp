@@ -74,7 +74,6 @@ const ATMTable = <T extends {}>({
     onDelete,
 }: ATMTablePropTypes<T>) => {
 
-    // console.log('onEdit: ', onEdit);
     const tabsRender = columns?.some((nav) => {
         if (nav.field === 'action') {
             return false
