@@ -17,7 +17,6 @@ import { twMerge } from 'tailwind-merge'
 // import { MdModeEditOutline } from "react-icons/md";
 // import { FaRegEye } from 'react-icons/fa'
 
-
 export interface columnTypes {
     field: string
     headerName: string
@@ -27,6 +26,8 @@ export interface columnTypes {
     extraClasses?: string
     name?: string
     hidden?: boolean
+    checkBox?: boolean
+    onCheckBox?: (e: any) => void
 }
 
 const idKey = '_id'
@@ -47,9 +48,11 @@ interface ATMTablePropTypes<T> {
     rowClassName?: string
     noDataFoundText?: string
     noDataFoundClass?: string
-    onView?: (item: T) => void;
-    onEdit?: (item: T) => void;
-    onDelete?: (item: T) => void;
+    onView?: (item: T) => void
+    onEdit?: (item: T) => void
+    onDelete?: (item: T) => void
+    isColumnCheckbox?: boolean
+    onCheckBox?: (e: any) => void
 }
 
 const NOT_DATA_FOUND = 'No Data Found'
@@ -69,11 +72,11 @@ const ATMTable = <T extends {}>({
     rowClassName = 'px-2 bg-white py-2',
     noDataFoundText = `${NOT_DATA_FOUND}`,
     noDataFoundClass = 'text-slate-500',
+    isColumnCheckbox = false,
     onView,
     onEdit,
     onDelete,
 }: ATMTablePropTypes<T>) => {
-
     // console.log('onEdit: ', onEdit);
     const tabsRender = columns?.some((nav) => {
         if (nav.field === 'action') {
@@ -130,12 +133,44 @@ const ATMTable = <T extends {}>({
                             return null
                         } else {
                             return (
-                                <div
-                                    key={column.field + index}
-                                    className={twMerge(`flex ${column.flex} justify-${column.align || 'start'} text-xs text-black font-semibold px-2 ${column.extraClasses}`, headerExtraClassName)}
-                                >
-                                    {column.headerName}
-                                </div>
+                                <>
+                                    {isColumnCheckbox ? (
+                                        <div
+                                            key={
+                                                'checkbox' + column?.headerName
+                                            }
+                                            className={`w-[20px]`}
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={column?.checkBox}
+                                                onChange={(e: any) => {
+                                                    e?.stopPropagation()
+                                                    column?.onCheckBox &&
+                                                        column?.onCheckBox(e)
+                                                }}
+                                                className=" w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300"
+                                                onClick={(e) =>
+                                                    e.stopPropagation()
+                                                }
+                                            />
+                                        </div>
+                                    ) : null}
+                                    <div
+                                        key={column.field + index}
+                                        className={twMerge(
+                                            `flex ${column.flex} justify-${
+                                                column.align || 'start'
+                                            } text-xs text-black font-semibold px-2 ${
+                                                column.extraClasses
+                                            }`,
+                                            headerExtraClassName
+                                        )}
+                                    >
+                                        {column.headerName}
+                                    </div>
+                                </>
                             )
                         }
                     })}
@@ -161,10 +196,12 @@ const ATMTable = <T extends {}>({
                     <div
                         onClick={() => onRowClick && onRowClick(row)}
                         key={row[idKey] || rowIndex}
-                        className={`flex items-center font-semibold text-grey-800 group group/action  ${rowClassName}  ${onRowClick && 'cursor-pointer'
-                            }  ${rowExtraClasses && rowExtraClasses(row)}  ${rowIndex !== rows.length - 1 &&
+                        className={`flex items-center font-semibold text-grey-800 group group/action  ${rowClassName}  ${
+                            onRowClick && 'cursor-pointer'
+                        }  ${rowExtraClasses && rowExtraClasses(row)}  ${
+                            rowIndex !== rows.length - 1 &&
                             'border-b border-slate-300'
-                            } `}
+                        } `}
                     >
                         {/* Checkbox */}
                         {isCheckbox ? (
@@ -190,10 +227,10 @@ const ATMTable = <T extends {}>({
                                                 ) === -1
                                                     ? [...selectedRows, row]
                                                     : selectedRows.filter(
-                                                        (selectedRow: any) =>
-                                                            selectedRow._id !==
-                                                            row._id
-                                                    )
+                                                          (selectedRow: any) =>
+                                                              selectedRow._id !==
+                                                              row._id
+                                                      )
                                             )
                                     }}
                                     className=" w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300"
@@ -248,9 +285,11 @@ const ATMTable = <T extends {}>({
                                     return (
                                         <div
                                             key={column.field + index}
-                                            className={`${column.flex
-                                                } text-xs text-slate-600 px-2 flex justify-${column.align || 'start'
-                                                } ${column.extraClasses}`}
+                                            className={`${
+                                                column.flex
+                                            } text-xs text-slate-600 px-2 flex justify-${
+                                                column.align || 'start'
+                                            } ${column.extraClasses}`}
                                         >
                                             {column.renderCell
                                                 ? column.renderCell(row)

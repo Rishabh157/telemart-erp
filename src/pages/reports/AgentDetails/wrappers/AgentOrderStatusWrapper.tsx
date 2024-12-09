@@ -9,37 +9,48 @@ import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import { useGetAgentOrderStatusReportsQuery } from 'src/services/ReportsService'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { useGetAllAgentsByCallCenterQuery } from 'src/services/UserServices'
-import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMTable, {
+    columnTypes,
+} from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
+import ATMPDFExportButton from 'src/components/UI/atoms/ATMPDFExport'
 
 const AgentOrderStatusWrapper = () => {
-
     const [filters, setFilters] = useState<any>({
         start_date: `${moment().format('YYYY-MM-DD')}`,
         end_date: `${moment().format('YYYY-MM-DD')}`,
         callCenterId: '',
-        agentId: null
+        agentId: null,
     })
 
     const { userData } = useGetLocalStorage()
 
     const { items, isFetching } = useGetDataByIdCustomQuery<any>({
-        useEndPointHook: useGetAgentOrderStatusReportsQuery({
-            callCenterId: filters?.callCenterId,
-            agentId: filters?.agentId,
-            dateFilter: {
-                startDate: filters.start_date
-                    ? moment(filters?.start_date).format('YYYY-MM-DD')
-                    : '',
-                endDate: filters.end_date
-                    ? moment(filters?.end_date).format('YYYY-MM-DD')
-                    : filters.end_date
+        useEndPointHook: useGetAgentOrderStatusReportsQuery(
+            {
+                callCenterId: filters?.callCenterId,
+                agentId: filters?.agentId,
+                dateFilter: {
+                    startDate: filters.start_date
+                        ? moment(filters?.start_date).format('YYYY-MM-DD')
+                        : '',
+                    endDate: filters.end_date
+                        ? moment(filters?.end_date).format('YYYY-MM-DD')
+                        : filters.end_date
                         ? moment().format('YYYY-MM-DD')
                         : '',
+                },
             },
-        }, { skip: !(filters.callCenterId && filters.start_date && filters.end_date), }),
+            {
+                skip: !(
+                    filters.callCenterId &&
+                    filters.start_date &&
+                    filters.end_date
+                ),
+            }
+        ),
         // }, { skip: !(filters.callCenterId && filters.agentId && filters.start_date && filters.end_date), }),
     })
-
 
     // get call centers
     const { options: callCenterOptions } = useCustomOptions({
@@ -52,9 +63,12 @@ const AgentOrderStatusWrapper = () => {
 
     // get agents by call center id
     const { options: agentsOptions } = useCustomOptions({
-        useEndPointHook: useGetAllAgentsByCallCenterQuery(filters?.callCenterId, {
-            skip: !filters?.callCenterId,
-        }),
+        useEndPointHook: useGetAllAgentsByCallCenterQuery(
+            filters?.callCenterId,
+            {
+                skip: !filters?.callCenterId,
+            }
+        ),
         keyName: 'userName',
         value: '_id',
     })
@@ -68,6 +82,8 @@ const AgentOrderStatusWrapper = () => {
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
             // renderCell: (row: OrderListResponse) => <span></span>,
         },
         {
@@ -78,6 +94,8 @@ const AgentOrderStatusWrapper = () => {
             align: 'start',
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row) => <span>{row?.userName}</span>,
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
         {
             field: 'FRESH',
@@ -85,6 +103,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
         {
             field: 'PREPAID',
@@ -92,6 +112,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
         {
             field: 'DELIVERED',
@@ -99,6 +121,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
         {
             field: 'HOLD',
@@ -106,6 +130,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
         {
             field: 'URGENT',
@@ -113,6 +139,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
         {
             field: 'INQUIRY',
@@ -120,6 +148,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
         {
             field: 'INTRANSIT',
@@ -127,6 +157,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             // name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_INQUIRY_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
+            checkBox: true,
+            onCheckBox: (e: any) => {},
         },
     ]
 
@@ -137,10 +169,12 @@ const AgentOrderStatusWrapper = () => {
                     name=""
                     componentClass="m-0"
                     value={filters?.callCenterId}
-                    onChange={(newValue) => setFilters({
-                        ...filters,
-                        callCenterId: newValue
-                    })}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            callCenterId: newValue,
+                        })
+                    }
                     options={callCenterOptions}
                     selectLabel="Select Call Center"
                     label=""
@@ -151,10 +185,12 @@ const AgentOrderStatusWrapper = () => {
                     name=""
                     componentClass="m-0"
                     value={filters?.agentId}
-                    onChange={(newValue) => setFilters({
-                        ...filters,
-                        agentId: newValue ? newValue : null
-                    })}
+                    onChange={(newValue) =>
+                        setFilters({
+                            ...filters,
+                            agentId: newValue ? newValue : null,
+                        })
+                    }
                     options={agentsOptions}
                     selectLabel="Select Agent"
                     label=""
@@ -228,6 +264,32 @@ const AgentOrderStatusWrapper = () => {
                         Clear
                     </button>
                 )}
+
+                <ATMExportButton
+                    data={[]}
+                    isLoading={false}
+                    headers={['']}
+                    fileName={'report'}
+                    onClick={(done) => {
+                        done()
+                    }}
+                    btnName="Download PDF"
+                    btnType="PDF"
+                    loadingText="..."
+                />
+                <ATMPDFExportButton
+                    headers={['schemeName', 'userName']}
+                    data={items ||[
+                        {
+                            schemeName: 'schem1',
+                            userName: 'ashu',
+                        },
+                        {
+                            schemeName: '1',
+                            userName: '2',
+                        },
+                    ]}
+                />
             </div>
 
             <div className="relative flex-1 h-0 z-10">
@@ -240,6 +302,7 @@ const AgentOrderStatusWrapper = () => {
                     {/* Table */}
                     <div className="overflow-auto grow">
                         <ATMTable
+                            isColumnCheckbox
                             extraClasses=""
                             columns={columns}
                             rows={items || []}
