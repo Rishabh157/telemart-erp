@@ -106,7 +106,7 @@ const SaleOrderListing = ({
                 )}
             </div>
 
-            <div className="border flex flex-col  rounded bg-white h-[calc(100%-75px)]">
+            <div className="border flex flex-col rounded bg-white h-[calc(100%-75px)]">
                 {/*Table Header */}
                 <ATMTableHeader
                     searchValue={searchValue}
