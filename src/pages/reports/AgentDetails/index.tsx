@@ -35,6 +35,12 @@ const tabs: tabsProps[] = [
         name: UserModuleNameTypes.ACTION_REPORTS_AGENT_ORDER_STATUS,
     },
     {
+        label: 'Agent Inquiries Status',
+        icon: MdOutbond,
+        path: 'agent-inquiries-status',
+        name: UserModuleNameTypes.ACTION_REPORTS_AGENT_INQUIRIES_STATUS,
+    },
+    {
         label: 'Agent Wise Complaint',
         icon: MdOutbond,
         path: 'agent-wise-complaint',

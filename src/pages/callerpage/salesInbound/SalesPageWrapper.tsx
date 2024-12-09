@@ -699,11 +699,10 @@ const SalesPageWrapper = () => {
                         }
                     } else {
                         setApiStatus(false)
-                        showToast('error', 'Something went wrong')
+                        showToast('error', res?.error?.data?.message)
                     }
                     // setApiStatus(false)
-                })
-                .catch((err) => {
+                }).catch((err) => {
                     setApiStatus(false)
                     showToast('error', 'Something went wrong')
                 })

@@ -20,6 +20,14 @@
             "fields": []
         },
         {
+            "actionId": "ACTION_REPORTS_AGENT_INQUIRIES_STATUS",
+            "actionUrl": "",
+            "actionName": "AGENT_INQUIRIES_STATUS_REPORTS_TAB",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        },
+        {
             "actionId": "ACTION_REPORTS_AGENT_WISE_COMPLAINT",
             "actionUrl": "",
             "actionName": "AGENT_WISE_COMPLAINT_REPORTS_TAB",

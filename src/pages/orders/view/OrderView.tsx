@@ -179,17 +179,6 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                         <div className='flex flex-col gap-4 px-3 py-4'>
                             <div className='flex justify-between items-center'>
                                 <span className='text-neutral font-medium text-sm'>
-                                    Full Address
-                                </span>
-                                <span
-                                    className='text-sm font-semibold w-[70%] truncate capitalize'
-                                    title={items?.autoFillingShippingAddress}
-                                >
-                                    {items?.autoFillingShippingAddress || 'NA'}
-                                </span>
-                            </div>
-                            <div className='flex justify-between items-center'>
-                                <span className='text-neutral font-medium text-sm'>
                                     State
                                 </span>
                                 <span className='text-sm capitalize font-semibold'>
@@ -250,6 +239,17 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                 </span>
                                 <span className='text-sm capitalize font-semibold'>
                                     {items?.streetNumber || '-'}
+                                </span>
+                            </div>
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Full Address
+                                </span>
+                                <span
+                                    className='text-sm font-semibold w-[70%] truncate capitalize'
+                                    title={items?.autoFillingShippingAddress}
+                                >
+                                    {items?.autoFillingShippingAddress || 'NA'}
                                 </span>
                             </div>
                         </div>
@@ -413,6 +413,15 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                 </span>
                                 <span className='text-sm font-bold'>
                                     {items?.preShipCancelationDate ? items?.preShipCancelationDate : 'NA'}
+                                </span>
+                            </div>
+
+                            <div className='flex justify-between items-center'>
+                                <span className='text-neutral font-medium text-sm'>
+                                    Delivered By
+                                </span>
+                                <span className='text-sm font-bold'>
+                                    {items?.delivery_boy_id ? items?.deliveredBy : 'NA'}
                                 </span>
                             </div>
                         </div>

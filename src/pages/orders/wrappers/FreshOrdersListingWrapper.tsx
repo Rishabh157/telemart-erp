@@ -160,14 +160,15 @@ const FreshOrdersListingWrapper = () => {
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: any) => {
                 return (
-                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
+                    <span className="block w-full px-2 py-1 text-left">
                         {row?.approved ? (
                             <Chip
-                                className="cursor-pointer text-xs"
+                                className="text-xs"
                                 label="Approved"
                                 color="success"
                                 variant="outlined"
                                 size="small"
+                                clickable={false}
                             />
                         ) : (
                             <SwtAlertChipConfirm
@@ -186,12 +187,7 @@ const FreshOrdersListingWrapper = () => {
                                 confirmButtonText="Yes"
                                 next={(res) => {
                                     if (res.isConfirmed || res?.isDenied) {
-                                        return res.isConfirmed
-                                            ? handleOrderApproval(
-                                                row?._id,
-                                                res?.value
-                                            )
-                                            : null
+                                        return res.isConfirmed ? handleOrderApproval(row?._id, res?.value) : null
                                     }
                                 }}
                             />
@@ -463,7 +459,7 @@ const FreshOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_FRESH_TAB_LIST_REMARK,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <div className="py-0">{row?.remark}</div>
+                <span className="py-0 truncate" title={row?.remark}>{row?.remark}</span>
             ),
         },
         {

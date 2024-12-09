@@ -669,6 +669,19 @@ const CreateOrderPageWrapper = () => {
     })
     // Caller Page Save Button Form Updation
     const onSubmitHandler = (values: FormInitialValues, { resetForm }: any) => {
+
+
+        const addressLabels = `${values.stateLabel ? values.stateLabel + '\n' : ''
+            }${values.districtLabel ? values.districtLabel + '\n' : ''}${values.tehsilLabel ? values.tehsilLabel + '\n' : ''
+            }${values.pincodeLabel ? values.pincodeLabel + '\n' : ''}${values.areaLabel ? values.areaLabel + '\n' : ''
+            }${values.houseNumber ? values.houseNumber + '\n' : ''}${values.streetNumber ? values.streetNumber + '\n' : ''
+            }${values.landmark ? values.landmark + '\n' : ''}`
+
+        if (!values?.autoFillingShippingAddress) {
+            values.autoFillingShippingAddress = addressLabels
+        }
+
+
         setApiStatus(true)
         const callerDetails: any = localStorage.getItem('callerPageData')
         let callerDataItem = JSON.parse(callerDetails)
@@ -687,7 +700,6 @@ const CreateOrderPageWrapper = () => {
             })
                 .then((res: any) => {
                     if ('data' in res) {
-                        // resetForm({ isSubmitting: false, dirty: false })
                         if (res?.data?.status) {
                             showToast('success', 'caller added successfully!')
                             localStorage.removeItem('callerPageData')
@@ -702,8 +714,7 @@ const CreateOrderPageWrapper = () => {
                         showToast('error', res?.error?.data?.message)
                     }
                     // setApiStatus(false)
-                })
-                .catch((err) => {
+                }).catch((err) => {
                     setApiStatus(false)
                     showToast('error', 'Something went wrong')
                 })

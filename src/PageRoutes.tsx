@@ -345,6 +345,7 @@ import AgentWiseSchemeWrapper from './pages/reports/AgentDetails/wrappers/AgentW
 import DealerBalanceRequestListingWrapper from './pages/DealerCreditAmountRequest/list/DealerBalanceRequestListingWrapper'
 import DealerBalanceRequestTabListingWrapper from './pages/dealers/view/tabs/DealerBalanceRequest/DealerBalanceRequestTabListingWrapper'
 import OrderSchemChangeRequestWrapper from './pages/OrderSchemChangeRequest/OrderSchemChangeRequestWrapper'
+import AgentInquiriesStatusWrapper from './pages/reports/AgentDetails/wrappers/AgentInquiriesStatusWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -4004,6 +4005,15 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<AgentOrderStatusWrapper />}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_ORDER_STATUS}
+                                />
+                            }
+                        />
+                        <Route
+                            path="agent-inquiries-status"
+                            element={
+                                <Authorization
+                                    children={<AgentInquiriesStatusWrapper />}
                                     permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_ORDER_STATUS}
                                 />
                             }

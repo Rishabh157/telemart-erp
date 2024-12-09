@@ -17,7 +17,7 @@ import {
 } from 'src/redux/slices/orderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { BiSearch } from 'react-icons/bi'
-import { handleValidNumber } from 'src/utils/methods/numberMethods'
+import { handleValidNumber, handleValidNumberForSearch } from 'src/utils/methods/numberMethods'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 
@@ -79,8 +79,7 @@ const OrderListing = ({ columns }: Props) => {
                                 placeholder="Order No..."
                                 onChange={(e) => {
                                     dispatch(setMobileNumberSearchValue(''))
-                                    handleValidNumber(e) &&
-                                        dispatch(setSearchValue(e.target.value))
+                                    handleValidNumber(e) && dispatch(setSearchValue(e.target.value))
                                 }}
                             />
                         </div>
@@ -92,12 +91,7 @@ const OrderListing = ({ columns }: Props) => {
                                 placeholder="Mobile No..."
                                 onChange={(e) => {
                                     dispatch(setSearchValue(''))
-                                    handleValidNumber(e) &&
-                                        dispatch(
-                                            setMobileNumberSearchValue(
-                                                e.target.value
-                                            )
-                                        )
+                                    handleValidNumber(e) && dispatch(setMobileNumberSearchValue(e.target.value))
                                 }}
                             />
                         </div>
@@ -126,27 +120,17 @@ const OrderListing = ({ columns }: Props) => {
                 ) : (
                     <ATMTableHeader
                         searchValue={searchValue}
-                        placeholder={
-                            activeTab !== 'inquiry'
-                                ? 'Order No...'
-                                : 'Inquiry No...'
-                        }
+                        placeholder={activeTab !== 'inquiry' ? 'Order No...' : 'Inquiry No...'}
                         page={page}
                         rowCount={totalItems}
                         rowsPerPage={rowsPerPage}
                         rows={items}
-                        onRowsPerPageChange={(newValue) =>
-                            dispatch(setRowsPerPage(newValue))
-                        }
-                        onSearch={(newValue) =>
-                            dispatch(setSearchValue(newValue))
-                        }
+                        onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+                        onSearch={(newValue) => handleValidNumberForSearch(newValue) && dispatch(setSearchValue(newValue))}
                         isAnotherSearch
                         anotherSearchValue={mobileNumberSearchValue}
                         anotherSearchPlaceholder="Mobile No..."
-                        onAnotherSearch={(newValue) => {
-                            dispatch(setMobileNumberSearchValue(newValue))
-                        }}
+                        onAnotherSearch={(newValue) => handleValidNumberForSearch(newValue) && dispatch(setMobileNumberSearchValue(newValue))}
                         isRefresh
                     />
                 )}
