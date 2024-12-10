@@ -243,12 +243,9 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         {' - '}{items?.dealerWarehouse?.billingAddress?.dealerPincodeName}
                         {', '} Ph:-{items?.dealerWarehouse?.billingAddress?.phone}
                     </h2>
+                    
                     <div>
-                        <span className="font-bold">EMAIL</span>
-                        {' '}:{' '}
-                        <span>
-                            {items?.dealerWarehouse?.email || '-'}
-                        </span>
+                        <span className="font-bold text-xs">EMAIL</span> : {items?.dealerWarehouse?.email || '-'}
                     </div>
                 </div>
             </div>
@@ -418,15 +415,15 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
             {/* Godown Information  */}
             <div className="grid grid-cols-12 border-b-[1px] border-black">
                 <div className="col-span-6 px-2 py-2 border-r-[1px] border-black">
-                    <h2 className="font-bold mb-2">
-                        GODOWN: {items?.companyDetails?.companyName}
+                    <h2 className="font-bold mb-2 capitalize">
+                        GODOWN:  {items?.companyDetails?.companyName}
                     </h2>
 
                     <h2 className='text-xs'>
                         {items?.companyWarehouse?.billingAddress?.address}
                         <p>
                             Contact No : {items?.companyWarehouse?.billingAddress?.phone}
-                            {','} Gst No : {items?.companyWarehouse?.billingAddress?.gstNumber}
+                            {','} Gst No : {items?.companyDetails?.gstNo || ''}
                         </p>
                     </h2>
                 </div>
