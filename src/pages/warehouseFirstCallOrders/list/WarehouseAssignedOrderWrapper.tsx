@@ -36,49 +36,50 @@ export enum FirstCallApprovalStatus {
 const WarehouseAssignedOrderListingWrapper = () => {
     useUnmountCleanup()
     const [filter, setFilter] = React.useState<FormInitialValuesFilterWithLabel>({
-            schemeId: { fieldName: '', label: '', value: '' },
-            stateId: { fieldName: '', label: '', value: '' },
-            districtId: {
-                fieldName: '',
-                label: '',
-                value: '',
-            },
-            callCenterManagerId: {
-                fieldName: '',
-                label: '',
-                value: '',
-            },
-            startDate: {
-                fieldName: '',
-                label: '',
-                value: '',
-            },
-            endDate: { fieldName: '', label: '', value: '' },
-            callBackFrom: {
-                fieldName: '',
-                label: '',
-                value: '',
-            },
-            callBackTo: {
-                fieldName: '',
-                label: '',
-                value: '',
-            },
-            orderType: {
-                fieldName: '',
-                label: '',
-                value: '',
-            },
-            languageBarrier: {
-                fieldName: '',
-                label: '',
-                value: '',
-            },
-            isPnd: { fieldName: '', label: '', value: false },
-        })
+        schemeId: { fieldName: '', label: '', value: '' },
+        stateId: { fieldName: '', label: '', value: '' },
+        districtId: {
+            fieldName: '',
+            label: '',
+            value: '',
+        },
+        callCenterManagerId: {
+            fieldName: '',
+            label: '',
+            value: '',
+        },
+        startDate: {
+            fieldName: '',
+            label: '',
+            value: '',
+        },
+        endDate: { fieldName: '', label: '', value: '' },
+        callBackFrom: {
+            fieldName: '',
+            label: '',
+            value: '',
+        },
+        callBackTo: {
+            fieldName: '',
+            label: '',
+            value: '',
+        },
+        orderType: {
+            fieldName: '',
+            label: '',
+            value: '',
+        },
+        languageBarrier: {
+            fieldName: '',
+            label: '',
+            value: '',
+        },
+        isPnd: { fieldName: '', label: '', value: false },
+    })
     const [, setShowDropdown] = useState(false)
     const params = useParams()
     const warehouseId = params.id
+    console.log('warehouseId: ', warehouseId);
     const warehouseAssignedOrdersState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
@@ -564,7 +565,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
             params: ['didNo', 'mobileNo', 'orderNumber'],
             page: page,
             filterBy: [
-                { fieldName: 'assignWarehouseId', value: warehouseId },
+                // { fieldName: 'assignWarehouseId', value: warehouseId },
                 { fieldName: 'companyId', value: userData?.companyId },
                 { fieldName: 'firstCallApproval', value: false },
                 { fieldName: 'approved', value: true },
@@ -599,6 +600,49 @@ const WarehouseAssignedOrderListingWrapper = () => {
         }),
     })
 
+
+    const { items: downloadCsvData } = useGetCustomListingData({
+        useEndPointHook: useGetWHFristCallAssignedOrderQuery({
+            limit: rowsPerPage,
+            searchValue: searchValue,
+            params: ['didNo', 'mobileNo', 'orderNumber'],
+            page: page,
+            filterBy: [
+                // { fieldName: 'assignWarehouseId', value: warehouseId },
+                { fieldName: 'companyId', value: userData?.companyId },
+                { fieldName: 'firstCallApproval', value: false },
+                { fieldName: 'approved', value: true },
+                { fieldName: 'schemeId', value: filter.schemeId.value },
+                // { fieldName: 'orderType', value: filter.orderType },
+                { fieldName: 'stateId', value: filter.stateId.value },
+                { fieldName: 'districtId', value: filter.districtId.value },
+                {
+                    fieldName: 'firstCallState',
+                    value: filter.languageBarrier.value
+                        ? ['LANGUAGEBARRIER']
+                        : '',
+                },
+                {
+                    fieldName: 'status',
+                    value: filter.isPnd.value ? ['PND'] : '',
+                },
+            ],
+            dateFilter: {
+                startDate: filter.startDate.value as string,
+                endDate: filter.endDate.value as string,
+            },
+            callbackDateFilter: {
+                startDate: filter.callBackFrom.value,
+                endDate: filter.callBackTo.value,
+                dateFilterKey: 'firstCallCallBackDate',
+            },
+            callCenterId: (filter.callCenterManagerId.value as any) || null,
+            orderBy: 'createdAt',
+            orderByValue: -1,
+            isPaginationRequired: false,
+        }),
+    })
+
     return (
         <SideNavLayout>
             <WarehouseAssignedOrdersListing
@@ -607,6 +651,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
                 setShowDropdown={setShowDropdown}
                 setFilter={setFilter}
                 filter={filter}
+                downloadCsvData={downloadCsvData}
             />
         </SideNavLayout>
     )
