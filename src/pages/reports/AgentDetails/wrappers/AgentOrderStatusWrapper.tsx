@@ -7,7 +7,9 @@ import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 import { useGetAgentOrderStatusReportsQuery } from 'src/services/ReportsService'
 import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import { useGetAllAgentsByCallCenterQuery } from 'src/services/UserServices'
-import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMTable, {
+    columnTypes,
+} from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ATMPDFExportButton from 'src/components/UI/atoms/ATMPDFExport'
 import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader'
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable'
@@ -21,7 +23,7 @@ const AgentOrderStatusWrapper = () => {
     })
 
     // State to track selected headers
-    const [selectedHeaders, setSelectedHeaders] = useState<string[]>([]);
+    const [selectedHeaders, setSelectedHeaders] = useState<string[]>([])
 
     const { userData } = useGetLocalStorage()
 
@@ -37,8 +39,8 @@ const AgentOrderStatusWrapper = () => {
                     endDate: filters.end_date
                         ? moment(filters?.end_date).format('YYYY-MM-DD')
                         : filters.end_date
-                            ? moment().format('YYYY-MM-DD')
-                            : '',
+                        ? moment().format('YYYY-MM-DD')
+                        : '',
                 },
             },
             {
@@ -72,14 +74,14 @@ const AgentOrderStatusWrapper = () => {
         value: '_id',
     })
 
-
     // Handle header selection
     const handleHeaderSelection = (checked: boolean, header: string) => {
-        console.log('checked: ', checked);
-        setSelectedHeaders((prev) => checked ? [...prev, header] : prev.filter((h) => h !== header));
-    };
+        setSelectedHeaders((prev) =>
+            checked ? [...prev, header] : prev.filter((h) => h !== header)
+        )
+    }
 
-    console.log(' ****  ', selectedHeaders);
+    console.log(' **** items ', items)
 
     // order column
     const columns: columnTypes[] = [
@@ -89,7 +91,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('schemeName'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'schemeName'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'schemeName'),
         },
         {
             field: 'userName',
@@ -97,7 +100,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('userName'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'userName'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'userName'),
         },
         {
             field: 'FRESH',
@@ -105,7 +109,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('FRESH'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'FRESH'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'FRESH'),
         },
         {
             field: 'PREPAID',
@@ -113,7 +118,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('PREPAID'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'PREPAID'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'PREPAID'),
         },
         {
             field: 'DELIVERED',
@@ -121,7 +127,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('DELIVERED'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'DELIVERED'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'DELIVERED'),
         },
         {
             field: 'HOLD',
@@ -129,7 +136,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('HOLD'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'HOLD'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'HOLD'),
         },
         {
             field: 'URGENT',
@@ -137,7 +145,8 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('URGENT'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'URGENT'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'URGENT'),
         },
         {
             field: 'INTRANSIT',
@@ -145,9 +154,11 @@ const AgentOrderStatusWrapper = () => {
             flex: 'flex-[1_1_0%]',
             extraClasses: 'text-xs min-w-[150px]',
             checkBox: selectedHeaders?.includes('INTRANSIT'),
-            onCheckBox: (e: any) => handleHeaderSelection(e?.target?.checked, 'INTRANSIT'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'INTRANSIT'),
         },
-    ];
+    ]
+    
 
     return (
         <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
@@ -254,13 +265,55 @@ const AgentOrderStatusWrapper = () => {
                     </button>
                 )}
 
-                {selectedHeaders.length ? <ATMPDFExportButton
-                    headers={selectedHeaders}
-                    data={items || []}
-                    onClick={() => {
-                        setSelectedHeaders([])
-                    }}
-                /> : null}
+                {selectedHeaders?.length && items?.length ? (
+                    <ATMPDFExportButton
+                        tableBody={[
+                            selectedHeaders, // First row as the header
+                            ...items?.map((row: any) =>
+                                selectedHeaders?.map((header) =>
+                                    row[header] !== undefined
+                                        ? row[header].toString()
+                                        : ''
+                                )
+                            ),
+                        ]}
+                        columnLength={selectedHeaders?.length}
+                        summarizeColumns={[
+                            'FRESH',
+                            'PREPAID',
+                            'DELIVERED',
+                            'HOLD',
+                            'URGENT',
+                            'INTRANSIT',
+                        ]
+                            .map((colName) => selectedHeaders?.indexOf(colName))
+                            .filter((idx) => idx !== -1)} // Columns to summarize
+                        onClick={() => {
+                            setSelectedHeaders([])
+                        }}
+                    />
+                ) : // <ATMPDFExportButton
+                //     // headers={selectedHeaders}
+                //     // data={items || []}
+                //     columnLength={selectedHeaders?.length}
+                //     tableBody={[
+                // selectedHeaders, // First row as the header
+                // ...items.map((row: any) =>
+                //     selectedHeaders.map(
+                //         (header) => row[header] || ''
+                //     )
+                // ),
+                //         selectedHeaders, // First row as the header
+                //         ...items.map((row: any) =>
+                //             selectedHeaders.map(
+                //                 (header) => row[header] || ''
+                //             )
+                //         ),
+
+                //     ]}
+
+                // />
+                null}
             </div>
 
             <div className="relative flex-1 h-0 z-10">
@@ -270,9 +323,11 @@ const AgentOrderStatusWrapper = () => {
                             isColumnCheckbox
                             extraClasses=""
                             columns={columns}
-                            rows={items || []}
+                            rows={items?.detailedData || []}
                             isLoading={isFetching}
                         />
+
+                     
                     </div>
                 </div>
             </div>
