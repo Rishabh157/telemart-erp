@@ -37,7 +37,7 @@ export const OrderApi = apiSlice.injectEndpoints({
         // for warehouse first call
         getWHFristCallAssignedOrder: builder.query({
             providesTags: ['order', 'batch-order'],
-            query: (body: PaginationType) => ({
+            query: (body) => ({
                 url: '/order-inquiry/warehouse-first-call',
                 method: 'POST',
                 body,
