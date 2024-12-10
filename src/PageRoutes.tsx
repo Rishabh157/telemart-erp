@@ -346,6 +346,7 @@ import DealerBalanceRequestListingWrapper from './pages/DealerCreditAmountReques
 import DealerBalanceRequestTabListingWrapper from './pages/dealers/view/tabs/DealerBalanceRequest/DealerBalanceRequestTabListingWrapper'
 import OrderSchemChangeRequestWrapper from './pages/OrderSchemChangeRequest/OrderSchemChangeRequestWrapper'
 import AgentInquiriesStatusWrapper from './pages/reports/AgentDetails/wrappers/AgentInquiriesStatusWrapper'
+import UnAssigneBatchOrderListingWrapper from './pages/batchOrder/all/unAssignOrders/UnAssigneBatchOrderListingWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -1994,6 +1995,18 @@ const PageRoutes = () => {
                             />
                         }
                     />
+                    <Route
+                        path="un-assign-order"
+                        element={
+                            <Authorization
+                                children={<UnAssigneBatchOrderListingWrapper />}
+                                permission={
+                                    UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB
+                                }
+                            />
+                        }
+                    />
+                    
                     {/* view assign batches */}
                     <Route
                         path="assign-batches/:id"

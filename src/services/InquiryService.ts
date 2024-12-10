@@ -24,6 +24,15 @@ export const InquiryApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** GET UnAuth *****/
+        getInquiryById: builder.query({
+            providesTags: ['inquiry'],
+            query: (id: string) => ({
+                url: `/inquiry/${id}`,
+                method: 'GET',
+            }),
+        }),
+
         //**** Status
         updateInquiryStatus: builder.mutation({
             invalidatesTags: ['inquiry'],
@@ -36,6 +45,7 @@ export const InquiryApi = apiSlice.injectEndpoints({
 })
 export const {
     useGetInquiryQuery,
+    useGetInquiryByIdQuery,
     useGetInquiryUnAuthQuery,
     useUpdateInquiryStatusMutation,
 } = InquiryApi

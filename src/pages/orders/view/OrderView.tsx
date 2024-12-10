@@ -1,15 +1,12 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
 
 // |-- Internal Dependencies --|
-import ATMBreadCrumbs, {
-    BreadcrumbType,
-} from '../../../components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
+import ATMBreadCrumbs, { BreadcrumbType } from '../../../components/UI/atoms/ATMBreadCrumbs/ATMBreadCrumbs'
 import ATMPageHeading from '../../../components/UI/atoms/ATMPageHeading/ATMPageHeading'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
-import { OrderListResponse } from 'src/models'
 import moment from 'moment'
-import { CircularProgress } from '@mui/material'
+import { OrderListResponse } from 'src/models'
+import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader'
 
 // |-- Types --|
 type Props = {
@@ -34,11 +31,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
     return (
         <div className="px-4 h-[calc(100vh-55px)] bg-white">
 
-            {isLoading && (
-                <div className="absolute inset-0 flex justify-center items-center z-10 bg-slate-100 opacity-50">
-                    <CircularProgress />
-                </div>
-            )}
+            {isLoading && <ATMFullScreenLoader />}
 
             <div className="p-4 flex flex-col gap-2  ">
                 {/* Breadcrumbs */}
@@ -115,13 +108,13 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                     <span className='text-neutral font-medium text-sm'>
                                         Campaign
                                     </span>
-                                    <span className='text-sm font-bold'>{items?.campaign?.replaceAll('_', ' ')}</span>
+                                    <span className='text-sm font-bold'>{items?.campaign?.replaceAll('_', ' ') || 'NA'}</span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
                                         Mobile Number
                                     </span>
-                                    <span className='text-sm font-bold'>{items?.mobileNo}</span>
+                                    <span className='text-sm font-bold'>{items?.mobileNo || 'NA'}</span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
@@ -139,14 +132,14 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                                         Assigne To {items?.assignDealerId === null ? 'Warehouse' : 'Dealer'}
                                     </span>
                                     <span className='text-sm font-bold'>
-                                        {items?.assignDealerId === null ? items?.assignWarehouseLabel : `${items?.assignDealerLabel} + (${items?.assignDealerCode})`}
+                                        {items?.assignDealerId === null ? items?.assignWarehouseLabel : items?.assignDealerId === null ? `${items?.assignDealerLabel} + (${items?.assignDealerCode})` : 'NA'}
                                     </span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
                                         Customer Name
                                     </span>
-                                    <span className='text-sm font-bold capitalize'>{items?.customerName || '-'}</span>
+                                    <span className='text-sm font-bold capitalize'>{items?.customerName || 'NA'}</span>
                                 </div>
                                 <div className='flex justify-between items-center'>
                                     <span className='text-neutral font-medium text-sm'>
