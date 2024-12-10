@@ -78,9 +78,13 @@ const CreateBatchOrderListingWrapper = () => {
                     fieldName: 'orderNumber',
                     value: [searchValue],
                 },
+                // {
+                //     fieldName: 'status',
+                //     value: ['FRESH', 'URGENT'],
+                // },
                 {
                     fieldName: 'status',
-                    value: filter.orderStatus.value || 'FRESH',
+                    value: filter.orderStatus.value || ['FRESH', 'URGENT'],
                 },
                 {
                     fieldName: 'isUrgentOrder',

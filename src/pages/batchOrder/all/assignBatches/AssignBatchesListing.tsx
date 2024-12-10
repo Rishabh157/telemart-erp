@@ -1,10 +1,8 @@
 // |-- Built-in Dependencies --|
-import React from 'react'
 
 // |-- External Dependencies --|
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { CircularProgress } from '@mui/material'
 import { CgDetailsMore } from "react-icons/cg";
 
 // |-- Internal Dependencies --|
@@ -23,6 +21,7 @@ import {
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import moment from 'moment'
+import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader';
 
 // |-- Types --|
 type Props = {
@@ -76,16 +75,15 @@ function BatchInfoCard({ batchNumber, bucketOders, batchCreatedBy, createdAt, on
 
 const AssignBatchesListing = ({ columns, rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const createBatchState: any = useSelector(
-        (state: RootState) => state.listingPagination
-    )
+    const createBatchState: any = useSelector((state: RootState) => state.listingPagination)
     const navigate = useNavigate()
-
-    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } =
-        createBatchState
+    const { page, rowsPerPage, searchValue, isTableLoading, totalItems } = createBatchState
 
     return (
         <div className="px-4 h-[calc(100vh-110px)]">
+
+            {isTableLoading && <ATMFullScreenLoader />}
+
             <div className="flex justify-between items-center h-[45px]">
                 <ATMPageHeading> Batches </ATMPageHeading>
             </div>
@@ -98,39 +96,25 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
                     rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
-                    onRowsPerPageChange={(newValue) =>
-                        dispatch(setRowsPerPage(newValue))
-                    }
-                    onSearch={(newValue) => {
-                        dispatch(setSearchValue(newValue))
-                    }}
-                    // isFilter
-                    // isRefresh
+                    onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
+                    onSearch={(newValue) => dispatch(setSearchValue(newValue))}
                     onFilterDispatch={() => dispatch(setFilterValue([]))}
                 />
 
                 {/* Table */}
                 <div className="h-[calc(100%-110px)] overflow-auto ">
-                    {!isTableLoading ? (
-                        <div className="grid grid-cols-4 gap-4 p-4">
-                            {rows?.map((batch: BatchesListResponseTypes) =>
-                                <BatchInfoCard
-                                    key={batch?._id}
-                                    batchNumber={batch?.batchNumber}
-                                    bucketOders={batch?.orders?.length}
-                                    batchCreatedBy={capitalizeFirstLetter(batch?.batchCreatedByLabel)}
-                                    createdAt={batch?.createdAt}
-                                    onClick={() => navigate(`${batch?._id}`)}
-                                />
-                            )}
-                        </div>
-                    ) : (
-                        <div className="flex justify-center items-center h-[calc(100%-75px)]">
-                            <h1 className="text-[23px]">
-                                <CircularProgress size={30} />
-                            </h1>
-                        </div>
-                    )}
+                    <div className="grid grid-cols-4 gap-4 p-4">
+                        {rows?.map((batch: BatchesListResponseTypes) =>
+                            <BatchInfoCard
+                                key={batch?._id}
+                                batchNumber={batch?.batchNumber}
+                                bucketOders={batch?.orders?.length}
+                                batchCreatedBy={capitalizeFirstLetter(batch?.batchCreatedByLabel)}
+                                createdAt={batch?.createdAt}
+                                onClick={() => navigate(`${batch?._id}`)}
+                            />
+                        )}
+                    </div>
                 </div>
 
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
