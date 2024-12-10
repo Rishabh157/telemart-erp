@@ -118,7 +118,7 @@ const AllOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ORDER_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row?.orderNumber}</span>
+                <span className="text-primary-main"># {row?.orderNumber}</span>
             ),
         },
         {

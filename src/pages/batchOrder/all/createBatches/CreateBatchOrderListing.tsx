@@ -102,9 +102,9 @@ const CreateBatchOrderListing = ({
                         disabled={!selectedRows.length}
                         loadingText="Saving..."
                         onClick={onClick}
-                        className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-60"
+                        className="bg-primary-main text-white flex items-center py-1 px-2 rounded w-32"
                     >
-                        Create Selected Order Batch
+                        Create Batch
                     </ATMLoadingButton>
                 )}
             </div>

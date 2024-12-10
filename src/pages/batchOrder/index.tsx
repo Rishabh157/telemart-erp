@@ -31,6 +31,12 @@ const BatchOrderView = () => {
             path: 'assign-batches',
             name: UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB,
         },
+        {
+            label: 'Unassign Order',
+            icon: MdOutbond,
+            path: 'un-assign-order',
+            name: UserModuleNameTypes.ACTION_BATCH_ORDER_ASSIGN_BATCH_TAB,
+        },
     ]
     const [activeTabIndex, setActiveTab] = useState<number>(0)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

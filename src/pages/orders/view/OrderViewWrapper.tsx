@@ -13,6 +13,7 @@ import OrderView from './OrderView'
 import { OrderListResponse } from 'src/models'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import moment from 'moment'
+// import { useGetInquiryByIdQuery } from 'src/services/InquiryService'
 
 type OrderFlowListResponse = {
     _id: string,
@@ -39,6 +40,15 @@ const OrderViewWrapper = () => {
             skip: !id,
         }),
     })
+
+    // // Get Order Details
+    // const { items: inquiryItems, isLoading: inquiryLoading } = useGetCustomListingData<OrderListResponse>({
+    //     useEndPointHook: useGetInquiryByIdQuery(id, {
+    //         skip: !id,
+    //     }),
+    // })
+
+    // console.log('inquiryItems', inquiryLoading, inquiryItems);
 
     // Order History
     const { items: orderHistory } = useGetCustomListingData<OrderListResponse>({

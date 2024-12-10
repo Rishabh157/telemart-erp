@@ -142,6 +142,7 @@ export type OrderListResponse = {
         _id: string
     }[]
     maerksResponse?: MaerksResponseType
+    batchNumber: number
 }
 
 // Invoice and Labels List Response

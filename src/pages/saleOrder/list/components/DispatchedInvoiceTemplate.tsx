@@ -103,7 +103,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
             className="bg-white border-[1px] border-black m-2 p-6 text-sm"
         >
             {/* Top Header With Logo */}
-            <div className="grid grid-cols-12 border-b-[1px] border-black">
+            <div className="grid grid-cols-12 border-b-[1px] pb-2 border-black">
                 <div className="col-span-4 p-2">
                     <img src="/skyLogo.jpg"
                         className="h-[6rem] w-full object-contain"
@@ -181,53 +181,52 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                     </h2>
 
                     <h2 className="font-bold text-xs capitalize">
-                        {items?.dealerWarehouse?.wareHouseName},{' '}
-                        <span className="pl-2">({items?.dealerWarehouse?.wareHouseCode})</span>
+                        {items?.companyWarehouse?.wareHouseName},{' '}
+                        <span className="pl-2">({items?.companyWarehouse?.wareHouseCode})</span>
                     </h2>
 
                     <h2 className="text-xs capitalize text-wrap">
-                        {items?.dealerWarehouse?.billingAddress?.address}
-                        {' '} +91{items?.dealerWarehouse?.billingAddress?.phone}
-                        {','}{items?.dealerWarehouse?.billingAddress?.dealerDistrictName}
-                        {','}{items?.dealerWarehouse?.billingAddress?.dealerStateName}
-                        {'-'}{items?.dealerWarehouse?.billingAddress?.dealerPincodeName}
+                        {items?.companyWarehouse?.billingAddress?.address}
+                        {/* {','}{items?.companyWarehouse?.billingAddress?.dealerDistrictName}
+                        {','}{items?.companyWarehouse?.billingAddress?.companyStateName}
+                        {'-'}{items?.companyWarehouse?.billingAddress?.dealerPincodeName} */}
                     </h2>
 
                     <div>
-                        <span className="font-bold">
+                        <span className="font-bold text-xs">
                             Phone No.
                         </span>
                         {' '}:{' '}
-                        <span>
-                            {items?.dealerWarehouse?.billingAddress?.phone}
+                        <span className='text-xs'>
+                            {items?.companyWarehouse?.billingAddress?.phone}
                         </span>
                     </div>
 
                     <div>
-                        <span className="font-bold">GSTIN</span>
+                        <span className="font-bold text-xs">GSTIN</span>
                         {' '}:{' '}
-                        <span>{items?.dealerWarehouse?.billingAddress?.gstNumber || '-'}</span>
+                        <span className='text-xs'>{items?.companyWarehouse?.billingAddress?.gstNumber || ''}</span>
                     </div>
 
-                    <div className='hidden'>
+                    {/* <div className='hidden'>
                         <span className="font-bold">
                             STATE CODE
                         </span>
                         {' '}:{' '}
                         <span>-</span>
-                    </div>
+                    </div> */}
 
-                    <div>
+                    {/* <div>
                         <span className="font-bold">PAN</span>
                         {' '}:{' '}
                         <span className="uppercase">
                             {items?.dealerWarehouse?.billingAddress?.panNumber || '-'}
                         </span>
-                    </div>
+                    </div> */}
 
                     <div>
-                        <span className="font-bold">
-                            EMAIL : {items?.dealerWarehouse?.email || '-'}
+                        <span className="font-bold text-xs">
+                            EMAIL : {items?.companyWarehouse?.email || '-'}
                         </span>
                     </div>
                 </div>
@@ -244,12 +243,9 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
                         {' - '}{items?.dealerWarehouse?.billingAddress?.dealerPincodeName}
                         {', '} Ph:-{items?.dealerWarehouse?.billingAddress?.phone}
                     </h2>
+                    
                     <div>
-                        <span className="font-bold">EMAIL</span>
-                        {' '}:{' '}
-                        <span>
-                            {items?.dealerWarehouse?.email || '-'}
-                        </span>
+                        <span className="font-bold text-xs">EMAIL</span> : {items?.dealerWarehouse?.email || '-'}
                     </div>
                 </div>
             </div>
@@ -419,15 +415,15 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
             {/* Godown Information  */}
             <div className="grid grid-cols-12 border-b-[1px] border-black">
                 <div className="col-span-6 px-2 py-2 border-r-[1px] border-black">
-                    <h2 className="font-bold mb-2">
-                        GODOWN: {items?.companyDetails?.companyName}
+                    <h2 className="font-bold mb-2 capitalize">
+                        GODOWN:  {items?.companyDetails?.companyName}
                     </h2>
 
                     <h2 className='text-xs'>
                         {items?.companyWarehouse?.billingAddress?.address}
                         <p>
                             Contact No : {items?.companyWarehouse?.billingAddress?.phone}
-                            {','} Gst No : {items?.companyWarehouse?.billingAddress?.gstNumber}
+                            {','} Gst No : {items?.companyDetails?.gstNo || ''}
                         </p>
                     </h2>
                 </div>
