@@ -103,7 +103,7 @@ const DispatchedInvoiceTemplate = React.forwardRef(({ items }: Props, ref: any) 
             className="bg-white border-[1px] border-black m-2 p-6 text-sm"
         >
             {/* Top Header With Logo */}
-            <div className="grid grid-cols-12 border-b-[1px] border-black">
+            <div className="grid grid-cols-12 border-b-[1px] pb-2 border-black">
                 <div className="col-span-4 p-2">
                     <img src="/skyLogo.jpg"
                         className="h-[6rem] w-full object-contain"
