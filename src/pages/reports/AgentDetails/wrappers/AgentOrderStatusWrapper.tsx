@@ -39,8 +39,8 @@ const AgentOrderStatusWrapper = () => {
                     endDate: filters.end_date
                         ? moment(filters?.end_date).format('YYYY-MM-DD')
                         : filters.end_date
-                        ? moment().format('YYYY-MM-DD')
-                        : '',
+                            ? moment().format('YYYY-MM-DD')
+                            : '',
                 },
             },
             {
@@ -80,8 +80,6 @@ const AgentOrderStatusWrapper = () => {
             checked ? [...prev, header] : prev.filter((h) => h !== header)
         )
     }
-
-    console.log(' **** items ', items)
 
     // order column
     const columns: columnTypes[] = [
@@ -157,8 +155,17 @@ const AgentOrderStatusWrapper = () => {
             onCheckBox: (e: any) =>
                 handleHeaderSelection(e?.target?.checked, 'INTRANSIT'),
         },
+        {
+            field: 'TOTAL',
+            headerName: 'Total',
+            flex: 'flex-[1_1_0%]',
+            extraClasses: 'text-xs min-w-[150px]',
+            checkBox: selectedHeaders?.includes('TOTAL'),
+            onCheckBox: (e: any) =>
+                handleHeaderSelection(e?.target?.checked, 'TOTAL'),
+        },
     ]
-    
+
 
     return (
         <div className="border border-slate-400 rounded p-2 h-full flex flex-col">
@@ -265,11 +272,11 @@ const AgentOrderStatusWrapper = () => {
                     </button>
                 )}
 
-                {selectedHeaders?.length && items?.length ? (
+                {selectedHeaders?.length && items?.detailedData?.length ? (
                     <ATMPDFExportButton
                         tableBody={[
                             selectedHeaders, // First row as the header
-                            ...items?.map((row: any) =>
+                            ...items?.detailedData?.map((row: any) =>
                                 selectedHeaders?.map((header) =>
                                     row[header] !== undefined
                                         ? row[header].toString()
@@ -285,35 +292,33 @@ const AgentOrderStatusWrapper = () => {
                             'HOLD',
                             'URGENT',
                             'INTRANSIT',
-                        ]
-                            .map((colName) => selectedHeaders?.indexOf(colName))
-                            .filter((idx) => idx !== -1)} // Columns to summarize
+                        ]?.map((colName) => selectedHeaders?.indexOf(colName))?.filter((idx) => idx !== -1)} // Columns to summarize
                         onClick={() => {
                             setSelectedHeaders([])
                         }}
                     />
                 ) : // <ATMPDFExportButton
-                //     // headers={selectedHeaders}
-                //     // data={items || []}
-                //     columnLength={selectedHeaders?.length}
-                //     tableBody={[
-                // selectedHeaders, // First row as the header
-                // ...items.map((row: any) =>
-                //     selectedHeaders.map(
-                //         (header) => row[header] || ''
-                //     )
-                // ),
-                //         selectedHeaders, // First row as the header
-                //         ...items.map((row: any) =>
-                //             selectedHeaders.map(
-                //                 (header) => row[header] || ''
-                //             )
-                //         ),
+                    //     // headers={selectedHeaders}
+                    //     // data={items || []}
+                    //     columnLength={selectedHeaders?.length}
+                    //     tableBody={[
+                    // selectedHeaders, // First row as the header
+                    // ...items.map((row: any) =>
+                    //     selectedHeaders.map(
+                    //         (header) => row[header] || ''
+                    //     )
+                    // ),
+                    //         selectedHeaders, // First row as the header
+                    //         ...items.map((row: any) =>
+                    //             selectedHeaders.map(
+                    //                 (header) => row[header] || ''
+                    //             )
+                    //         ),
 
-                //     ]}
+                    //     ]}
 
-                // />
-                null}
+                    // />
+                    null}
             </div>
 
             <div className="relative flex-1 h-0 z-10">
@@ -327,7 +332,7 @@ const AgentOrderStatusWrapper = () => {
                             isLoading={isFetching}
                         />
 
-                     
+
                     </div>
                 </div>
             </div>
