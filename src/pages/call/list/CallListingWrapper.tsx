@@ -133,7 +133,7 @@ const CallListingWrapper = () => {
         useEndPointHook: useGetPaginationInboundCallerQuery({
             limit: rowsPerPage,
             searchValue: searchValue,
-            params: ['didNo'],
+            params: ['didNo', 'mobileNo'],
             page: page,
             filterBy: [
                 {

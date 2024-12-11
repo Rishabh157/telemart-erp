@@ -12,7 +12,6 @@ import WarehouseAssignedOrdersListing from './WarehouseAssignedOrderListing'
 
 // |-- Redux --|
 import { Chip } from '@mui/material'
-import { useParams } from 'react-router-dom'
 import SideNavLayout from 'src/components/layouts/SideNavLayout/SideNavLayout'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
@@ -77,9 +76,7 @@ const WarehouseAssignedOrderListingWrapper = () => {
         isPnd: { fieldName: '', label: '', value: false },
     })
     const [, setShowDropdown] = useState(false)
-    const params = useParams()
-    const warehouseId = params.id
-    console.log('warehouseId: ', warehouseId);
+   
     const warehouseAssignedOrdersState: any = useSelector(
         (state: RootState) => state.listingPagination
     )
