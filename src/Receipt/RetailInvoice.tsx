@@ -131,7 +131,8 @@ const RetailInvoice = ({
         <div className="bg-white p-4 text-sm">
             <div className="grid grid-cols-12 py-6 items-center border-b border-gray-400 gap-x-8">
                 <div className="col-span-4">
-                    <img
+                <img src="/skyLogo.jpg" className="h-[6rem] w-full object-contain" alt='Saptel logo' />
+                    {/* <img
                         src={
                             items?.companyDetails?.companyLogo
                                 ? items?.companyDetails?.companyLogo
@@ -139,7 +140,7 @@ const RetailInvoice = ({
                         }
                         className="h-20 w-full"
                         alt={items?.companyDetails?.companyName + ' logo'}
-                    />
+                    /> */}
                 </div>
 
                 <div className="flex flex-col font-medium col-span-8">
@@ -245,10 +246,10 @@ const RetailInvoice = ({
                             <th className={tableHead}>DISC. </th>
                             <th className={tableHead}>DEL. CHGS</th>
                             <th className={tableHead}>TAXABLE VALUE</th>
-                            <th className={tableHead}>S-GST</th>
-                            <th className={tableHead}>C-GST</th>
-                            <th className={tableHead}>I-GST</th>
-                            <th className={tableHead}>U-GST</th>
+                            <th className={tableHead}>SGST</th>
+                            <th className={tableHead}>CGST</th>
+                            <th className={tableHead}>IGST</th>
+                            <th className={tableHead}>UGST</th>
                             <th className={tableHead}>AMOUNT</th>
                         </tr>
                     </thead>
@@ -260,7 +261,7 @@ const RetailInvoice = ({
                                 <br />
                                 Item Code:{gstTotals?.productGroupCode}
                                 <br />
-                                SERIAL NO: BARCOE
+                                SERIAL NO: {items?.barcodeData?.map((ele) => ele?.barcode).join(', ')}
                             </td>
                             <td className={tableCell}>{items?.hsnCode}</td>
                             <td className={tableCell}>

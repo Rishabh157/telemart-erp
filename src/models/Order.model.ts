@@ -153,6 +153,7 @@ export type OrderInvoiceAndLabelListResponse = {
     orderReferenceNumber: string | null
     orderMBKNumber: string | null
     inquiryNumber: number
+    courierBillingAddress: string
     orderStatus: string
     assignDealerId: string
     assignDealerLabel: string
