@@ -10,11 +10,6 @@
             "parentGroup": [],
             "fields": [
                 {
-                    "fieldId": "ORDER_UNA_TAB_LIST_INQUIRY_NUMBER",
-                    "fieldName": "Inquiry Number",
-                    "fieldValue": "inquiryNumber"
-                },
-                {
                     "fieldId": "ORDER_UNA_TAB_LIST_ORDER_NUMBER",
                     "fieldName": "Order Number",
                     "fieldValue": "Order Number"

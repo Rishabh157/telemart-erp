@@ -109,15 +109,15 @@ const PrepaidOrdersListingWrapper = () => {
                 />
             ),
         },
-        {
-            field: 'inquiryNumber',
-            headerName: 'Inquiry No.',
-            flex: 'flex-[1_1_0%]',
-            name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER,
-            align: 'start',
-            extraClasses: 'text-xs min-w-[150px]',
-            // renderCell: (row: OrderListResponse) => <span></span>,
-        },
+        // {
+        //     field: 'inquiryNumber',
+        //     headerName: 'Inquiry No.',
+        //     flex: 'flex-[1_1_0%]',
+        //     name: UserModuleNameTypes.ORDER_ALL_TAB_LIST_ENQUIRY_NUMBER,
+        //     align: 'start',
+        //     extraClasses: 'text-xs min-w-[150px]',
+        //     // renderCell: (row: OrderListResponse) => <span></span>,
+        // },
         {
             field: 'orderNumber',
             headerName: 'Order No.',

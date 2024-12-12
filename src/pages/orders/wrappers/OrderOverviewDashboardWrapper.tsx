@@ -29,7 +29,7 @@ const OrderOverviewDashboardWrapper = () => {
 
     const getData = (items: any) => {
         return [
-            { y: items?.allOrders || 0, label: 'All' },
+            { y: items?.allOrders || 0, label: 'All Orders' },
             { y: items?.freshOrders || 0, label: 'Fresh' },
             { y: items?.holdOrders || 0, label: 'Hold' },
             { y: items?.inquiryOrders || 0, label: 'Inquiry' },

@@ -23,7 +23,8 @@ const RetailILabel = ({
         <div className="bg-white p-4 py-2 text-sm h-auto">
             <div className="grid grid-cols-12 py-6 items-center border-b border-gray-400 gap-x-8">
                 <div className="col-span-4">
-                    <img
+                    <img src="/skyLogo.jpg" className="h-[6rem] w-full object-contain" alt='Saptel logo' />
+                    {/* <img
                         src={
                             items?.companyDetails?.companyLogo
                                 ? items?.companyDetails?.companyLogo
@@ -31,7 +32,7 @@ const RetailILabel = ({
                         }
                         className="h-20 w-full"
                         alt={items?.companyDetails?.companyName + ' logo'}
-                    />
+                    /> */}
                 </div>
 
                 <div className="flex flex-col font-medium col-span-8">
@@ -51,18 +52,19 @@ const RetailILabel = ({
             </div>
 
             <div className="flex justify-between gap-4 border-b-[1px] border-gray-400">
+                
                 <div className="flex flex-col border-r-[1px] border-gray-400 pr-10 pb-10">
                     <span className="font-semibold">To</span>
                     <span className="font-medium">{items?.customerName}</span>
                     <span className="font-medium text-wrap">
                         {items?.houseNumber &&
-                        items?.streetNumber &&
-                        items?.landmark
+                            items?.streetNumber &&
+                            items?.landmark
                             ? items?.houseNumber +
-                              ' ,, ' +
-                              items?.streetNumber +
-                              ' ,, ' +
-                              items?.landmark
+                            ' ,, ' +
+                            items?.streetNumber +
+                            ' ,, ' +
+                            items?.landmark
                             : items?.autoFillingShippingAddress}
                         <div className="capitalize">
                             <span className="font-bold"> CITY </span> :{' '}
@@ -76,10 +78,18 @@ const RetailILabel = ({
                         </div>
                     </span>
                 </div>
-                <div className="text-wrap text-lg font-semibold p-2">
-                    <span> CASH ON DELIVERY AMOUNT TO COLLECT</span>
+
+                <div className="flex justify-start items-center p-2">
+
+                    {items?.courierBillingAddress ? <div className='text-sm'
+                        dangerouslySetInnerHTML={{
+                            __html: items.courierBillingAddress.replace(/\n/g, '<br>'),
+                        }}
+                    /> : null}
+                    {/* <span>Rs {items?.totalAmount?.toFixed(2)}</span> */}
+                    {/* <span className='text-sm'> CASH ON DELIVERY AMOUNT TO COLLECT</span>
                     <p></p>
-                    <span>Rs {items?.totalAmount?.toFixed(2)}</span>
+                    <span>Rs {items?.totalAmount?.toFixed(2)}</span> */}
                 </div>
             </div>
 
@@ -97,8 +107,8 @@ const RetailILabel = ({
                             <span className="font-semibold">
                                 {items?.orderInvoiceDate
                                     ? moment(items?.orderInvoiceDate).format(
-                                          'DD MMM YYYY'
-                                      )
+                                        'DD MMM YYYY'
+                                    )
                                     : '-'}
                             </span>
                         </div>

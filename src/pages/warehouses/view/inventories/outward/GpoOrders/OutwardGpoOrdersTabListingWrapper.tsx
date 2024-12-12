@@ -100,6 +100,10 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                     fieldName: 'orderNumber',
                     value: [orderNumberSearchValue],
                 },
+                {
+                    fieldName: 'firstCallApproval',
+                    value: true,
+                },
             ],
             dateFilter: {
                 startDate: filter.startDate.value as string,
@@ -132,8 +136,8 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             next: (res) => {
                                 return res.isConfirmed
                                     ? handleDeliveredStatus({
-                                          orderId: row?._id,
-                                      })
+                                        orderId: row?._id,
+                                    })
                                     : null
                             },
                         })
@@ -204,7 +208,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                                 size="small"
                             />
                         ) : row?.firstCallState ===
-                          FirstCallApprovalStatus.CANCEL ? (
+                            FirstCallApprovalStatus.CANCEL ? (
                             <Chip
                                 className="cursor-pointer"
                                 label="Cancled"
@@ -214,7 +218,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
                             />
                         ) : (
                             <Chip
-                                onClick={() => {}}
+                                onClick={() => { }}
                                 className="cursor-pointer"
                                 label="Pending"
                                 color="error"
@@ -443,7 +447,7 @@ const OutwardGpoOrdersTabListingWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
-renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
 
         {
@@ -589,8 +593,8 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
                     <span>
                         {row?.preffered_delivery_date
                             ? moment(row?.preffered_delivery_date).format(
-                                  'DD-MM-YYYY'
-                              )
+                                'DD-MM-YYYY'
+                            )
                             : '-'}
                     </span>
                 )
