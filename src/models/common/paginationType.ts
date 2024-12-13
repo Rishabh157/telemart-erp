@@ -18,8 +18,8 @@ export type PaginationType = {
         value: any
     }[]
     dateFilter: {
-        startDate?: string
-        endDate?: string
+        startDate?: string | null
+        endDate?: string | null
         dateFilterKey?: string
     }
     orderBy: string
