@@ -20,12 +20,14 @@ import { BiSearch } from 'react-icons/bi'
 import { handleValidNumber, handleValidNumberForSearch } from 'src/utils/methods/numberMethods'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import MOLFilterBar from 'src/components/UI/molecules/MOLFilterBar/MOLFilterBar'
 
 type Props = {
     columns: columnTypes[]
+    filters?: any
 }
 
-const OrderListing = ({ columns }: Props) => {
+const OrderListing = ({ columns, filters }: Props) => {
     const [activeTab, setActiveTab] = useState('')
 
     // Hooks
@@ -132,6 +134,7 @@ const OrderListing = ({ columns }: Props) => {
                         anotherSearchPlaceholder="Mobile No..."
                         onAnotherSearch={(newValue) => handleValidNumberForSearch(newValue) && dispatch(setMobileNumberSearchValue(newValue))}
                         isRefresh
+                        children={<MOLFilterBar filters={filters} />}
                     />
                 )}
 

@@ -22,17 +22,38 @@ import {
 } from 'src/redux/slices/orderSlice'
 import { OrderStatusEnum } from 'src/utils/constants/enums'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay, ATMDealerDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { FilterType } from 'src/components/UI/molecules/MOLFilterBar/MOLFilterBar'
+import { useFilterPagination } from 'src/hooks/useFilterPagination'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
+// import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 
 const PrepaidOrdersListingWrapper = () => {
-    const navigate = useNavigate()
-    const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
-    const dispatch = useDispatch<AppDispatch>()
-    const { userData } = useSelector((state: RootState) => state?.auth)
-    const orderState: any = useSelector((state: RootState) => state.order)
 
-    // Get All Order Data Query
-    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } =
-        orderState
+    const navigate = useNavigate()
+    const { dateFilter } = useFilterPagination()
+    const { userData } = useGetLocalStorage()
+    const dispatch = useDispatch<AppDispatch>()
+    const orderState: any = useSelector((state: RootState) => state.order)
+    const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
+
+    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } = orderState
+
+    const filters: FilterType[] = [
+        {
+            filterType: "date",
+            fieldName: "createdAt",
+            dateFilterKeyOptions: [
+                {
+                    label: "startDate",
+                    value: dateFilter?.startDate || "",
+                },
+                {
+                    label: "endDate",
+                    value: dateFilter?.endDate || "",
+                },
+            ],
+        },
+    ];
 
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
@@ -57,11 +78,51 @@ const PrepaidOrdersListingWrapper = () => {
                 value: OrderStatusEnum.PREPAID,
             },
         ],
-        dateFilter: {},
+        dateFilter: {
+            dateFilterKey: dateFilter.dateFilterKey,
+            startDate: dateFilter?.startDate ?? '',
+            endDate: dateFilter?.endDate ?? ''
+        },
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
     })
+
+
+    // const { items } = useGetCustomListingData({
+    //     useEndPointHook: useGetOrderQuery({
+    //         limit: rowsPerPage,
+    //         searchValue: '',
+    //         params: ['didNo', 'mobileNo'],
+    //         page: page,
+    //         filterBy: [
+    //             {
+    //                 fieldName: 'companyId',
+    //                 value: userData?.companyId,
+    //             },
+    //             {
+    //                 fieldName: 'orderNumber',
+    //                 value: [searchValue],
+    //             },
+    //             {
+    //                 fieldName: 'mobileNo',
+    //                 value: [mobileNumberSearchValue],
+    //             },
+    //             {
+    //                 fieldName: 'status',
+    //                 value: OrderStatusEnum.PREPAID,
+    //             },
+    //         ],
+    //         dateFilter: {
+    //             dateFilterKey: dateFilter.dateFilterKey,
+    //             startDate: dateFilter?.startDate ?? '',
+    //             endDate: dateFilter?.endDate ?? ''
+    //         },
+    //         orderBy: 'createdAt',
+    //         orderByValue: -1,
+    //         isPaginationRequired: true,
+    //     }),
+    // })
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -514,7 +575,7 @@ const PrepaidOrdersListingWrapper = () => {
         },
     ]
 
-    return <OrderListing columns={columns} />
+    return <OrderListing columns={columns} filters={filters} />
 }
 
 export default PrepaidOrdersListingWrapper

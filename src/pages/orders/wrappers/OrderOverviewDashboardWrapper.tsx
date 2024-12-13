@@ -1,28 +1,44 @@
-import { useState } from 'react'
-import moment from 'moment'
+import { useState, useEffect } from 'react'
+// import moment from 'moment'
 import BarGraph from 'src/components/UI/atoms/ATMBarGraph/ATMBarGraph'
 import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader'
-import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
+// import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { useGetOrderDashboardDataQuery } from 'src/services/OrderService'
+import ATMDateFilterChip from 'src/components/UI/atoms/ATMDateFilterChip/ATMDateFilterChip'
+import { useSearchParams } from "react-router-dom";
+import { format } from "date-fns";
+import { addMonths, endOfDay, isBefore } from 'date-fns';
+
 
 const OrderOverviewDashboardWrapper = () => {
+
+    const keyName = {
+        dateFilterKey: "dateFilterKey",
+        startDate: "startDate",
+        endDate: "endDate",
+    };
+
+    const [searchParams, setSearchParams] = useSearchParams();
     const [dateFilter, setDateFilter] = useState<any>({
-        start_date: `${moment().format('YYYY-MM-DD')}`,
-        end_date: `${moment().format('YYYY-MM-DD')}`,
+        start_date: searchParams.get(keyName.startDate) || format(new Date(), 'yyyy-MM-dd'),
+        end_date: searchParams.get(keyName.endDate) || format(new Date(), 'yyyy-MM-dd'),
     })
 
+    useEffect(() => {
+        // Update search params whenever the date filter state changes
+        searchParams.set(keyName.startDate, dateFilter.start_date);
+        searchParams.set(keyName.endDate, dateFilter.end_date);
+        setSearchParams(searchParams);
+    }, [dateFilter, keyName.startDate, keyName.endDate, searchParams, setSearchParams]);
+
+
+    // API
     const { items, isFetching } = useGetDataByIdCustomQuery<any>({
         useEndPointHook: useGetOrderDashboardDataQuery({
             dateFilter: {
-                startDate: dateFilter.start_date
-                    ? moment(dateFilter?.start_date).format('YYYY-MM-DD')
-                    : '',
-                endDate: dateFilter.end_date
-                    ? moment(dateFilter?.end_date).format('YYYY-MM-DD')
-                    : dateFilter.end_date
-                        ? moment().format('YYYY-MM-DD')
-                        : '',
+                startDate: dateFilter.start_date,
+                endDate: dateFilter.end_date,
             },
         }),
     })
@@ -49,79 +65,52 @@ const OrderOverviewDashboardWrapper = () => {
         ]
     }
 
+    const handleStartDateChange = (newDate: any) => {
+        if (!newDate) return;
+
+        const maxEndDate = endOfDay(addMonths(newDate, 3));
+        const updatedEndDate = isBefore(new Date(dateFilter.end_date), maxEndDate)
+            ? dateFilter.end_date
+            : format(maxEndDate, 'yyyy-MM-dd');
+
+        setDateFilter({
+            start_date: format(newDate, 'yyyy-MM-dd'),
+            end_date: updatedEndDate,
+        });
+    };
+
+    const handleEndDateChange = (newDate: any) => {
+        if (!newDate) return;
+
+        const minEndDate = endOfDay(addMonths(new Date(dateFilter.start_date), 3));
+
+        if (isBefore(newDate, minEndDate)) {
+            setDateFilter((prev: any) => ({
+                ...prev,
+                end_date: format(newDate, 'yyyy-MM-dd'),
+            }));
+        }
+    };
+
+    const handleClear = () => {
+        setDateFilter({
+            start_date: format(new Date(), 'yyyy-MM-dd'),
+            end_date: format(new Date(), 'yyyy-MM-dd'),
+        });
+    };
+
     return (
         <div className="flex flex-col border border-slate-400 rounded p-2 h-auto">
             {isFetching && <ATMFullScreenLoader />}
 
-            <div className="flex gap-2 items-center justify-end">
-                <ATMDatePicker
-                    name=""
-                    value={dateFilter.start_date}
-                    onChange={(value) => {
-                        const endDate = moment(value)
-                            .add(3, 'months')
-                            .endOf('day')
-                        const threeMonthsLater = moment()
-                            .add(3, 'months')
-                            .endOf('day')
-
-                        // Check if the selected start date is less than 3 months from the current date
-                        if (moment(value).isBefore(threeMonthsLater)) {
-                            // If yes, set the end date to 3 months from the selected start date
-                            setDateFilter({
-                                ...dateFilter,
-                                start_date: value,
-                                end_date: endDate.isBefore(threeMonthsLater)
-                                    ? endDate
-                                    : threeMonthsLater,
-                            })
-                        } else {
-                            // Otherwise, keep the end date unchanged
-                            setDateFilter({
-                                ...dateFilter,
-                                start_date: value,
-                            })
-                        }
-                    }}
-                    label=""
-                    dateTimeFormat="DD/MM/YYYY"
+            <div className="flex gap-2 items-center justify-center">
+                <ATMDateFilterChip
+                    startDate={searchParams.get(keyName?.startDate) || null}
+                    endDate={searchParams.get(keyName?.endDate) || null}
+                    onSelectStartDate={handleStartDateChange}
+                    onSelectEndDate={handleEndDateChange}
+                    onClear={handleClear}
                 />
-
-                <ATMDatePicker
-                    name=""
-                    value={dateFilter.end_date}
-                    onChange={(value) => {
-                        setDateFilter({
-                            ...dateFilter,
-                            end_date: value,
-                        })
-                    }}
-                    label=""
-                    dateTimeFormat="DD/MM/YYYY"
-                    minDate={dateFilter.start_date}
-                    maxDate={moment(dateFilter.start_date)
-                        .add(3, 'months')
-                        .endOf('day')}
-                />
-
-                {(dateFilter.start_date || dateFilter.end_date) && (
-                    <button
-                        type="button"
-                        className="rounded bg-primary-main text-white text-sm py-1 px-2"
-                        onClick={() => {
-                            setDateFilter({
-                                start_date: moment(new Date()).format(
-                                    'YYYY-MM-DD'
-                                ),
-                                end_date: moment(new Date()).format(
-                                    'YYYY-MM-DD'
-                                ),
-                            })
-                        }}
-                    >
-                        Clear
-                    </button>
-                )}
             </div>
 
             <div className="relative flex-1 h-0">

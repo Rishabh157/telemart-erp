@@ -21,17 +21,39 @@ import {
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay, ATMDealerDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { FilterType } from 'src/components/UI/molecules/MOLFilterBar/MOLFilterBar'
+import { useFilterPagination } from 'src/hooks/useFilterPagination'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const AllOrdersListingWrapper = () => {
+
     const navigate = useNavigate()
+    const { dateFilter } = useFilterPagination()
+    const { userData } = useGetLocalStorage()
     const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
     const dispatch = useDispatch<AppDispatch>()
-
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const orderState: any = useSelector((state: RootState) => state.order)
+
     // Get All Order Data Query
-    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } =
-        orderState
+    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } = orderState
+
+    const filters: FilterType[] = [
+        {
+            filterType: "date",
+            fieldName: "createdAt",
+            dateFilterKeyOptions: [
+                {
+                    label: "startDate",
+                    value: dateFilter?.startDate || "",
+                },
+                {
+                    label: "endDate",
+                    value: dateFilter?.endDate || "",
+                },
+            ],
+        },
+    ];
+
 
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
@@ -52,7 +74,11 @@ const AllOrdersListingWrapper = () => {
                 value: [mobileNumberSearchValue],
             },
         ],
-        dateFilter: {},
+        dateFilter: {
+            dateFilterKey: dateFilter.dateFilterKey,
+            startDate: dateFilter?.startDate ?? '',
+            endDate: dateFilter?.endDate ?? ''
+        },
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
@@ -140,43 +166,41 @@ const AllOrdersListingWrapper = () => {
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: any) => {
                 return (
-                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
-                        {row?.approved ? (
-                            <Chip
-                                className="cursor-pointer text-xs"
-                                label="Approved"
-                                color="success"
-                                variant="outlined"
-                                size="small"
-                            />
-                        ) : (
-                            <SwtAlertChipConfirm
-                                title="Approval"
-                                text="Do you want to Approve ?"
-                                color="warning"
-                                chipLabel="pending"
-                                errorMessage="please enter transaction id"
-                                input={'text'}
-                                inputPlaceholder="transaction id"
-                                showCancelButton
-                                showDenyButton={false}
-                                icon="warning"
-                                confirmButtonColor="#3085d6"
-                                cancelButtonColor="#dc3741"
-                                confirmButtonText="Yes"
-                                next={(res) => {
-                                    if (res.isConfirmed || res?.isDenied) {
-                                        return res.isConfirmed
-                                            ? handleOrderApproval(
-                                                row?._id,
-                                                res?.value
-                                            )
-                                            : null
-                                    }
-                                }}
-                            />
-                        )}
-                    </span>
+                    row?.approved ? (
+                        <Chip
+                            className="text-xs"
+                            label="Approved"
+                            color="success"
+                            variant="outlined"
+                            size="small"
+                        />
+                    ) : (
+                        <SwtAlertChipConfirm
+                            title="Approval"
+                            text="Do you want to Approve ?"
+                            color="warning"
+                            chipLabel="pending"
+                            errorMessage="please enter transaction id"
+                            input={'text'}
+                            inputPlaceholder="transaction id"
+                            showCancelButton
+                            showDenyButton={false}
+                            icon="warning"
+                            confirmButtonColor="#3085d6"
+                            cancelButtonColor="#dc3741"
+                            confirmButtonText="Yes"
+                            next={(res) => {
+                                if (res.isConfirmed || res?.isDenied) {
+                                    return res.isConfirmed
+                                        ? handleOrderApproval(
+                                            row?._id,
+                                            res?.value
+                                        )
+                                        : null
+                                }
+                            }}
+                        />
+                    )
                 )
             },
         },
@@ -498,7 +522,7 @@ const AllOrdersListingWrapper = () => {
         },
     ]
 
-    return <OrderListing columns={columns} />
+    return <OrderListing columns={columns} filters={filters} />
 }
 
 export default AllOrdersListingWrapper

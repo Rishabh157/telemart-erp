@@ -15,15 +15,37 @@ import {
 } from 'src/redux/slices/orderSlice'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
 import { useGetInquiryQuery } from 'src/services/InquiryService'
+import { FilterType } from 'src/components/UI/molecules/MOLFilterBar/MOLFilterBar'
+import { useFilterPagination } from 'src/hooks/useFilterPagination'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const InquiryOrdersListingWrapper = () => {
+
     const navigate = useNavigate()
+    const { dateFilter } = useFilterPagination()
+    const { userData } = useGetLocalStorage()
     const dispatch = useDispatch<AppDispatch>()
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const orderState: any = useSelector((state: RootState) => state.order)
 
     // Get All Order Data Query
     const { page, rowsPerPage, searchValue, mobileNumberSearchValue } = orderState
+
+    const filters: FilterType[] = [
+        {
+            filterType: "date",
+            fieldName: "createdAt",
+            dateFilterKeyOptions: [
+                {
+                    label: "startDate",
+                    value: dateFilter?.startDate || "",
+                },
+                {
+                    label: "endDate",
+                    value: dateFilter?.endDate || "",
+                },
+            ],
+        },
+    ];
 
     const { data, isLoading, isFetching } = useGetInquiryQuery({
         limit: rowsPerPage,
@@ -43,12 +65,12 @@ const InquiryOrdersListingWrapper = () => {
                 fieldName: 'inquiryNumber',
                 value: [parseInt(searchValue)],
             },
-            // {
-            //     fieldName: 'status',
-            //     value: OrderStatusEnum.INQUIRY,
-            // },
         ],
-        dateFilter: {},
+        dateFilter: {
+            dateFilterKey: dateFilter.dateFilterKey,
+            startDate: dateFilter?.startDate ?? '',
+            endDate: dateFilter?.endDate ?? ''
+        },
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
@@ -439,7 +461,7 @@ const InquiryOrdersListingWrapper = () => {
         },
     ]
 
-    return <OrderListing columns={columns} />
+    return <OrderListing columns={columns} filters={filters} />
 }
 
 export default InquiryOrdersListingWrapper

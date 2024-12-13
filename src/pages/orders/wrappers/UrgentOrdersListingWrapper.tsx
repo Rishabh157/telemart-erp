@@ -6,13 +6,8 @@ import { OrderListResponse } from 'src/models'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import { Chip } from '@mui/material'
 import { FirstCallApprovalStatus } from 'src/pages/warehouseFirstCallOrders/list/WarehouseAssignedOrderWrapper'
-import {
-    useApprovedOrderStatusMutation,
-    useGetOrderQuery,
-} from 'src/services/OrderService'
-import { showToast } from 'src/utils'
+import { useGetOrderQuery } from 'src/services/OrderService'
 import { useNavigate } from 'react-router-dom'
-import SwtAlertChipConfirm from 'src/utils/SwtAlertChipConfirm'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
 import {
@@ -21,17 +16,37 @@ import {
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay, ATMDealerDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { FilterType } from 'src/components/UI/molecules/MOLFilterBar/MOLFilterBar'
+import { useFilterPagination } from 'src/hooks/useFilterPagination'
+import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 
 const UrgentOrdersListingWrapper = () => {
+
     const navigate = useNavigate()
-    const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
+    const { dateFilter } = useFilterPagination()
+    const { userData } = useGetLocalStorage()
     const dispatch = useDispatch<AppDispatch>()
-    const { userData } = useSelector((state: RootState) => state?.auth)
     const orderState: any = useSelector((state: RootState) => state.order)
 
     // Get All Order Data Query
-    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } =
-        orderState
+    const { page, rowsPerPage, searchValue, mobileNumberSearchValue } = orderState
+
+    const filters: FilterType[] = [
+        {
+            filterType: "date",
+            fieldName: "createdAt",
+            dateFilterKeyOptions: [
+                {
+                    label: "startDate",
+                    value: dateFilter?.startDate || "",
+                },
+                {
+                    label: "endDate",
+                    value: dateFilter?.endDate || "",
+                },
+            ],
+        },
+    ];
 
     const { data, isLoading, isFetching } = useGetOrderQuery({
         limit: rowsPerPage,
@@ -60,7 +75,11 @@ const UrgentOrdersListingWrapper = () => {
                 value: true,
             },
         ],
-        dateFilter: {},
+        dateFilter: {
+            dateFilterKey: dateFilter.dateFilterKey,
+            startDate: dateFilter?.startDate ?? '',
+            endDate: dateFilter?.endDate ?? ''
+        },
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,
@@ -77,23 +96,6 @@ const UrgentOrdersListingWrapper = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoading, isFetching, data, dispatch])
-
-    const handleOrderApproval = (orderId: string, transactionId: string) => {
-        approvedOrderStatus({ orderId, transactionId }).then((res: any) => {
-            if ('data' in res) {
-                if (res?.data?.status) {
-                    showToast('success', 'Status changed successfully!')
-                } else {
-                    showToast('error', res?.data?.message)
-                }
-            } else {
-                showToast(
-                    'error',
-                    'Something went wrong, Please try again later'
-                )
-            }
-        })
-    }
 
     // order column
     const columns: columnTypes[] = [
@@ -112,15 +114,6 @@ const UrgentOrdersListingWrapper = () => {
                 />
             ),
         },
-        // {
-        //     field: 'inquiryNumber',
-        //     headerName: 'Inquiry No.',
-        //     flex: 'flex-[1_1_0%]',
-        //     name: UserModuleNameTypes.ORDER_URGENT_TAB_LIST_INQUIRY_NUMBER,
-        //     align: 'start',
-        //     extraClasses: 'text-xs min-w-[150px]',
-        //     // renderCell: (row: OrderListResponse) => <span></span>,
-        // },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
@@ -159,43 +152,15 @@ const UrgentOrdersListingWrapper = () => {
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: any) => {
                 return (
-                    <span className="block w-full px-2 py-1 text-left cursor-pointer">
-                        {row?.approved ? (
-                            <Chip
-                                className="cursor-pointer text-xs"
-                                label="Approved"
-                                color="success"
-                                variant="outlined"
-                                size="small"
-                            />
-                        ) : (
-                            <SwtAlertChipConfirm
-                                title="Approval"
-                                text="Do you want to Approve ?"
-                                color="warning"
-                                chipLabel="pending"
-                                errorMessage="please enter transaction id"
-                                input={'text'}
-                                inputPlaceholder="transaction id"
-                                showCancelButton
-                                showDenyButton={false}
-                                icon="warning"
-                                confirmButtonColor="#3085d6"
-                                cancelButtonColor="#dc3741"
-                                confirmButtonText="Yes"
-                                next={(res) => {
-                                    if (res.isConfirmed || res?.isDenied) {
-                                        return res.isConfirmed
-                                            ? handleOrderApproval(
-                                                row?._id,
-                                                res?.value
-                                            )
-                                            : null
-                                    }
-                                }}
-                            />
-                        )}
-                    </span>
+                    row?.approved && (
+                        <Chip
+                            className="text-xs"
+                            label="Approved"
+                            color="success"
+                            variant="outlined"
+                            size="small"
+                        />
+                    )
                 )
             },
         },
@@ -363,7 +328,7 @@ const UrgentOrdersListingWrapper = () => {
             flex: 'flex-[1_1_0%]',
             name: UserModuleNameTypes.ORDER_URGENT_TAB_LIST_CREATED_AT,
             extraClasses: 'text-xs min-w-[150px]',
-renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         {
             field: 'edpDate',
@@ -516,7 +481,7 @@ renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.crea
             ),
         },
     ]
-    return <OrderListing columns={columns} />
+    return <OrderListing columns={columns} filters={filters} />
 }
 
 export default UrgentOrdersListingWrapper
