@@ -52,7 +52,7 @@
     "scripts": {
         "start": "react-scripts start webpack --config webpack.config.js",
         "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
-        "build": "react-scripts build",
+        "build": "NODE_OPTIONS='--max-old-space-size=8192' react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "format": "prettier --write \"**\\*.{ts,tsx,js,jsx,scss,css,json}\""
