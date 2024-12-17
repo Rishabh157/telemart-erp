@@ -8,6 +8,7 @@ export type BatchesListResponseTypes = {
     isDeleted: boolean
     isActive: boolean
     createdAt: string
+    isCompleted: boolean
     updatedAt: string
     __v: number
     batchCreatedByLabel: string

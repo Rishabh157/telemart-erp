@@ -1,41 +1,38 @@
 // |-- Built-in Dependencies --|
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 // |-- External Dependencies --|
 import { useParams } from 'react-router-dom'
 
 // |-- Internal Dependencies --|
-import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
+import ATMTable, { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
 import AddOrderAssigneeFormWrapper from 'src/pages/batchOrder/all/assignBatches/OrderAssigneeForm/AddOrderAssigneeFormWrapper'
 
 // |-- Redux --|
-import { useGetSingleBatchesOrdersQuery } from 'src/services/BatchesServices'
-import AssignBatchesViewListing from './AssignBatchesViewListing'
+import { useGetSingleBatchesOrdersQuery, useUpdateBatchCompleteMutation } from 'src/services/BatchesServices'
 import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery'
 import { OrderListResponse } from 'src/models'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
 import useUnmountCleanup from 'src/hooks/useUnmountCleanup'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay, ATMDealerDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import ATMPageHeading from 'src/components/UI/atoms/ATMPageHeading/ATMPageHeading'
 
 const AssigneBatchesViewListingWrapper = () => {
     useUnmountCleanup()
 
     const params = useParams()
-    const [selectedRows, setSelectedRows] = useState([])
-
-    const [selectedOrder, setSelectedOrder] = useState<any>(null)
-    const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] =
-        useState<boolean>(false)
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [showDropdown, setShowDropdown] = useState<boolean>(false)
-
     const batchId = params?.id
 
-    const { items } = useGetDataByIdCustomQuery<OrderListResponse>({
+    const [selectedOrder, setSelectedOrder] = useState<any>(null)
+    const [isOrderAssigneeFormOpen, setIsOrderAssigneeFormOpen] = useState<boolean>(false)
+
+    const [updateBatchComplete] = useUpdateBatchCompleteMutation();
+
+    // API
+    const { items, isLoading } = useGetDataByIdCustomQuery<OrderListResponse[]>({
         useEndPointHook: useGetSingleBatchesOrdersQuery(batchId, {
             skip: !batchId,
         }),
@@ -50,10 +47,7 @@ const AssigneBatchesViewListingWrapper = () => {
             renderCell: (row: OrderListResponse) =>
                 !row?.isOrderAssigned && (
                     <ActionPopup
-                        handleOnAction={() => {
-                            setShowDropdown(!showDropdown)
-                            // setCurrentId(row?._id)
-                        }}
+                        handleOnAction={() => { }}
                         isCustomBtn={isAuthorized(
                             UserModuleNameTypes.ACTION_ASSIGN_BATCH_LIST_ASSIGN
                         )}
@@ -62,18 +56,6 @@ const AssigneBatchesViewListingWrapper = () => {
                             setIsOrderAssigneeFormOpen(true)
                             setSelectedOrder(row)
                         }}
-                    // children={
-                    //     <>
-                    //         <button
-                    //             onClick={() => {
-                    //                 navigate(`/orders/view/${row?._id}`)
-                    //             }}
-                    //             className="w-full px-4 py-2 text-left hover:bg-gray-100"
-                    //         >
-                    //             View
-                    //         </button>
-                    //     </>
-                    // }
                     />
                 ),
         },
@@ -87,20 +69,6 @@ const AssigneBatchesViewListingWrapper = () => {
                 <span className="text-primary-main "># {row.orderNumber}</span>
             ),
         },
-        // {
-        //     field: 'assignDealerLabel',
-        //     headerName: 'Assigned Dealer',
-        //     flex: 'flex-[1_1_0%]',
-        //     name: UserModuleNameTypes.ASSIGN_BATCH_LIST_ASSIGNED_DEALER,
-        //     align: 'start',
-        //     extraClasses: 'text-xs min-w-[150px]',
-        //     renderCell: (row: OrderListResponse) => (
-        //         <span>
-        //             {row?.assignDealerLabel || '-'}
-        //             {row?.assignDealerCode || '-'}
-        //         </span>
-        //     ),
-        // },
         {
             field: 'assignDealerLabel',
             headerName: 'Assigned Dealer',
@@ -401,14 +369,47 @@ const AssigneBatchesViewListingWrapper = () => {
         },
     ]
 
+    // const isApiCall = items?.some((ele: OrderListResponse) => ele?.isOrderAssigned === true) || false
+    // console.log('items?.some: ', isApiCall);
+    const isApiCall = useMemo(() => items?.some((ele: OrderListResponse) => ele?.isOrderAssigned === true) || false, [items]);
+
+    useEffect(() => {
+        return () => {
+            if (isApiCall) {
+                console.log('isApiCall: ', isApiCall);
+                // Handle the async operation without returning the promise
+                (async () => {
+                    try {
+                        const res = await updateBatchComplete(batchId || '');
+                        console.log('res', res);
+                    } catch (err) {
+                        console.error(err);
+                    }
+                })();
+            }
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isApiCall, batchId]);
+
     return (
         <>
-            <AssignBatchesViewListing
-                columns={columns}
-                rows={items as any}
-                selectedRows={selectedRows}
-                setSelectedRows={(ele) => setSelectedRows(ele)}
-            />
+            <div className="px-4 h-[calc(100vh-150px)]">
+                <div className="flex justify-between items-center h-[40px]">
+                    <ATMPageHeading> Assign Orders </ATMPageHeading>
+                </div>
+
+                <div className="border flex flex-col h-[calc(100%-45px)] rounded bg-white">
+                    <div className="grow overflow-auto">
+                        <ATMTable
+                            extraClasses="w-[200%]"
+                            columns={columns}
+                            rows={items as any || []}
+                            isLoading={isLoading}
+                        />
+                    </div>
+                </div>
+            </div>
+
             <DialogLogBox
                 maxWidth="md"
                 handleClose={() => {
