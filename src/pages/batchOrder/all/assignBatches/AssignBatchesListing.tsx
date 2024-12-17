@@ -11,6 +11,7 @@ import ATMPagination from 'src/components/UI/atoms/ATMPagination/ATMPagination'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { capitalizeFirstLetter } from 'src/components/utilsComponent/capitalizeFirstLetter'
 import { BatchesListResponseTypes } from 'src/models/Batches.model'
+import { format } from 'date-fns';
 
 // |-- Redux --|
 import {
@@ -20,12 +21,11 @@ import {
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
-import moment from 'moment'
 import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader';
+
 
 // |-- Types --|
 type Props = {
-    columns?: any[]
     rows: any[]
 }
 
@@ -39,45 +39,80 @@ interface InfoCardPropTypes {
 
 function BatchInfoCard({ batchNumber, bucketOders, batchCreatedBy, createdAt, onClick }: InfoCardPropTypes) {
     return (
-        <div className="p-6 bg-white rounded-lg shadow-md border-[1px] border-gray-500 ">
+        <div className="p-6 bg-gradient-to-r from-white via-gray-50 to-gray-100 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow duration-300 ease-in-out">
 
-            <div className="text-xs text-gray-500 mb-4 flex items-center gap-x-4 ">
-                Batch Number : <span className="text-xl text-black font-semibold">{batchNumber}</span>
+            {/* Batch Number */}
+            <div className="text-sm text-gray-600 mb-4 flex items-center justify-between">
+                <span className="font-medium">Batch Number:</span>
+                <span className="text-sm text-primary-main font-bold"># {batchNumber}</span>
             </div>
 
-            <div className="text-xs text-gray-500 mb-4 flex items-center gap-x-4 ">
-                Created By : <span className="px-3 py-1 bg-gray-200 text-black font-semibold rounded-full text-xs">{batchCreatedBy}</span>
+            {/* Created By */}
+            <div className="text-sm text-gray-600 mb-4 flex items-center justify-between">
+                <span className="font-medium">Created By:</span>
+                <span className="bg-primary-light text-primary-main font-semibold rounded-full text-xs">
+                    {batchCreatedBy}
+                </span>
             </div>
 
-            <div className="text-xs text-gray-500 mb-4 flex items-center gap-x-4 ">
-                Orders Buckets : <span className="px-3 py-1 bg-gray-200 text-black font-semibold rounded-full text-xs">{bucketOders}</span>
+            {/* Orders Buckets */}
+            <div className="text-sm text-gray-600 mb-4 flex items-center justify-between">
+                <span className="font-medium">Order Buckets:</span>
+                <span className="px-3 py-1 bg-gray-100 text-black font-semibold rounded-full text-xs">
+                    {bucketOders}
+                </span>
             </div>
 
-
-            <div className="text-xs text-gray-500 mb-4 flex gap-x-4">
-                Create Date :
-                <div className="py-0">
-                    <div className="text-xs text-slate-700 font-medium">
-                        {moment(createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
-                        {moment(createdAt).format('hh:mm A')}
+            {/* Created Date */}
+            <div className="text-sm text-gray-600 mb-4">
+                <div className="flex justify-between">
+                    <span className="font-medium">Created Date:</span>
+                    <div className="text-right">
+                        <div className="text-xs text-slate-700 font-medium">
+                            {format(new Date(createdAt), 'dd MMM yyyy')}
+                        </div>
+                        <div className="text-xs text-slate-500 font-medium">
+                            {format(new Date(createdAt), 'hh:mm a')}
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <button onClick={onClick} className="w-full py-2 flex justify-center items-center gap-x-1 text-white bg-primary-main hover:bg-primary-hover rounded-md focus:outline-none">
-                <span className="mr-2"><CgDetailsMore /></span> View
+            {/* View Button */}
+            <button
+                onClick={onClick}
+                className="w-full py-2 flex justify-center items-center gap-x-2 text-white bg-primary-main hover:bg-primary-dark rounded-md shadow-md focus:ring-2 focus:ring-primary-light focus:ring-offset-2 transition-all duration-200"
+            >
+                <CgDetailsMore className="text-lg" />
+                <span>View Orders</span>
             </button>
         </div>
     );
 }
 
-const AssignBatchesListing = ({ columns, rows }: Props) => {
+
+const withCompltedBatchCard = (BatchInfoCard: any) => {
+    return (props: InfoCardPropTypes) => {
+        return (
+            <div className="relative group">
+                <BatchInfoCard {...props} />
+                <div className="absolute top-8 left-2 transform -rotate-45 bg-red-500 text-white px-4 py-1 text-[12px] font-bold shadow-md rounded">
+                    <span>Batch completed</span>
+                </div>
+            </div>
+        )
+    }
+}
+
+const AssignBatchesListing = ({ rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
     const createBatchState: any = useSelector((state: RootState) => state.listingPagination)
     const navigate = useNavigate()
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } = createBatchState
+
+
+    // Higher order component with preview of the project link
+    const BatchCompletedWithRemark = withCompltedBatchCard(BatchInfoCard);
 
     return (
         <div className="px-4 h-[calc(100vh-110px)]">
@@ -105,7 +140,14 @@ const AssignBatchesListing = ({ columns, rows }: Props) => {
                 <div className="h-[calc(100%-110px)] overflow-auto ">
                     <div className="grid grid-cols-4 gap-4 p-4">
                         {rows?.map((batch: BatchesListResponseTypes) =>
-                            <BatchInfoCard
+                            !batch?.isCompleted ? <BatchInfoCard
+                                key={batch?._id}
+                                batchNumber={batch?.batchNumber}
+                                bucketOders={batch?.orders?.length}
+                                batchCreatedBy={capitalizeFirstLetter(batch?.batchCreatedByLabel)}
+                                createdAt={batch?.createdAt}
+                                onClick={() => navigate(`${batch?._id}`)}
+                            /> : <BatchCompletedWithRemark
                                 key={batch?._id}
                                 batchNumber={batch?.batchNumber}
                                 bucketOders={batch?.orders?.length}

@@ -33,15 +33,15 @@ export const createBatchApi = apiSlice.injectEndpoints({
             }),
         }),
 
-        //***** Get Single Batch *****/
-        getUsersByDistributeDepartment: builder.query({
-            providesTags: ['batch-order'],
-            query: () => ({
-                url: '/user/get-batch-assignes',
-                method: 'GET',
+        //***** Get Batch Completed *****/
+        updateBatchComplete: builder.mutation({
+            invalidatesTags: ['batch-order'],
+            query: (batchId: string) => ({
+                url: `/batch/status-change/${batchId}`,
+                method: 'PUT',
             }),
         }),
-        //
+
     }),
 })
 
@@ -49,5 +49,5 @@ export const {
     useGetBatchesOrderQuery,
     useAddBatchesMutation,
     useGetSingleBatchesOrdersQuery,
-    useGetUsersByDistributeDepartmentQuery,
+    useUpdateBatchCompleteMutation,
 } = createBatchApi

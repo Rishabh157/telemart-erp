@@ -131,6 +131,15 @@ export const userApi = apiSlice.injectEndpoints({
             }),
         }),
 
+        //***** Get Single Batch *****/
+        getUsersByDistributeDepartment: builder.query({
+            providesTags: ['user'],
+            query: () => ({
+                url: '/user/get-batch-assignes',
+                method: 'GET',
+            }),
+        }),
+
         // ****  Floor manger by call center
         getFloorMangerUserByCallCenterId: builder.query({
             providesTags: ['user', 'newUser'],
@@ -244,6 +253,7 @@ export const {
     useUpdateCompanyByAdminMutation,
     useGetDistributionsRoleMutation,
     useDeactiveUserMutation,
+    useGetUsersByDistributeDepartmentQuery,
     useGetFloorMangerUserByCallCenterIdQuery,
     useGetTeamLeadUserByCallCenterIdQuery,
     useGetSeniorUsersQuery,

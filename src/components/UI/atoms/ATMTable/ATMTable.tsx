@@ -133,7 +133,7 @@ const ATMTable = <T extends {}>({
                             return null
                         } else {
                             return (
-                                 <>
+                                 <React.Fragment key={index}>
                                     {isColumnCheckbox ? (
                                         <div
                                             key={'checkbox' + column?.headerName}
@@ -167,7 +167,7 @@ const ATMTable = <T extends {}>({
                                     >
                                         {column.headerName}
                                     </div>
-                                </>
+                                </React.Fragment>
                             )
                         }
                     })}

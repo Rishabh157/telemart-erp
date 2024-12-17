@@ -12,8 +12,8 @@ import { showToast } from 'src/utils'
 // |-- Redux --|
 import {
     useAddBatchesMutation,
-    useGetUsersByDistributeDepartmentQuery,
 } from 'src/services/BatchesServices'
+import { useGetUsersByDistributeDepartmentQuery } from 'src/services/UserServices'
 import { useCustomOptions } from 'src/hooks/useCustomOptions'
 
 // |-- Types --|

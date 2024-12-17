@@ -84,9 +84,9 @@ const BatchOrderView = () => {
     return (
         <SideNavLayout>
             <div className="h-[calc(100vh-55px)]">
-                <div className="w-full flex  h-[calc(100%)] bg-white">
+                <div className="w-full flex h-[calc(100%)] bg-white">
                     {/* Right Section */}
-                    <div className="w-[100%] border-b border-r border-l rounded-r h-full overflow-x-scroll">
+                    <div className="w-[100%] border-b border-r border-l rounded-r h-full">
                         <TabScrollable
                             tabs={allowedTabs}
                             active={activeTabIndex}
@@ -94,8 +94,8 @@ const BatchOrderView = () => {
                         />
 
                         {/* Children */}
-                        <div className="h-[calc(100%-30px)] pt-4">
-                            <div className="h-full overflow-auto">
+                        <div className="h-[calc(100%-35px)]">
+                            <div className="h-full">
                                 <Outlet />
                             </div>
                         </div>
