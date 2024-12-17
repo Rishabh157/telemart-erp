@@ -347,6 +347,8 @@ import DealerBalanceRequestTabListingWrapper from './pages/dealers/view/tabs/Dea
 import OrderSchemChangeRequestWrapper from './pages/OrderSchemChangeRequest/OrderSchemChangeRequestWrapper'
 import AgentInquiriesStatusWrapper from './pages/reports/AgentDetails/wrappers/AgentInquiriesStatusWrapper'
 import UnAssigneBatchOrderListingWrapper from './pages/batchOrder/all/unAssignOrders/UnAssigneBatchOrderListingWrapper'
+import SchemeWiseOrderReportWrapper from './pages/reports/AgentDetails/wrappers/SchemeWiseOrderReportWrapper'
+import AgentWiseOutCallWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseOutCallWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -4056,6 +4058,33 @@ const PageRoutes = () => {
                             element={
                                 <Authorization
                                     children={<AgentWiseSchemeWrapper />}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT}
+                                />
+                            }
+                        />
+                        <Route
+                            path="scheme-wise-order"
+                            element={
+                                <Authorization
+                                    children={<SchemeWiseOrderReportWrapper />}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_SCHEME_WISE_ORDERS}
+                                />
+                            }
+                        />
+                        <Route
+                            path="agent-wise-scheme"
+                            element={
+                                <Authorization
+                                    children={<AgentWiseSchemeWrapper />}
+                                    permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT}
+                                />
+                            }
+                        />
+                        <Route
+                            path="agent-wise-outcall"
+                            element={
+                                <Authorization
+                                    children={<AgentWiseOutCallWrapper />}
                                     permission={UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT}
                                 />
                             }

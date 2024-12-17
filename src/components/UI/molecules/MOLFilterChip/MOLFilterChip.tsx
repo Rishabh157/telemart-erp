@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // import { IconCirclePlus } from "@tabler/icons-react";
 import { FaCirclePlus } from "react-icons/fa6";
 import { ReactNode, useEffect, useRef, useState } from "react";

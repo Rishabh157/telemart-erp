@@ -59,6 +59,18 @@ const tabs: tabsProps[] = [
         name: UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT,
     },
     {
+        label: 'Scheme Wise Orders',
+        icon: MdOutbond,
+        path: 'scheme-wise-order',
+        name: UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT,
+    },
+    {
+        label: 'Agent Wise Out Call',
+        icon: MdOutbond,
+        path: 'agent-wise-outcall',
+        name: UserModuleNameTypes.ACTION_REPORTS_AGENT_WISE_PRODUCT,
+    },
+    {
         label: 'Call Back',
         icon: MdOutbond,
         path: 'call-back',

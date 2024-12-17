@@ -1,24 +1,15 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-// import ATMDatePicker from 'src/components/UI/atoms/formFields/ATMDatePicker/ATMDatePicker'
 import { Chip, Stack } from '@mui/material'
 import { useGetAgentWiseProductReportsQuery } from 'src/services/ReportsService'
-// import { useGetAllCallCenterMasterQuery } from 'src/services/CallCenterMasterServices'
 import {
     setPage,
     setRowsPerPage,
     setSearchValue,
 } from 'src/redux/slices/ListingPaginationSlice'
-
-// import {
-//     useGetAllAgentsByCallCenterQuery,
-//     useGetFloorMangerUserByCallCenterIdQuery,
-//     useGetTeamLeadUserByCallCenterIdQuery,
-// } from 'src/services/UserServices'
 import ATMTable, {
     columnTypes,
 } from 'src/components/UI/atoms/ATMTable/ATMTable'
-// import { GetHierarchByDeptProps } from 'src/utils/GetHierarchyByDept'
 import ATMTableHeader from 'src/components/UI/atoms/ATMTableHeader/ATMTableHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from 'src/redux/store'
