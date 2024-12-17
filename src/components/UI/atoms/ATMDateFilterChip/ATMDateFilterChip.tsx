@@ -153,11 +153,11 @@ const ATMDateFilterChip = ({
           }}
           className="flex gap-1 pl-2 border-l"
         >
-          <div className="flex items-center px-1 text-xs font-semibold rounded text-primary-30 text-nowrap bg-primary-95">
+          <div className="flex items-center px-1 text-xs font-semibold rounded text-white text-nowrap bg-primary-main">
             {startDate ? format(new Date(startDate), "dd MMM yy") : "From"}
           </div>
           -
-          <div className="flex items-center px-1 text-xs font-semibold rounded text-primary-30 text-nowrap bg-primary-95">
+          <div className="flex items-center px-1 text-xs font-semibold rounded text-white text-nowrap bg-primary-main">
             {endDate ? format(new Date(endDate), "dd MMM yy") : "To"}
           </div>
         </div>

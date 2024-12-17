@@ -12,7 +12,7 @@ export const reportsApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-       
+
         //***** Get Agent Inquiries Status *****/
         getAgentInquiriesStatusReports: builder.query({
             // providesTags: ['agent-report'],
@@ -52,6 +52,26 @@ export const reportsApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
+
+        //***** Get Scheme Wise Orders *****/
+        getSchemeWiseOrdersReports: builder.query({
+            // providesTags: ['agent-report'],
+            query: (body) => ({
+                url: '/report/scheme-wise-orders',
+                method: 'POST',
+                body,
+            }),
+        }),
+
+        //***** Get Scheme Wise Orders *****/
+        getAgentWiseOutCallReports: builder.query({
+            // providesTags: ['agent-report'],
+            query: (body) => ({
+                url: '/report/agent-wise-outcall',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 })
 
@@ -61,4 +81,6 @@ export const {
     useGetAgentWiseComplaintQuery,
     useGetAgentWiseEnquiryQuery,
     useGetAgentWiseProductReportsQuery,
+    useGetSchemeWiseOrdersReportsQuery,
+    useGetAgentWiseOutCallReportsQuery,
 } = reportsApi
