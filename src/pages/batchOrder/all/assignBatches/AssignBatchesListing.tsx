@@ -96,7 +96,7 @@ const withCompltedBatchCard = (BatchInfoCard: any) => {
         return (
             <div className="relative group">
                 <BatchInfoCard {...props} />
-                <div className="absolute top-8 left-2 transform -rotate-45 bg-red-500 text-white px-4 py-1 text-[12px] font-bold shadow-md rounded">
+                <div className="absolute top-8 -left-2 transform -rotate-45 bg-red-500 text-white px-4 py-1 text-[12px] font-bold shadow-md rounded">
                     <span>Batch completed</span>
                 </div>
             </div>
