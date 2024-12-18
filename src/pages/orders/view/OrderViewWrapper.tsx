@@ -5,29 +5,14 @@ import {
     useGetOrderHistoryQuery,
 } from '../../../services/OrderService'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
-// import moment from 'moment'
 
 // |-- Internal Dependencies --|
 import SideNavLayout from '../../../components/layouts/SideNavLayout/SideNavLayout'
 import OrderView from './OrderView'
 import { OrderListResponse } from 'src/models'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
-import moment from 'moment'
-// import { useGetInquiryByIdQuery } from 'src/services/InquiryService'
-
-type OrderFlowListResponse = {
-    _id: string,
-    orderId: string,
-    orderReferenceNumber: number,
-    remark: string,
-    status: string,
-    createdBy: string,
-    isDeleted: boolean,
-    isActive: boolean,
-    createdAt: string,
-    updatedAt: string,
-    __v: number
-}
+import { ATMDateTimeDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import { OrderFlowListResponse } from 'src/models/Order.model'
 
 const OrderViewWrapper = () => {
 
@@ -48,10 +33,8 @@ const OrderViewWrapper = () => {
     //     }),
     // })
 
-    // console.log('inquiryItems', inquiryLoading, inquiryItems);
-
     // Order History
-    const { items: orderHistory } = useGetCustomListingData<OrderListResponse>({
+    const { items: orderHistory } = useGetCustomListingData<OrderFlowListResponse[]>({
         useEndPointHook: useGetOrderHistoryQuery(id, {
             skip: !id,
         }),
@@ -82,31 +65,13 @@ const OrderViewWrapper = () => {
             flex: 'flex-[1_1_0%]',
             align: 'start',
             extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderFlowListResponse) => (
-                <div className="py-0">
-                    <div className=" text-slate-700 font-medium">
-                        {moment(row?.createdAt).format('DD MMM YYYY')}
-                    </div>
-                    <div className="text-[12px] text-slate-500 font-medium">
-                        {moment(row?.createdAt).format('hh:mm A')}
-                    </div>
-                </div>
-            ),
+            renderCell: (row: OrderFlowListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
         {
             field: 'status',
             headerName: 'Status',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px]',
-        },
-        {
-            field: 'orderReferenceNumber',
-            headerName: 'Order Ref. No.',
-            flex: 'flex-[1_1_0%]',
-            extraClasses: 'min-w-[150px]',
-            renderCell: (row: OrderFlowListResponse) => (
-                <div className="py-0">{row?.orderReferenceNumber}</div>
-            ),
         },
     ]
 

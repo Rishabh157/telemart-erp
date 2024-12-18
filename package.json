@@ -1,7 +1,7 @@
 {
-    "name": "telemart-erp",
+    "name": "saptel-erp",
     "version": "0.0.1",
-    "author": "codiotic",
+    "author": "Rishabh_Gour <rishabh@provista.in>",
     "private": true,
     "dependencies": {
         "@canvasjs/charts": "^3.10.8",
@@ -52,7 +52,7 @@
     "scripts": {
         "start": "react-scripts start webpack --config webpack.config.js",
         "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
-        "build": "NODE_OPTIONS='--max-old-space-size=8192' react-scripts build",
+        "build": "cross-env NODE_OPTIONS='--max-old-space-size=8192' react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "format": "prettier --write \"**\\*.{ts,tsx,js,jsx,scss,css,json}\""
@@ -92,6 +92,7 @@
         "@types/react-draft-wysiwyg": "^1.13.8",
         "@types/react-select": "^5.0.1",
         "@types/uuid": "^9.0.1",
+        "cross-env": "^7.0.3",
         "csstype": "^3.1.3",
         "immutable": "^4.3.6",
         "prettier": "2.8.8",
