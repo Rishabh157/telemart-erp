@@ -328,3 +328,17 @@ export type OrderInvoiceAndLabelListResponse = {
         pincodeLable: string
     }
 }
+
+export type OrderFlowListResponse = {
+    _id: string
+    orderId: string
+    orderReferenceNumber: number
+    remark: string
+    status: string
+    createdBy: string
+    isDeleted: boolean
+    isActive: boolean
+    createdAt: string
+    updatedAt: string
+    __v: number
+}

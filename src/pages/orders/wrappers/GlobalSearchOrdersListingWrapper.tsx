@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import OrderListing from '../OrderListing'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
@@ -21,6 +21,8 @@ import {
     setTotalItems,
 } from 'src/redux/slices/orderSlice'
 import { ATMOrderStatus, ATMDateTimeDisplay, ATMPincodeDisplay, ATMDealerDisplay } from 'src/components/UI/atoms/ATMDisplay/ATMDisplay'
+import DialogLogBox from 'src/components/utilsComponent/DialogLogBox'
+import OrderViewFlowWrapper from '../flow/OrderViewFlowWrapper'
 
 const GlobalSearchOrdersListingWrapper = () => {
     const navigate = useNavigate()
@@ -28,6 +30,7 @@ const GlobalSearchOrdersListingWrapper = () => {
     const dispatch = useDispatch<AppDispatch>()
     const orderState: any = useSelector((state: RootState) => state.order)
 
+    const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
     // Get All Order Data Query
     const { searchValue, mobileNumberSearchValue } = orderState
 
@@ -77,22 +80,14 @@ const GlobalSearchOrdersListingWrapper = () => {
             renderCell: (row: OrderListResponse) => (
                 <ActionPopup
                     isView
-                    handleViewActionButton={() => {
-                        navigate(`/orders/view/${row?._id}`)
-                    }}
+                    handleViewActionButton={() => navigate(`/orders/view/${row?._id}`)}
                     handleOnAction={() => { }}
+                    isCustomBtn
+                    customBtnText='Flow'
+                    handleCustomActionButton={() => setCurrentOrderId(row?._id)}
                 />
             ),
         },
-        // {
-        //     field: 'inquiryNumber',
-        //     headerName: 'Inquiry No.',
-        //     flex: 'flex-[1_1_0%]',
-        //     name: UserModuleNameTypes.ORDER_GLOBAL_TAB_LIST_INQUIRY_NUMBER,
-        //     align: 'start',
-        //     extraClasses: 'text-xs min-w-[150px]',
-        //     // renderCell: (row: OrderListResponse) => <span></span>,
-        // },
         {
             field: 'orderNumber',
             headerName: 'Order No.',
@@ -489,7 +484,15 @@ const GlobalSearchOrdersListingWrapper = () => {
         },
     ]
 
-    return <OrderListing columns={columns} />
+    return (<>
+        <OrderListing columns={columns} />
+        <DialogLogBox
+            maxWidth="md"
+            handleClose={() => setCurrentOrderId(null)}
+            isOpen={currentOrderId ? true : false}
+            component={<OrderViewFlowWrapper orderId={currentOrderId ? currentOrderId : null} />}
+        />
+    </>)
 }
 
 export default GlobalSearchOrdersListingWrapper

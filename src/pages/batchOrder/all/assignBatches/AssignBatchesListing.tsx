@@ -23,7 +23,6 @@ import {
 import { AppDispatch, RootState } from 'src/redux/store'
 import { ATMFullScreenLoader } from 'src/components/UI/atoms/ATMDisplay/ATMLoader';
 
-
 // |-- Types --|
 type Props = {
     rows: any[]
@@ -34,10 +33,11 @@ interface InfoCardPropTypes {
     bucketOders: number
     batchCreatedBy: string
     createdAt: string
+    isCompleted: any
     onClick: () => void
 }
 
-function BatchInfoCard({ batchNumber, bucketOders, batchCreatedBy, createdAt, onClick }: InfoCardPropTypes) {
+function BatchInfoCard({ batchNumber, bucketOders, batchCreatedBy, createdAt, isCompleted, onClick }: InfoCardPropTypes) {
     return (
         <div className="p-6 bg-gradient-to-r from-white via-gray-50 to-gray-100 rounded-lg shadow-lg border border-gray-300 hover:shadow-xl transition-shadow duration-300 ease-in-out">
 
@@ -61,6 +61,16 @@ function BatchInfoCard({ batchNumber, bucketOders, batchCreatedBy, createdAt, on
                 <span className="px-3 py-1 bg-gray-100 text-black font-semibold rounded-full text-xs">
                     {bucketOders}
                 </span>
+            </div>
+
+            {/* Orders Buckets */}
+            <div className="text-sm text-gray-600 mb-4 flex items-center justify-between">
+                <span className="font-medium">Status:</span>
+
+                <span className={`px-3 py-1 text-xs font-medium rounded-md ${isCompleted ? 'bg-green-500 text-green-100' : 'bg-primary-main text-white'}  `}>
+                    {isCompleted ? 'Complete' : 'Pending'}
+                </span>
+
             </div>
 
             {/* Created Date */}
@@ -91,18 +101,19 @@ function BatchInfoCard({ batchNumber, bucketOders, batchCreatedBy, createdAt, on
 }
 
 
-const withCompltedBatchCard = (BatchInfoCard: any) => {
-    return (props: InfoCardPropTypes) => {
-        return (
-            <div className="relative group">
-                <BatchInfoCard {...props} />
-                <div className="absolute top-8 -left-2 transform -rotate-45 bg-red-500 text-white px-4 py-1 text-[12px] font-bold shadow-md rounded">
-                    <span>Batch completed</span>
-                </div>
-            </div>
-        )
-    }
-}
+// making HOC
+// const withCompltedBatchCard = (BatchInfoCard: any) => {
+//     return (props: InfoCardPropTypes) => {
+//         return (
+//             <div className="relative group">
+//                 <BatchInfoCard {...props} />
+//                 <div className="absolute top-8 -left-2 transform -rotate-45 bg-red-500 text-white px-4 py-1 text-[12px] font-bold shadow-md rounded">
+//                     <span>Batch completed</span>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
 
 const AssignBatchesListing = ({ rows }: Props) => {
     const dispatch = useDispatch<AppDispatch>()
@@ -111,8 +122,8 @@ const AssignBatchesListing = ({ rows }: Props) => {
     const { page, rowsPerPage, searchValue, isTableLoading, totalItems } = createBatchState
 
 
-    // Higher order component with preview of the project link
-    const BatchCompletedWithRemark = withCompltedBatchCard(BatchInfoCard);
+    // Higher order component with additoanl UI
+    // const BatchCompletedWithRemark = withCompltedBatchCard(BatchInfoCard);
 
     return (
         <div className="px-4 h-[calc(100vh-110px)]">
@@ -140,12 +151,24 @@ const AssignBatchesListing = ({ rows }: Props) => {
                 <div className="h-[calc(100%-110px)] overflow-auto ">
                     <div className="grid grid-cols-4 gap-4 p-4">
                         {rows?.map((batch: BatchesListResponseTypes) =>
+                            <BatchInfoCard
+                                key={batch?._id}
+                                batchNumber={batch?.batchNumber}
+                                bucketOders={batch?.orders?.length}
+                                batchCreatedBy={capitalizeFirstLetter(batch?.batchCreatedByLabel)}
+                                createdAt={batch?.createdAt}
+                                isCompleted={batch?.isCompleted}
+                                onClick={() => navigate(`${batch?._id}`)}
+                            />
+                        )}
+                        {/* {rows?.map((batch: BatchesListResponseTypes) =>
                             !batch?.isCompleted ? <BatchInfoCard
                                 key={batch?._id}
                                 batchNumber={batch?.batchNumber}
                                 bucketOders={batch?.orders?.length}
                                 batchCreatedBy={capitalizeFirstLetter(batch?.batchCreatedByLabel)}
                                 createdAt={batch?.createdAt}
+                                isCompleted={batch?.isCompleted}
                                 onClick={() => navigate(`${batch?._id}`)}
                             /> : <BatchCompletedWithRemark
                                 key={batch?._id}
@@ -153,9 +176,10 @@ const AssignBatchesListing = ({ rows }: Props) => {
                                 bucketOders={batch?.orders?.length}
                                 batchCreatedBy={capitalizeFirstLetter(batch?.batchCreatedByLabel)}
                                 createdAt={batch?.createdAt}
+                                isCompleted={batch?.isCompleted}
                                 onClick={() => navigate(`${batch?._id}`)}
                             />
-                        )}
+                        )} */}
                     </div>
                 </div>
 

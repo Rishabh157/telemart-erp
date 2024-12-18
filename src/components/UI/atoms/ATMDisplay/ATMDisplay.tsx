@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import { format as formatDate, parseISO, isValid } from 'date-fns';
 import { OrderStatusEnum } from 'src/utils/constants/enums';
 
 /** Order Status **/
@@ -62,6 +62,16 @@ export const ATMOrderStatus: React.FC<ATMOrderStatusProps> = ({ status }) => {
 };
 
 /** Date With Time **/
+
+// Date formats mapped to date-fns compatible formats
+const dateFormats: Record<string, string> = {
+  DEFAULT: 'dd MMM yyyy',
+  'DD-MM-YYYY': 'dd-MM-yyyy',
+  'MM/DD/YYYY': 'MM/dd/yyyy',
+  'YYYY.MM.DD': 'yyyy.MM.dd',
+  LONG: 'EEEE, MMMM do yyyy',
+};
+
 interface ATMDateDisplayProps {
   createdAt: string | Date;
   disableTime?: boolean;
@@ -70,33 +80,34 @@ interface ATMDateDisplayProps {
 
 export const ATMDateTimeDisplay: React.FC<ATMDateDisplayProps> = ({ createdAt, disableTime, format = 'DEFAULT' }) => {
 
-  const getFormattedDate = (date: string | Date, format: string): string => {
-    const parsedDate = moment(date);
+  const parseDate = (date: string | Date): Date | null => {
+    if (typeof date === 'string') {
+      const parsed = parseISO(date);
+      return isValid(parsed) ? parsed : null;
+    }
+    return isValid(date) ? date : null;
+  };
 
-    // Handle invalid dates
-    if (!parsedDate.isValid()) {
+  const getFormattedDate = (date: string | Date, formatKey: string): string => {
+    const dateObj = parseDate(date);
+    if (!dateObj) {
       return 'N/A';
     }
 
-    // Switch case for formats
-    switch (format) {
-      case 'DD-MM-YYYY':
-        return parsedDate.format('DD-MM-YYYY');
-      case 'MM/DD/YYYY':
-        return parsedDate.format('MM/DD/YYYY');
-      case 'YYYY.MM.DD':
-        return parsedDate.format('YYYY.MM.DD');
-      case 'LONG':
-        return parsedDate.format('dddd, MMMM Do YYYY');
-      case 'DEFAULT':
-      default:
-        return parsedDate.format('DD MMM YYYY');
-    }
+    const formatPattern = dateFormats[formatKey] || dateFormats.DEFAULT;
+    return formatDate(dateObj, formatPattern);
   };
 
-  // Get formatted date and time
+  const getFormattedTime = (date: string | Date): string => {
+    const dateObj = parseDate(date);
+    if (!dateObj) {
+      return 'N/A';
+    }
+    return formatDate(dateObj, 'hh:mm a');
+  };
+
   const orderDate = getFormattedDate(createdAt, format);
-  const orderTime = moment(createdAt).isValid() ? moment(createdAt).format('hh:mm A') : 'N/A';
+  const orderTime = getFormattedTime(createdAt);
 
   return (
     <div className="flex flex-col items-start space-y-0.5">
