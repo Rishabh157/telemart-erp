@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "author": "Rishabh_Gour <rishabh@provista.in>",
     "private": true,
+    "license": "MIT",
     "dependencies": {
         "@canvasjs/charts": "^3.10.8",
         "@canvasjs/react-charts": "^1.0.2",
@@ -52,7 +53,8 @@
     "scripts": {
         "start": "react-scripts start webpack --config webpack.config.js",
         "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
-        "build": "cross-env NODE_OPTIONS='--max-old-space-size=8192' react-scripts build",
+        "build": "cross env NODE_OPTIONS='--max-old-space-size=4096' react-scripts build",
+        "prod-build": "NODE_OPTIONS='--max-old-space-size=4096' react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "format": "prettier --write \"**\\*.{ts,tsx,js,jsx,scss,css,json}\""
