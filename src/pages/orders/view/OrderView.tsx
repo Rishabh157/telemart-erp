@@ -551,7 +551,7 @@ const OrderView = ({ items, isLoading, historyColumns, orderHistory }: Props) =>
                 <div className='bg-white shadow border p-4 rounded-lg'>
                     {/* Heading */}
                     <p className='sticky top-0 border-l-[3px] border-fuchsia-600 px-2 py-1 font font-medium text-md bg-white text-fuchsia-600'>
-                        Order Flow Of <span className='font-semibold text-primary-main text-sm'># {items?.orderNumber} </span>
+                        Order History Of <span className='font-semibold text-primary-main text-sm'># {items?.orderNumber} </span>
                     </p>
                     <div className="grow overflow-auto mt-4">
                         <ATMTable

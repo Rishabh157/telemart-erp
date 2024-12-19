@@ -82,10 +82,7 @@ const GlobalSearchOrdersListingWrapper = () => {
                     isView
                     handleViewActionButton={() => navigate(`/orders/view/${row?._id}`)}
                     handleOnAction={() => { }}
-                    isCustomBtn
-                    customBtnText='Flow'
-                    handleCustomActionButton={() => setCurrentOrderId(row?._id)}
-                />
+               />
             ),
         },
         {
@@ -95,7 +92,9 @@ const GlobalSearchOrdersListingWrapper = () => {
             name: UserModuleNameTypes.ORDER_GLOBAL_TAB_LIST_ORDER_NUMBER,
             extraClasses: 'text-xs min-w-[150px]',
             renderCell: (row: OrderListResponse) => (
-                <span className="text-primary-main "># {row?.orderNumber}</span>
+                <span className="text-primary-main cursor-pointer"
+                    onClick={() => setCurrentOrderId(row?._id)}
+                ># {row?.orderNumber}</span>
             ),
         },
         {
