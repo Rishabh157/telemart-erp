@@ -55,6 +55,7 @@
         "analyze": "webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
         "build": "cross env NODE_OPTIONS='--max-old-space-size=4096' react-scripts build",
         "prod-build": "NODE_OPTIONS='--max-old-space-size=4096' react-scripts build",
+        "dev-build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "format": "prettier --write \"**\\*.{ts,tsx,js,jsx,scss,css,json}\""
