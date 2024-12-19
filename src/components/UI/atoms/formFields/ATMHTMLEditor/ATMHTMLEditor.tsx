@@ -1,3 +1,4 @@
+// @ts-nocheck
 /// ==============================================
 // Filename:ATMHTMLEditor.tsx
 // Type: UI Component

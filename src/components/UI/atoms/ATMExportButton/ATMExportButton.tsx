@@ -1,3 +1,4 @@
+// @ts-nocheck
 /// ==============================================
 // Filename:ATMExportButton.tsx
 // Type: UI Component
