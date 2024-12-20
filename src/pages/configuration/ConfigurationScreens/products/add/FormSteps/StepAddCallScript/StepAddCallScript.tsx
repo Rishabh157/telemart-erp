@@ -12,7 +12,6 @@ import React from 'react'
 import { FormikProps, FieldArray } from 'formik'
 import { MdDeleteOutline } from 'react-icons/md'
 import { EditorState } from 'draft-js'
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 import { useDispatch, useSelector } from 'react-redux'
 
 // |-- Internal Dependencies --|
@@ -124,9 +123,10 @@ const StepAddCallScript = ({ formikProps, dropdownOptions }: Props) => {
                                 }
                                 className="bg-primary-main px-3 py-1 text-white rounded"
                             >
-                                <AddCircleOutlineOutlinedIcon
-                                    style={{ fontSize: '32px' }}
-                                />
+                                {/* <AddCircleOutlineOutlinedIcon
+                                    style={{ fontSize: '34px' }}
+                                /> */} 
+                                +
                             </button>
                         </div>
                     </div>

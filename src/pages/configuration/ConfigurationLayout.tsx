@@ -11,7 +11,7 @@ import {
 } from 'react-icons/bi'
 import { MdOutlineCategory } from 'react-icons/md'
 import {
-    // BsBox, 
+    BsBox, 
     BsBoxes, BsBoxSeam
 } from 'react-icons/bs'
 import { TbAppsFilled } from 'react-icons/tb'
@@ -73,12 +73,12 @@ const configurationNavigation: NavItemType[] = [
         path: 'item',
         name: UserModuleNameTypes.NAV_ITEMS,
     },
-    // {
-    //     label: 'Products',
-    //     icon: BsBox,
-    //     path: 'products',
-    //     name: UserModuleNameTypes.NAV_PRODUCTS,
-    // },
+    {
+        label: 'Products',
+        icon: BsBox,
+        path: 'products',
+        name: UserModuleNameTypes.NAV_PRODUCTS,
+    },
     {
         label: 'Carton Box',
         icon: BsBoxSeam,
