@@ -32,7 +32,7 @@ const initialState: ListingPaginationSliceStateType = {
     totalItems: 0,
     isTableLoading: false,
     page: 1,
-    rowsPerPage: 20,
+    rowsPerPage: 10,
     searchValue: '',
     sortValue: { field: 'createdAt', value: 'DESC' },
     selectedId: '',

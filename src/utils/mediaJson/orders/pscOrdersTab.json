@@ -170,6 +170,14 @@
                     "fieldValue": "orderMBKNumber"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_PSC_ORDER_TAB_EXCEL_EXPORT",
+            "actionUrl": "",
+            "actionName": "PSC_TAB_EXCEL_EXPORT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

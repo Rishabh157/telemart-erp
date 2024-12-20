@@ -55,7 +55,7 @@ const OutwardMaerskOrdersTabListing = ({
     )
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, isTableLoading, searchValue } =
+    const { page, rowsPerPage, isTableLoading, searchValue, totalItems } =
         outwardCustomerState
 
     const handleReset = () => {
@@ -118,7 +118,7 @@ const OutwardMaerskOrdersTabListing = ({
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -203,7 +203,7 @@ const OutwardMaerskOrdersTabListing = ({
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
