@@ -52,7 +52,7 @@ const OutwardDealerTabs = ({ columns, rows, filter, setFilter }: Props) => {
     })
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, isTableLoading } = outwardRequestState
+    const { page, rowsPerPage, isTableLoading ,totalItems} = outwardRequestState
 
 
 
@@ -87,18 +87,7 @@ const OutwardDealerTabs = ({ columns, rows, filter, setFilter }: Props) => {
         )
     }
 
-    // const isFilterApplied = (isMenifest: boolean, isRedirect: boolean) => {
-    //     let keys: string = ''
-    //     for (keys in filter) {
-    //         if (
-    //             filter[keys as keyof typeof filter].value !== '' &&
-    //             isMenifest === true &&
-    //             isRedirect === true
-    //         )
-    //             return true
-    //     }
-    //     return false
-    // }
+ 
 
     useEffect(() => {
         return () => {
@@ -106,7 +95,6 @@ const OutwardDealerTabs = ({ columns, rows, filter, setFilter }: Props) => {
                 isFilterOpen: false,
                 isMenifest: false,
             })
-            // setIsRedirect(false)
         }
     }, [])
 
@@ -117,7 +105,7 @@ const OutwardDealerTabs = ({ columns, rows, filter, setFilter }: Props) => {
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -147,20 +135,7 @@ const OutwardDealerTabs = ({ columns, rows, filter, setFilter }: Props) => {
                             ...prev,
                             isFilterOpen: false,
                         }))
-                        // if (
-                        //     isFilterApplied(
-                        //         isOpenFilterFormDialog.isMenifest,
-                        //         // isRedirect
-                        //     )
-                        // ) {
-                        //     navigate('/menifest-invoice-orders', {
-                        //         state: {
-                        //             filter,
-                        //             warehouseId,
-                        //             providerName: courierCompanyEnum.gpo,
-                        //         },
-                        //     })
-                        // }
+                     
                     }}
                 />
 
@@ -183,7 +158,7 @@ const OutwardDealerTabs = ({ columns, rows, filter, setFilter }: Props) => {
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}

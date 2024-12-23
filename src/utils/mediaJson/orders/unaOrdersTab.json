@@ -170,6 +170,14 @@
                     "fieldValue": "orderMBKNumber"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_UNA_ORDER_TAB_EXCEL_EXPORT",
+            "actionUrl": "",
+            "actionName": "UNA_TAB_EXCEL_EXPORT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

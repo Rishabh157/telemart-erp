@@ -170,6 +170,14 @@
                     "fieldValue": "orderMBKNumber"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_DOORCANCELLED_ORDER_TAB_EXCEL_EXPORT",
+            "actionUrl": "",
+            "actionName": "DOORCANCELLED_TAB_EXCEL_EXPORT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

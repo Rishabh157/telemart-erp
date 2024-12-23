@@ -170,6 +170,14 @@
                     "fieldValue": "orderMBKNumber"
                 }
             ]
+        },
+        {
+            "actionId": "ACTION_PND_ORDER_TAB_EXCEL_EXPORT",
+            "actionUrl": "",
+            "actionName": "PND_TAB_EXCEL_EXPORT",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

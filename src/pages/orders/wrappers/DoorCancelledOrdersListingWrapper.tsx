@@ -85,6 +85,42 @@ const DoorCancelledOrdersListingWrapper = () => {
         orderByValue: -1,
         isPaginationRequired: true,
     })
+    const { data:excelData } = useGetOrderQuery({
+        limit: rowsPerPage,
+        searchValue: '',
+        params: ['didNo', 'mobileNo'],
+        page: page,
+        filterBy: [
+            {
+                fieldName: 'companyId',
+                value: userData?.companyId,
+            },
+            {
+                fieldName: 'orderNumber',
+                value: [searchValue],
+            },
+            {
+                fieldName: 'mobileNo',
+                value: [mobileNumberSearchValue],
+            },
+            {
+                fieldName: 'status',
+                value: OrderStatusEnum.DOOR_CANCELLED,
+            },
+            {
+                fieldName: 'approved',
+                value: true,
+            },
+        ],
+        dateFilter: {
+            dateFilterKey: dateFilter.dateFilterKey,
+            startDate: dateFilter?.startDate ?? '',
+            endDate: dateFilter?.endDate ?? ''
+        },
+        orderBy: 'createdAt',
+        orderByValue: -1,
+        isPaginationRequired: false,
+    })
 
     useEffect(() => {
         if (!isFetching && !isLoading) {
@@ -483,7 +519,7 @@ const DoorCancelledOrdersListingWrapper = () => {
         },
     ]
 
-    return <OrderListing columns={columns} filters={filters} />
+    return <OrderListing columns={columns} filters={filters}  excelData={excelData?.data || []}/>
 }
 
 export default DoorCancelledOrdersListingWrapper

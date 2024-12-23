@@ -24,9 +24,14 @@ const Authorization: ({ permission, children }: Props) => any = ({
     const { authToken, userData } = useGetLocalStorage()
 
     useEffect(() => {
-        if (!authToken) return navigate('/')
+        const checkAuth = async () => {
+            if (!authToken) {
+                navigate('/')
+            }
+        }
+        checkAuth()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [authToken])
+    }, [authToken, navigate])
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { isDataLoading, getAllPermission } = useGetUserAccess()

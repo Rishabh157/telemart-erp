@@ -77,7 +77,7 @@ const ATMExportButton = ({
                     }
                 }}
                 className={twMerge(
-                    `border border-primary-main h-[34px] px-3 items-center rounded bg-white  text-primary-main flex gap-2 ${
+                    `border border-primary-main h-[34px] px-3 items-center rounded bg-white  text-primary-main flex gap-2 py-2 ${
                         disabled && 'opacity-70'
                     }`,
                     className
@@ -111,7 +111,7 @@ const ATMExportButton = ({
                         ) : (
                             <FaCloudUploadAlt className="text-lg" />
                         )}{' '}
-                        <span className="text-sm"> {btnName} </span>
+                        <span className="text-sm "> {btnName} </span>
                     </>
                 )}
             </button>

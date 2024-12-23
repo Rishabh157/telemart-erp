@@ -17,17 +17,28 @@ import {
 } from 'src/redux/slices/orderSlice'
 import { AppDispatch, RootState } from 'src/redux/store'
 import { BiSearch } from 'react-icons/bi'
-import { handleValidNumber, handleValidNumberForSearch } from 'src/utils/methods/numberMethods'
+import {
+    handleValidNumber,
+    handleValidNumberForSearch,
+} from 'src/utils/methods/numberMethods'
 import ATMTable from 'src/components/UI/atoms/ATMTable/ATMTable'
 import { columnTypes } from 'src/components/UI/atoms/ATMTable/ATMTable'
 import MOLFilterBar from 'src/components/UI/molecules/MOLFilterBar/MOLFilterBar'
+import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
+import { isAuthorized } from 'src/utils/authorization'
+import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
+// import { useGetAllDealersQuery } from 'src/services/DealerServices'
+// import { useCustomOptions } from 'src/hooks/useCustomOptions'
+// import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 
 type Props = {
     columns: columnTypes[]
     filters?: any
+    excelData?: []
 }
 
-const OrderListing = ({ columns, filters }: Props) => {
+const OrderListing = ({ columns, filters, excelData = [] }: Props) => {
+    console.log('excelData', excelData)
     const [activeTab, setActiveTab] = useState('')
 
     // Hooks
@@ -61,6 +72,17 @@ const OrderListing = ({ columns, filters }: Props) => {
             dispatch(setMobileNumberSearchValue(''))
         }
     }, [dispatch])
+    //  const { options: dealerOptions } = useCustomOptions({
+    //         useEndPointHook: useGetAllDealersQuery(''),
+    //         keyName: 'dealerCode',
+    //         value: '_id',
+    //     })
+    // const { options: warehouseOptions } = useCustomOptions({
+    //      useEndPointHook: useGetWareHousesQuery(''),
+    //      keyName: 'wareHouseName',
+    //      value: '_id',
+    //  })
+ 
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
@@ -81,7 +103,8 @@ const OrderListing = ({ columns, filters }: Props) => {
                                 placeholder="Order No..."
                                 onChange={(e) => {
                                     dispatch(setMobileNumberSearchValue(''))
-                                    handleValidNumber(e) && dispatch(setSearchValue(e.target.value))
+                                    handleValidNumber(e) &&
+                                        dispatch(setSearchValue(e.target.value))
                                 }}
                             />
                         </div>
@@ -93,7 +116,12 @@ const OrderListing = ({ columns, filters }: Props) => {
                                 placeholder="Mobile No..."
                                 onChange={(e) => {
                                     dispatch(setSearchValue(''))
-                                    handleValidNumber(e) && dispatch(setMobileNumberSearchValue(e.target.value))
+                                    handleValidNumber(e) &&
+                                        dispatch(
+                                            setMobileNumberSearchValue(
+                                                e.target.value
+                                            )
+                                        )
                                 }}
                             />
                         </div>
@@ -122,19 +150,81 @@ const OrderListing = ({ columns, filters }: Props) => {
                 ) : (
                     <ATMTableHeader
                         searchValue={searchValue}
-                        placeholder={activeTab !== 'inquiry' ? 'Order No...' : 'Inquiry No...'}
+                        placeholder={
+                            activeTab !== 'inquiry'
+                                ? 'Order No...'
+                                : 'Inquiry No...'
+                        }
                         page={page}
                         rowCount={totalItems}
                         rowsPerPage={rowsPerPage}
                         rows={items}
-                        onRowsPerPageChange={(newValue) => dispatch(setRowsPerPage(newValue))}
-                        onSearch={(newValue) => handleValidNumberForSearch(newValue) && dispatch(setSearchValue(newValue))}
+                        onRowsPerPageChange={(newValue) =>
+                            dispatch(setRowsPerPage(newValue))
+                        }
+                        onSearch={(newValue) =>
+                            handleValidNumberForSearch(newValue) &&
+                            dispatch(setSearchValue(newValue))
+                        }
                         isAnotherSearch
                         anotherSearchValue={mobileNumberSearchValue}
                         anotherSearchPlaceholder="Mobile No..."
-                        onAnotherSearch={(newValue) => handleValidNumberForSearch(newValue) && dispatch(setMobileNumberSearchValue(newValue))}
+                        onAnotherSearch={(newValue) =>
+                            handleValidNumberForSearch(newValue) &&
+                            dispatch(setMobileNumberSearchValue(newValue))
+                        }
                         isRefresh
-                        children={<MOLFilterBar filters={filters} />}
+                        children={
+                            <div className="flex gap-x-2">
+                                <MOLFilterBar filters={filters} />
+
+                                {(activeTab === 'una' ||
+                                    activeTab === 'psc' ||
+                                    activeTab === 'doodoorCancelled' ||
+                                    activeTab === 'pnd') &&
+                                    isAuthorized(
+                                        UserModuleNameTypes.ACTION_UNA_ORDER_TAB_EXCEL_EXPORT ||
+                                            UserModuleNameTypes.ACTION_PSC_ORDER_TAB_EXCEL_EXPORT ||
+                                            UserModuleNameTypes.ACTION_DOORCANCELLED_ORDER_TAB_EXCEL_EXPORT ||
+                                            UserModuleNameTypes.ACTION_PND_ORDER_TAB_EXCEL_EXPORT
+                                    ) && (
+                                        <ATMExportButton
+                                            data={excelData || []}
+                                            isLoading={false}
+                                            headers={[
+                                                {
+                                                    label: 'order Number',
+                                                    key: 'orderNumber',
+                                                },
+                                                {
+                                                    label: 'mobile No',
+                                                    key: 'mobileNo',
+                                                },
+                                                {
+                                                    label: 'call Center',
+                                                    key: 'callCenterLabel',
+                                                },
+
+                                                {
+                                                    label: 'district Label',
+                                                    key: 'districtLabel',
+                                                },
+                                                {
+                                                    label: 'scheme Name',
+                                                    key: 'schemeName',
+                                                },
+                                            ]}
+                                            fileName={activeTab}
+                                            onClick={(done) => {
+                                                done()
+                                            }}
+                                            btnName="Download CSV"
+                                            btnType="DOWNLOAD"
+                                            loadingText="..."
+                                        />
+                                    )}
+                            </div>
+                        }
                     />
                 )}
 

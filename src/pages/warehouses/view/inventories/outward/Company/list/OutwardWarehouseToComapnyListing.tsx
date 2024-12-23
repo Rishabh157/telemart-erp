@@ -30,7 +30,7 @@ const OutwardWarehouseToComapnyListing = ({ columns, rows }: Props) => {
     )
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, isTableLoading } = warehouseToCompanyState
+    const { page, rowsPerPage, isTableLoading ,totalItems} = warehouseToCompanyState
 
     return (
         <div className=" h-[calc(100vh-160px)]  bg-white ">
@@ -38,7 +38,7 @@ const OutwardWarehouseToComapnyListing = ({ columns, rows }: Props) => {
                 {/*Table Header */}
                 <ATMTableHeader
                     page={page}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -67,7 +67,7 @@ const OutwardWarehouseToComapnyListing = ({ columns, rows }: Props) => {
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}
