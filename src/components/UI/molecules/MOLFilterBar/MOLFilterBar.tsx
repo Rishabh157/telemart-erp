@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import MOLFilterChip from "../MOLFilterChip/MOLFilterChip";
 import ATMDateFilterChip from "../../atoms/ATMDateFilterChip/ATMDateFilterChip";
 import { format } from "date-fns";
+import ATMRadioButtonGroup from "../../atoms/ATMRadioButtonGroup/ATMRadioButtonGroup";
 
 type Option = { value: string;[field: string]: string };
 type DropdownFilter = {
@@ -24,7 +25,13 @@ type DateFilter = {
   dateFilterKeyOptions: { label: string; value: string }[];
 };
 
-export type FilterType = DropdownFilter | DateFilter;
+type RadioFilter = {
+  filterType: "radio";
+  fieldName?: string;
+  options: { label: string; value: string }[];
+};
+
+export type FilterType = DropdownFilter | DateFilter | RadioFilter;
 
 type Props = {
   filters?: FilterType[];
@@ -52,6 +59,7 @@ const MOLFilterBar = ({
     startDate: prefixer ? `${prefixer}_startDate` : "startDate",
     endDate: prefixer ? `${prefixer}_endDate` : "endDate",
     page: prefixer ? `${prefixer}_page` : "page",
+    active: prefixer ? `${prefixer}_active` : "active",
   };
 
   useEffect(() => {
@@ -221,6 +229,22 @@ const MOLFilterBar = ({
                       //     },
                       //   ]
                       // }
+                      />
+                    );
+                  case "radio":
+                    return (
+                      <ATMRadioButtonGroup
+                        key={filterIndex}
+                        name=""
+                        required={false}
+                        label=""
+                        value={searchParams.get(keyName?.active) || ''}
+                        // value={'ACTIVE'}
+                        options={filter.options}
+                        onChange={(newValue: any) => {
+                          searchParams.set(keyName?.active, newValue);
+                          setSearchParams(searchParams);
+                        }}
                       />
                     );
                   default:

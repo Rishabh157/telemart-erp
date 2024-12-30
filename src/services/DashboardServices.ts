@@ -99,6 +99,14 @@ export const customerComplainApi = apiSlice.injectEndpoints({
                 method: 'GET',
             }),
         }),
+
+        getCallCenterPerformace: builder.query({
+            providesTags: ['dashboard'],
+            query: () => ({
+                url: '/report/callcenter-performance',
+                method: 'POST',
+            }),
+        }),
     }),
 })
 
@@ -112,4 +120,5 @@ export const {
     useGetWHOutwardInventoryByWarehouseIdQuery,
     useGetSalesDepartmentDataQuery,
     useGetBasicAdminDashboardDataQuery,
+    useGetCallCenterPerformaceQuery
 } = customerComplainApi

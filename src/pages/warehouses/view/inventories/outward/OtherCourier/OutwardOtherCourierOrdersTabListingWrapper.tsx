@@ -12,8 +12,8 @@ import OutwardOtherCourierOrdersTabListing from './OutwardOtherCourierOrdersTabL
 // |-- Redux --|
 import { Chip } from '@mui/material'
 import { PDFDocument } from 'pdf-lib'
+// import { MdLabelImportantOutline } from 'react-icons/md'
 import { FaRegFilePdf } from 'react-icons/fa'
-import { MdLabelImportantOutline } from 'react-icons/md'
 import ActionPopup from 'src/components/utilsComponent/ActionPopup'
 import useGetCustomListingData from 'src/hooks/useGetCustomListingData'
 import useMarkAsDelivered from 'src/hooks/useMarkAsDelivered'
@@ -137,10 +137,10 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         ),
     })
 
-    const [getGenerateCouriorLabel] =
-        useGetGenerateCouriorLabelByAwbNumberMutation()
+    const [getGenerateCouriorLabel] = useGetGenerateCouriorLabelByAwbNumberMutation()
     const [getGenerateInvoice] = useGetGenerateInvoiceByAwbNumberMutation()
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleGenerateCourierLabel = (row: any) => {
         getGenerateCouriorLabel({ awbNumber: row?.awbNumber }).then(
             (res: any) => {
@@ -155,6 +155,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
         )
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleGenerateInvoice = (row: any) => {
         getGenerateInvoice({ awbNumber: row?.awbNumber }).then((res: any) => {
             if (res.data?.data) {
@@ -265,29 +266,34 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
             name: UserModuleNameTypes.TAB_WAREHOUSE_OUTWARD_INVENTORIES_OTHER_COURIER_ORDERS_TAB_LIST_FIRST_CALL_APPROVAL,
             headerName: 'Label & Invoice',
             flex: 'flex-[1_1_0%]',
-            align: 'start',
+            align: 'center',
             extraClasses: 'min-w-[150px] text-xs',
             renderCell: (row: OrderListResponse) => {
                 return (
                     <>
-                        {row?.awbNumber ? (
+                        {row?.awbNumber !== 'NA' ? (
                             <div className="flex gap-2">
-                                <MdLabelImportantOutline
+                                <FaRegFilePdf
                                     title="Print label"
                                     size={25}
                                     color="blue"
                                     className="cursor-pointer"
+                                    // onClick={() => {
+                                    //     handleGenerateCourierLabel(row)
+                                    // }}
                                     onClick={() => {
-                                        handleGenerateCourierLabel(row)
+                                        if (row?.orderStatus === 'DISPATCHED' && row?.awbNumber !== 'NA') {
+                                            window.open(`/gpo/label-invoice?orderNumber=${row.orderNumber}`, '_blank')
+                                        }
                                     }}
                                 />
-                                <FaRegFilePdf
+                                {/* <FaRegFilePdf
                                     title="Print Invoice"
                                     className="cursor-pointer"
                                     color="red"
                                     size={22}
-                                    onClick={() => handleGenerateInvoice(row)}
-                                />
+                                // onClick={() => handleGenerateInvoice(row)}
+                                /> */}
                             </div>
                         ) : null}
                     </>
@@ -564,7 +570,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
             headerName: 'Order Date',
             flex: 'flex-[1_1_0%]',
             extraClasses: 'min-w-[150px] text-xs',
-renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
+            renderCell: (row: OrderListResponse) => <ATMDateTimeDisplay createdAt={row?.createdAt} />
         },
 
         {

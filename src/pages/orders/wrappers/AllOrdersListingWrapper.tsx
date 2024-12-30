@@ -28,7 +28,7 @@ import { useGetLocalStorage } from 'src/hooks/useGetLocalStorage'
 const AllOrdersListingWrapper = () => {
 
     const navigate = useNavigate()
-    const { dateFilter } = useFilterPagination()
+    const { dateFilter, active } = useFilterPagination()
     const { userData } = useGetLocalStorage()
     const [approvedOrderStatus] = useApprovedOrderStatusMutation<any>()
     const dispatch = useDispatch<AppDispatch>()
@@ -49,6 +49,20 @@ const AllOrdersListingWrapper = () => {
                 {
                     label: "endDate",
                     value: dateFilter?.endDate || "",
+                },
+            ],
+        },
+        {
+            filterType: "radio",
+            fieldName: "status",
+            options: [
+                {
+                    label: 'WH Orders',
+                    value: 'WH',
+                },
+                {
+                    label: 'Dealer Orders',
+                    value: 'DEALER',
                 },
             ],
         },
@@ -79,6 +93,7 @@ const AllOrdersListingWrapper = () => {
             startDate: dateFilter?.startDate ?? '',
             endDate: dateFilter?.endDate ?? ''
         },
+        orderSortBy : active === null ? '' : active === 'WH' ? 'WH' : 'DEALER',
         orderBy: 'createdAt',
         orderByValue: -1,
         isPaginationRequired: true,

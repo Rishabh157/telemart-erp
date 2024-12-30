@@ -48,5 +48,8 @@ export const useFilterPagination = (
     orderValue: searchParams?.get(
       options?.preFixer ? `${options?.preFixer}_sortOrder` : "sortOrder"
     ),
+    active: searchParams?.get(
+      options?.preFixer ? `${options?.preFixer}_active` : "active"
+    ),
   };
 };

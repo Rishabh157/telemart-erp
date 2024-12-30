@@ -19,20 +19,13 @@ const RetailILabel = ({
         return <canvas ref={inputRef} className="h-full w-full" />
     }
 
+    console.log('items', items);
+
     return (
         <div className="bg-white p-4 py-2 text-sm h-auto">
             <div className="grid grid-cols-12 py-6 items-center border-b border-gray-400 gap-x-8">
                 <div className="col-span-4">
                     <img src="/skyLogo.jpg" className="h-[6rem] w-full object-contain" alt='Saptel logo' />
-                    {/* <img
-                        src={
-                            items?.companyDetails?.companyLogo
-                                ? items?.companyDetails?.companyLogo
-                                : '/logo.jpg'
-                        }
-                        className="h-20 w-full"
-                        alt={items?.companyDetails?.companyName + ' logo'}
-                    /> */}
                 </div>
 
                 <div className="flex flex-col font-medium col-span-8">
@@ -52,7 +45,7 @@ const RetailILabel = ({
             </div>
 
             <div className="flex justify-between gap-4 border-b-[1px] border-gray-400">
-                
+
                 <div className="flex flex-col border-r-[1px] border-gray-400 pr-10 pb-10">
                     <span className="font-semibold">To</span>
                     <span className="font-medium">{items?.customerName}</span>
