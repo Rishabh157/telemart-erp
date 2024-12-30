@@ -60,6 +60,7 @@ const OrderOverviewDashboardWrapper = () => {
             { y: items?.nonActionOrders || 0, label: 'Non-Action' },
             { y: items?.doorCancelledOrders || 0, label: 'Door Cancelled' },
             { y: items?.deliveryOutOfNetworkOrders, label: 'Delivery Out Of Network' },
+            { y: items?.cancelledOrders, label: 'Cancelled' },
         ]
     }
 

@@ -69,8 +69,7 @@ const OutwardOtherCourierOrdersTabListing = ({
     )
     const [selectedRows, setSelectedRows] = useState([])
 
-    const { page, rowsPerPage, isTableLoading, searchValue } =
-        outwardCustomerState
+    const { page, rowsPerPage, totalItems, isTableLoading, searchValue } = outwardCustomerState
 
     const { options: courierAwbOptions } = useCustomOptions({
         useEndPointHook: useGetAwbCouriersQuery(''),
@@ -230,7 +229,7 @@ const OutwardOtherCourierOrdersTabListing = ({
             })
             .catch()
     }
-
+    
     return (
         <div className="h-[calc(100vh-350px)] bg-white">
             <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
@@ -239,7 +238,7 @@ const OutwardOtherCourierOrdersTabListing = ({
                     page={page}
                     isDisableSearch={true}
                     isChilderFirst={true}
-                    rowCount={rows.length}
+                    rowCount={totalItems}
                     rowsPerPage={rowsPerPage}
                     rows={rows}
                     onRowsPerPageChange={(newValue) =>
@@ -350,7 +349,7 @@ const OutwardOtherCourierOrdersTabListing = ({
                 <div className="h-[60px] flex items-center justify-end border-t border-slate-300">
                     <ATMPagination
                         page={page}
-                        rowCount={rows.length}
+                        rowCount={totalItems}
                         rows={rows}
                         rowsPerPage={rowsPerPage}
                         onPageChange={(newPage) => dispatch(setPage(newPage))}

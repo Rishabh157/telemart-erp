@@ -25,6 +25,7 @@ export type PaginationType = {
     orderBy: string
     orderByValue: number
     isPrepaid?: boolean
+    orderSortBy?: string
     isPaginationRequired?: boolean
     isOrderOrInquiry?: any
     getBatchData?: boolean
