@@ -567,7 +567,6 @@ const WarehouseAssignedOrderListingWrapper = () => {
                 { fieldName: 'firstCallApproval', value: false },
                 { fieldName: 'approved', value: true },
                 { fieldName: 'schemeId', value: filter.schemeId.value },
-                // { fieldName: 'orderType', value: filter.orderType },
                 { fieldName: 'stateId', value: filter.stateId.value },
                 { fieldName: 'districtId', value: filter.districtId.value },
                 {
@@ -605,12 +604,10 @@ const WarehouseAssignedOrderListingWrapper = () => {
             params: ['didNo', 'mobileNo', 'orderNumber'],
             page: page,
             filterBy: [
-                // { fieldName: 'assignWarehouseId', value: warehouseId },
                 { fieldName: 'companyId', value: userData?.companyId },
                 { fieldName: 'firstCallApproval', value: false },
                 { fieldName: 'approved', value: true },
                 { fieldName: 'schemeId', value: filter.schemeId.value },
-                // { fieldName: 'orderType', value: filter.orderType },
                 { fieldName: 'stateId', value: filter.stateId.value },
                 { fieldName: 'districtId', value: filter.districtId.value },
                 {

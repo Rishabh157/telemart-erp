@@ -25,6 +25,7 @@ import { OrderListResponse } from 'src/models'
 import { Chip, Stack } from '@mui/material'
 import { OrderStatusEnum } from 'src/utils/constants/enums'
 import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
+import moment from 'moment'
 
 // |-- Types --|
 type Props = {
@@ -103,6 +104,23 @@ const WarehouseAssignedOrdersListing = ({
         )
     }
 
+
+    // ['orderNumber', 'mobileNo', 'districtLabel', 'schemeName']
+    const headers = [
+        { label: 'Order No.', key: 'orderNumber' },
+        { label: 'Mobile', key: 'mobileNo' },
+        { label: 'District', key: 'districtLabel' },
+        { label: 'Scheme', key: 'schemeName' },
+        { label: 'Order Date', key: 'createdAt' },
+    ];
+
+    const formatDates = (data: any) => {
+        return data.map((item: any) => ({
+            ...item,
+            createdAt: moment(item?.createdAt).format('DD-MM-YYYY, hh:mm a'),
+        }))
+    }
+
     return (
         <div className="px-4 h-[calc(100vh-45px)] bg-white ">
             {/* Page Header */}
@@ -146,9 +164,10 @@ const WarehouseAssignedOrdersListing = ({
                         // hidden={!selectedCourier.length ? true : false}
                         >
                             <ATMExportButton
-                                data={downloadCsvData}
+                                data={formatDates(downloadCsvData)}
                                 isLoading={false}
-                                headers={['mobileNo', 'districtLabel', 'schemeName']}
+                                headers={headers}
+                                // headers={['orderNumber', 'mobileNo', 'districtLabel', 'schemeName']}
                                 fileName=""
                                 btnName="Download First Calls "
                                 btnType="DOWNLOAD"

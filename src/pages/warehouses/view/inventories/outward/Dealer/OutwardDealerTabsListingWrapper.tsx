@@ -172,8 +172,7 @@ const OutwardDealerTabsListingWrapper = () => {
     const [getBarCode] = useGetAllBarcodeOfDealerOutWardDispatchMutation()
     const { updateStatus } = useUpdateBarcodeFreezedStatus()
 
-    const [barcodeDispatch, barcodeDispatchInfo] =
-        useDispatchDealerBarcodeMutation()
+    const [barcodeDispatch, barcodeDispatchInfo] = useDispatchDealerBarcodeMutation()
 
     // Form Initial Values
     const initialValues: FormInitialValues = {

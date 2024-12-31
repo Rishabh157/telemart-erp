@@ -141,7 +141,7 @@ export const OrderApi = apiSlice.injectEndpoints({
                 body,
             }),
         }),
-       
+
         //***** Dispached Order Barcode *****/
         updateOrderSchemeAndQuantity: builder.mutation({
             invalidatesTags: ['order'],
@@ -351,6 +351,7 @@ export const OrderApi = apiSlice.injectEndpoints({
                 method: 'PUT',
             }),
         }),
+
         orderStatusUpdateFromWarehouse: builder.mutation({
             invalidatesTags: ['order'],
             query: ({
@@ -362,6 +363,15 @@ export const OrderApi = apiSlice.injectEndpoints({
             }) => ({
                 url: `order-inquiry/bulk-upload/status-change/${warehouseId}`,
                 method: 'POST',
+                body,
+            }),
+        }),
+
+        reAssignUnaOrder: builder.mutation({
+            invalidatesTags: ['order'],
+            query: ({ id, body }: { id: string; body: any }) => ({
+                url: `order-inquiry/update-una-order/${id}`,
+                method: 'PUT',
                 body,
             }),
         }),
@@ -406,4 +416,5 @@ export const {
     useGetStatusMarkAsDeleiverdMutation,
     useOrderStatusFreezedMutation,
     useOrderStatusUpdateFromWarehouseMutation,
+    useReAssignUnaOrderMutation,
 } = OrderApi

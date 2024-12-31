@@ -58,6 +58,7 @@ const OutwardOtherCourierOrdersTabListing = ({
     const { userData } = useGetLocalStorage()
 
     const [exportData, setExportData] = useState<any>([])
+    console.log('exportData: ', exportData)
 
     const [isOpenFilterFormDialog, setIsOpenFilterFormDialog] = useState({
         isFilterOpen: false,
@@ -79,41 +80,41 @@ const OutwardOtherCourierOrdersTabListing = ({
 
     const headers = [
         { label: 'Order Number', key: 'orderNumber' },
-        { label: 'Consignee Name', key: 'orderNumber' },
-        { label: 'Price', key: 'orderNumber' },
-        { label: 'City', key: 'orderNumber' },
-        { label: 'Tehsil', key: 'orderNumber' },
-        { label: 'District', key: 'orderNumber' },
-        { label: 'State', key: 'orderNumber' },
-        { label: 'Address', key: 'orderNumber' },
-        { label: 'Pincode', key: 'orderNumber' },
-        { label: 'Contact Number', key: 'orderNumber' },
-        { label: 'Weight(kg.)', key: 'orderNumber' },
-        { label: 'COD Amount (To be collection)', key: 'orderNumber' },
-        { label: 'Order Date', key: 'orderNumber' },
-        { label: 'Product to be shipped', key: 'orderNumber' },
-        { label: 'Payment Mode', key: 'orderNumber' },
-        { label: 'Package Amount', key: 'orderNumber' },
-        { label: 'Call Center Name', key: 'orderNumber' },
-        { label: 'Shipping Client', key: 'orderNumber' },
-        { label: 'Seller Name', key: 'orderNumber' },
-        { label: 'Seller Address', key: 'orderNumber' },
-        { label: 'Seller CST No', key: 'orderNumber' },
-        { label: 'Seller TIN', key: 'orderNumber' },
-        { label: 'AWB', key: 'orderNumber' },
-        { label: 'Invoice No', key: 'orderNumber' },
-        { label: 'Invoice Date', key: 'orderNumber' },
-        { label: 'Length', key: 'orderNumber' },
-        { label: 'Breadth', key: 'orderNumber' },
-        { label: 'Height', key: 'orderNumber' },
-        { label: 'Return Address', key: 'orderNumber' },
-        { label: 'Return Pincode', key: 'orderNumber' },
-        { label: 'Return Pincode', key: 'orderNumber' },
-        { label: 'Prod / SKU Code', key: 'orderNumber' },
-        { label: 'Pieces', key: 'orderNumber' },
-        { label: 'Area Customer Code', key: 'orderNumber' },
-        { label: 'Remarks', key: 'orderNumber' },
-    ]
+        { label: 'Consignee Name', key: 'customerName' },
+        { label: 'Price', key: 'price' },
+        { label: 'City', key: 'districtLabel' },
+        { label: 'Tehsil', key: 'tehsilLabel' },
+        { label: 'District', key: 'districtLabel' },
+        { label: 'State', key: 'stateLabel' },
+        // { label: 'Address', key: 'address' },
+        { label: 'Pincode', key: 'pincodeLabel' },
+        { label: 'Contact Number', key: 'mobileNo' },
+        { label: 'Weight(kg.)', key: 'shcemeQuantity' },
+        { label: 'COD Amount (To be collection)', key: 'totalAmount' },
+        { label: 'Order Date', key: 'orderMappedDate' },
+        { label: 'Product to be shipped', key: 'schemeProducts[0].productGroupName' },
+        { label: 'Payment Mode', key: 'paymentMode' },
+        { label: 'Package Amount', key: 'price' },
+        { label: 'Call Center Name', key: 'callCenterLabel' },
+        { label: 'Shipping Client', key: 'orderAssignedToCourier' },
+        // { label: 'Seller Name', key: 'companyAddress' }, // Assuming "Seller Name" is not directly available; using companyAddress as an approximation.
+        // { label: 'Seller Address', key: 'companyAddress' },
+        { label: 'Seller CST No', key: 'hsnCode' }, // Assuming CST No maps to hsnCode.
+        { label: 'Seller TIN', key: 'hsnCode' }, // Reused as no clear mapping exists.
+        { label: 'AWB', key: 'awbNumber' },
+        { label: 'Invoice No', key: 'orderInvoice' },
+        { label: 'Invoice Date', key: 'orderInvoiceDate' },
+        { label: 'Length', key: 'length' }, // No corresponding data provided.
+        { label: 'Breadth', key: 'breadth' }, // No corresponding data provided.
+        { label: 'Height', key: 'height' }, // No corresponding data provided.
+        { label: 'Return Address', key: 'pincodeLabel' },
+        { label: 'Return Pincode', key: 'pincodeLabel' }, // Reused as secondary pincode.
+        { label: 'Prod / SKU Code', key: 'hsnCode' }, // Assuming SKU Code maps to hsnCode.
+        { label: 'Quantity', key: 'shcemeQuantity' },
+        { label: 'Area Customer Code', key: 'areaLabel' },
+        { label: 'Remarks', key: 'remark' }
+    ];
+
 
     const handleReset = () => {
         setFilter((prev) => ({
@@ -229,7 +230,7 @@ const OutwardOtherCourierOrdersTabListing = ({
             })
             .catch()
     }
-    
+
     return (
         <div className="h-[calc(100vh-350px)] bg-white">
             <div className="border flex flex-col h-[calc(100%)] rounded bg-white">
@@ -277,6 +278,7 @@ const OutwardOtherCourierOrdersTabListing = ({
                                 <div className="mt-1">
                                     <ATMExportButton
                                         data={formatDates(exportData)}
+                                        // data={rows}
                                         isLoading={exportListingInfo.isLoading}
                                         headers={headers}
                                         fileName="other-courier"

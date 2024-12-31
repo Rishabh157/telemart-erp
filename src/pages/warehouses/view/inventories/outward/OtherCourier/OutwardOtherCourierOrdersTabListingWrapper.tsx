@@ -283,7 +283,7 @@ const OutwardOtherCourierOrdersTabListingWrapper = () => {
                                     // }}
                                     onClick={() => {
                                         if (row?.orderStatus === 'DISPATCHED' && row?.awbNumber !== 'NA') {
-                                            window.open(`/gpo/label-invoice?orderNumber=${row.orderNumber}`, '_blank')
+                                            window.open(`/gpo/label-invoice?orderNumber=${row?.orderNumber}`, '_blank')
                                         }
                                     }}
                                 />

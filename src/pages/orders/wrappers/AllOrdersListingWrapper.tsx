@@ -61,7 +61,7 @@ const AllOrdersListingWrapper = () => {
                     value: 'WH',
                 },
                 {
-                    label: 'Dealer Orders',
+                    label: 'Dealers Orders',
                     value: 'DEALER',
                 },
             ],
