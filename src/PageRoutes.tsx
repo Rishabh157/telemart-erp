@@ -349,6 +349,7 @@ import AgentInquiriesStatusWrapper from './pages/reports/AgentDetails/wrappers/A
 import UnAssigneBatchOrderListingWrapper from './pages/batchOrder/all/unAssignOrders/UnAssigneBatchOrderListingWrapper'
 import SchemeWiseOrderReportWrapper from './pages/reports/AgentDetails/wrappers/SchemeWiseOrderReportWrapper'
 import AgentWiseOutCallWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseOutCallWrapper'
+import UnaAssignOrderWrapper from './pages/orders/unaAssignOrder/UnaAssignOrderWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -1721,6 +1722,7 @@ const PageRoutes = () => {
                     }
                 /> */}
                 <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
+                <Route path="/orders/una/:id" element={<UnaAssignOrderWrapper />} />
 
                 <Route
                     path="/orders"

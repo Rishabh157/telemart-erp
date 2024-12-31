@@ -148,6 +148,9 @@ const UnaOrdersListingWrapper = () => {
                         navigate(`/orders/view/${row?._id}`)
                     }}
                     handleOnAction={() => { }}
+                    isCustomBtn
+                    customBtnText='Reassign Order'
+                    handleCustomActionButton={() => navigate(`/orders/una/${row?._id}`)}
                 />
             ),
         },
