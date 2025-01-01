@@ -27,9 +27,6 @@ import MOLFilterBar from 'src/components/UI/molecules/MOLFilterBar/MOLFilterBar'
 import ATMExportButton from 'src/components/UI/atoms/ATMExportButton/ATMExportButton'
 import { isAuthorized } from 'src/utils/authorization'
 import { UserModuleNameTypes } from 'src/utils/mediaJson/userAccess'
-// import { useGetAllDealersQuery } from 'src/services/DealerServices'
-// import { useCustomOptions } from 'src/hooks/useCustomOptions'
-// import { useGetWareHousesQuery } from 'src/services/WareHouseService'
 
 type Props = {
     columns: columnTypes[]
@@ -38,7 +35,7 @@ type Props = {
 }
 
 const OrderListing = ({ columns, filters, excelData = [] }: Props) => {
-    console.log('excelData', excelData)
+
     const [activeTab, setActiveTab] = useState('')
 
     // Hooks
@@ -82,7 +79,7 @@ const OrderListing = ({ columns, filters, excelData = [] }: Props) => {
     //      keyName: 'wareHouseName',
     //      value: '_id',
     //  })
- 
+
 
     return (
         <div className="px-4 h-[calc(100vh-150px)]">
@@ -184,9 +181,9 @@ const OrderListing = ({ columns, filters, excelData = [] }: Props) => {
                                     activeTab === 'pnd') &&
                                     isAuthorized(
                                         UserModuleNameTypes.ACTION_UNA_ORDER_TAB_EXCEL_EXPORT ||
-                                            UserModuleNameTypes.ACTION_PSC_ORDER_TAB_EXCEL_EXPORT ||
-                                            UserModuleNameTypes.ACTION_DOORCANCELLED_ORDER_TAB_EXCEL_EXPORT ||
-                                            UserModuleNameTypes.ACTION_PND_ORDER_TAB_EXCEL_EXPORT
+                                        UserModuleNameTypes.ACTION_PSC_ORDER_TAB_EXCEL_EXPORT ||
+                                        UserModuleNameTypes.ACTION_DOORCANCELLED_ORDER_TAB_EXCEL_EXPORT ||
+                                        UserModuleNameTypes.ACTION_PND_ORDER_TAB_EXCEL_EXPORT
                                     ) && (
                                         <ATMExportButton
                                             data={excelData || []}

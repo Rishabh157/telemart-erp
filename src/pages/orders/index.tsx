@@ -85,6 +85,12 @@ const tabs: tabsProps[] = [
         name: UserModuleNameTypes.ACTION_DOORCANCELLED_ORDER_TAB_LIST,
     },
     {
+        label: 'Cancelled',
+        icon: MdOutbond,
+        path: '/cancelled',
+        name: UserModuleNameTypes.ACTION_CANCELLED_ORDER_TAB_LIST,
+    },
+    {
         label: 'Hold',
         icon: MdOutbond,
         path: '/hold',

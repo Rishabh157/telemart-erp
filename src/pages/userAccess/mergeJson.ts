@@ -6,6 +6,7 @@ import { default as assignOrdersJson } from '../../utils/mediaJson/orders/assign
 import { default as prepaidOrdersJson } from '../../utils/mediaJson/orders/prepaidOrdersTab.json'
 import { default as deliveredOrdersJson } from '../../utils/mediaJson/orders/deliveredOrdersTab.json'
 import { default as doorCancelledOrdersJson } from '../../utils/mediaJson/orders/doorCancelledOrdersTab.json'
+import { default as cancelledOrdersJson } from '../../utils/mediaJson/orders/cancelledOrdersTab.json'
 import { default as holdOrdersJson } from '../../utils/mediaJson/orders/holdOrdersTab.json'
 import { default as pscOrdersJson } from '../../utils/mediaJson/orders/pscOrdersTab.json'
 import { default as unaOrdersJson } from '../../utils/mediaJson/orders/unaOrdersTab.json'
@@ -125,6 +126,7 @@ const orderTabsMerge = {
         ...prepaidOrdersJson.moduleAction,
         ...deliveredOrdersJson.moduleAction,
         ...doorCancelledOrdersJson.moduleAction,
+        ...cancelledOrdersJson.moduleAction,
         ...holdOrdersJson.moduleAction,
         ...pscOrdersJson.moduleAction,
         ...unaOrdersJson.moduleAction,

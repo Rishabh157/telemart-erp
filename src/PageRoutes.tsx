@@ -350,6 +350,7 @@ import UnAssigneBatchOrderListingWrapper from './pages/batchOrder/all/unAssignOr
 import SchemeWiseOrderReportWrapper from './pages/reports/AgentDetails/wrappers/SchemeWiseOrderReportWrapper'
 import AgentWiseOutCallWrapper from './pages/reports/AgentDetails/wrappers/AgentWiseOutCallWrapper'
 import UnaAssignOrderWrapper from './pages/orders/unaAssignOrder/UnaAssignOrderWrapper'
+import CancelledOrdersListingWrapper from './pages/orders/wrappers/CancelledOrdersListingWrapper'
 
 // NOT USED ROUTE AND MODULE
 // import AddCourierPreferenceWrapper from './pages/configuration/ConfigurationScreens/preferenceCourier/add/AddCourierPreferenceWrapper'
@@ -1722,7 +1723,14 @@ const PageRoutes = () => {
                     }
                 /> */}
                 <Route path="/orders/view/:id" element={<OrderViewWrapper />} />
-                <Route path="/orders/una/:id" element={<UnaAssignOrderWrapper />} />
+                <Route path="/orders/una/:id"
+                    element={
+                        <Authorization
+                            children={<UnaAssignOrderWrapper />}
+                            permission={UserModuleNameTypes.ACTION_UNA_ORDER_RE_ASSIGN_ORDER}
+                        />
+                    }
+                />
 
                 <Route
                     path="/orders"
@@ -1801,6 +1809,15 @@ const PageRoutes = () => {
                         element={
                             <Authorization
                                 children={<DoorCancelledOrdersListingWrapper />}
+                                permission={UserModuleNameTypes.NAV_ORDER}
+                            />
+                        }
+                    />
+                    <Route
+                        path="cancelled"
+                        element={
+                            <Authorization
+                                children={<CancelledOrdersListingWrapper />}
                                 permission={UserModuleNameTypes.NAV_ORDER}
                             />
                         }
@@ -2010,7 +2027,7 @@ const PageRoutes = () => {
                             />
                         }
                     />
-                    
+
                     {/* view assign batches */}
                     <Route
                         path="assign-batches/:id"

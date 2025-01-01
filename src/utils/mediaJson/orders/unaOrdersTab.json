@@ -178,6 +178,14 @@
             "compulsoryFields": [],
             "parentGroup": [],
             "fields": []
+        },
+        {
+            "actionId": "ACTION_UNA_ORDER_RE_ASSIGN_ORDER",
+            "actionUrl": "",
+            "actionName": "UNA_RE_ASSIGN_ORDER",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
         }
     ]
 }

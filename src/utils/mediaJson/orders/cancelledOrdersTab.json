@@ -1,0 +1,14 @@
+{
+    "moduleId": "NAV_CANCELLED_ORDER",
+    "moduleName": "NAV_CANCELLED_ORDER",
+    "moduleAction": [
+        {
+            "actionId": "ACTION_CANCELLED_ORDER_TAB_LIST",
+            "actionUrl": "",
+            "actionName": "CANCELLED_TAB_LIST",
+            "compulsoryFields": [],
+            "parentGroup": [],
+            "fields": []
+        }
+    ]
+}

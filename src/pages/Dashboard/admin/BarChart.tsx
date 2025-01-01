@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
 import { useGetBasicAdminDashboardDataQuery, useGetCallCenterPerformaceQuery } from 'src/services/DashboardServices';
-import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery';
+// import useGetDataByIdCustomQuery from 'src/hooks/useGetDataByIdCustomQuery';
 import { CircularProgress } from '@mui/material';
 import ATMSelectSearchable from 'src/components/UI/atoms/formFields/ATMSelectSearchable.tsx/ATMSelectSearchable';
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
-const CanvasJS = CanvasJSReact.CanvasJS;
+// const CanvasJS = CanvasJSReact.CanvasJS;
 
-type BasicAdminDashboardData = {
-  totalActiveDealer: number,
-  totalActiveVendor: number
-  totalActiveWarehouse: number
-  totalActiveProducts: number
-  totalActiveSchemes: number
-}
+// type BasicAdminDashboardData = {
+//   totalActiveDealer: number,
+//   totalActiveVendor: number
+//   totalActiveWarehouse: number
+//   totalActiveProducts: number
+//   totalActiveSchemes: number
+// }
 
 const BarChart = () => {
 
